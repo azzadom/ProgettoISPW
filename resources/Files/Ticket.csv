@@ -1,0 +1,10 @@
+BASIC,30,18,Standard ticket,200,1
+BRONZE,20,21,Economy ticket,300,3
+Economy,20,19,Economy ticket,300,4
+GOLD,50,21,VIP ticket,100,3
+PLUS,50,18,VIP ticket,100,1
+SILVER,30,21,Standard ticket,200,3
+Standard,30,14,Standard ticket,200,2
+Standard,30,19,Standard ticket,200,4
+VIP,50,14,VIP ticket,100,2
+VIP,50,19,VIP ticket,100,4

@@ -1,0 +1,10 @@
+
+”	java:S116"SRename this field "FILEPATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è¸ù}8ßøÙÕû1J$f31d922b-7f29-4c63-ba7c-edd0bc6050bf
+c
+java:S1170"!Make this final field static too.(è¸ù}8áøÙÕû1J$067a730c-91ba-419d-9c44-9a40db79b4d9
+v
+java:S1144".Remove this unused private "uniqueKey" method.(Õ˜¿Àÿÿÿÿÿ8åøÙÕû1J$0b57d487-3d22-427b-bc00-94f797a8dd1d
+s
+java:S1144)"0Remove this unused private "toCvsRecord" method.(¡æ¤ô8åøÙÕû1J$b5640b1f-8bef-44c1-99ea-f75a08a657da
+½
+java:S6204"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(†ÒÓË8ëøÙÕû1J$21084eda-fa7b-447d-9ef0-9ba3ff3ab394

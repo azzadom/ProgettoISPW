@@ -1,0 +1,7 @@
+
+u
+java:S2699"-Add at least one assertion to this test case.(üƒ”éÿÿÿÿÿ8§î¿ðû1J$a5571383-f54c-4fcc-8528-173ff9bf8696
+ä
+java:S3577" Rename class "NotificationsControllerTestDELETE" to match the regular expression: '^((Test|IT)[a-zA-Z0-9_]+|[A-Z][a-zA-Z0-9_]*(Test|Tests|TestCase|IT|ITCase))$'(µñ€Ÿ8Ü’ÞÕû1J$c371c7d4-d0d8-4995-a78a-46113807ab7b
+Á
+java:S1130"yRemove the declaration of thrown exception 'exception.IncorrectDataException', as it cannot be thrown from method's body.(üƒ”éÿÿÿÿÿ8·î¿ðû1J$109c4528-46b2-4180-a76a-8c84fca196a1

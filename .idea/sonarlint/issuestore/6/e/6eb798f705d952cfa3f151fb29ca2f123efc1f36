@@ -1,0 +1,6 @@
+
+š	java:S116"SRename this field "FILEPATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£Åşÿÿÿÿ8´Å³ğû1J$b3f9f57a-dfee-4662-933b-54ed4612ffc8
+i
+java:S1170"!Make this final field static too.(£Åşÿÿÿÿ8´Å³ğû1J$665a6161-6362-44ee-9c3b-1e623bdedbfa
+Â
+java:S6204"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(”µÕÄüÿÿÿÿ8ÄÅ³ğû1J$ea566a79-9db4-4409-b06e-d4189b501e7f
