@@ -1,15 +1,0 @@
-
-p
-java:S2699"-Add at least one assertion to this test case.(ØÔÔÎ8¯îÌÑû1J$3aca1eb9-ce16-4659-aaba-42048fcfcb2d
-Ù
-java:S3577"Rename class "EventFSTestDELETE" to match the regular expression: '^((Test|IT)[a-zA-Z0-9_]+|[A-Z][a-zA-Z0-9_]*(Test|Tests|TestCase|IT|ITCase))$'(µ‰¼ƒÿÿÿÿÿ8³îÌÑû1J$4c4306cf-e027-4811-8376-d27a76564fff
-}
-java:S1854":Remove this useless assignment to local variable "events".(žó·Ç8µîÌÑû1J$ffa1ae4e-94d2-4666-99a6-c3dd6021d50e
-†
-java:S1854">Remove this useless assignment to local variable "csvHandler".(¶ž•¦ÿÿÿÿÿ8µîÌÑû1J$e000c3a4-2c26-444d-8bce-343f5395156e
-¯
-java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ØÔÔÎ8¸îÌÑû1J$3daedcf1-2469-4eaa-9e69-2f56727177bb
-w
-java:S1481"/Remove this unused "csvHandler" local variable.(¶ž•¦ÿÿÿÿÿ8ºîÌÑû1J$a1842a7a-3cf5-4e10-842a-80f6e0be008e
-n
-java:S1481"+Remove this unused "events" local variable.(žó·Ç8ºîÌÑû1J$9cbab80f-fddc-4404-9456-3c0ddaced09f

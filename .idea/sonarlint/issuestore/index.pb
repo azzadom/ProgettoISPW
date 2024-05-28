@@ -48,8 +48,6 @@ V
 .src/logic/java/engineering/dao/CSVHandler.java,5\a\5ae29435f6e048e47f4d1c121548d812979d261f
 S
 #src/logic/java/dao/fs/TicketFS.java,4\a\4a27735ed10a6484d2d2a4c012143ef163bb0169
-_
-/src/test/java/dao/fs/OrganizerFSTestDELETE.java,4\8\48c49ab7c584ecd0988dfc0f91a32e5c03623ac0
 g
 7src/logic/java/controller/app/BookTicketController.java,c\5\c5e9b2f18e05c2b5cb2eb4d1d671ba99e7a2a120
 b
@@ -80,14 +78,10 @@ W
 'src/logic/java/engineering/Session.java,e\2\e25927c9adc5eab5e51f67910f49fc9a9f25f74a
 h
 8src/logic/java/dao/jdbc/queries/NotificationQueries.java,3\f\3f4f38d37392c85c8609b82e0f4b560dd86c0ebf
-[
-+src/test/java/dao/fs/EventFSTestDELETE.java,9\e\9ec56af826fdb617a47599341b3e068df5c62d1e
 n
 >src/logic/java/engineering/dao/ObjectSerializationHandler.java,6\b\6bd98a6ef9ff073737a51bc1774c604059629d96
 W
 'src/logic/java/dao/NotificationDAO.java,f\a\fae9b9a79beb34c5cc49956283e8d03cefee8fa8
-s
-Csrc/test/java/controller/app/NotificationsControllerTestDELETE.java,8\8\880e6570d20b3176b92b46c0354cf35c7b212b2a
 o
 ?src/logic/java/engineering/dao/factory/FactorySingletonDAO.java,2\b\2b140b413a7328cb0f24636e4ebbfcb31595c82b
 g
@@ -144,8 +138,6 @@ d
 .src/logic/java/exception/dao/DAOException.java,0\f\0fc173669836a9df24fbb220e378cad5f9ef434a
 Å
 Q.idea/sonarlint/securityhotspotstore/4/a/4a27735ed10a6484d2d2a4c012143ef163bb0169,4\1\4147c3989a8a42a6b7cbf3a8a99319d2d5911849
-Å
-Q.idea/sonarlint/securityhotspotstore/4/8/48c49ab7c584ecd0988dfc0f91a32e5c03623ac0,f\d\fd1837c332ff333015a5cae073e6a7b0a292f0ba
 Å
 Q.idea/sonarlint/securityhotspotstore/8/f/8ff10918660720078e1f0faaa3d779cc2bdd4d6c,0\e\0e0c4bbb6aa102d782035d12bb08c2c9a7d8c4e2
 Å
@@ -205,8 +197,6 @@ Q.idea/sonarlint/securityhotspotstore/e/2/e25927c9adc5eab5e51f67910f49fc9a9f25f7
 w
 G.idea/sonarlint/issuestore/e/2/e25927c9adc5eab5e51f67910f49fc9a9f25f74a,c\7\c75c20912d02c9e947209878269246fad688ed91
 Å
-Q.idea/sonarlint/securityhotspotstore/9/e/9ec56af826fdb617a47599341b3e068df5c62d1e,6\7\67cd1b547f42fcc620f0f230909080b3bfb73d0c
-Å
 Q.idea/sonarlint/securityhotspotstore/3/f/3f4f38d37392c85c8609b82e0f4b560dd86c0ebf,0\d\0db99b8c6cc8040019d5e58e6432ab3fd1430516
 Å
 Q.idea/sonarlint/securityhotspotstore/7/0/700f65076bb25487bce1e725f70e798f66505c96,d\d\ddc709755697a727c0314391b949c6438d0984bb
@@ -222,8 +212,6 @@ Q.idea/sonarlint/securityhotspotstore/f/a/fae9b9a79beb34c5cc49956283e8d03cefee8f
 Q.idea/sonarlint/securityhotspotstore/6/b/6bd98a6ef9ff073737a51bc1774c604059629d96,6\9\69cc9cdf8d68a43e4d70b2ebc8fa560a1db0a3c8
 w
 G.idea/sonarlint/issuestore/f/a/fae9b9a79beb34c5cc49956283e8d03cefee8fa8,7\5\75a2918b55d1c6c6c3280b1d89da3dd163424536
-Å
-Q.idea/sonarlint/securityhotspotstore/8/8/880e6570d20b3176b92b46c0354cf35c7b212b2a,1\3\13ef02c4e2f12e376b96df12ab0bd072eba3d42d
 Å
 Q.idea/sonarlint/securityhotspotstore/c/2/c2a62b60f71613530c146667b0cc9163536188ab,b\c\bcef83916f6caf5f395a6f901a3b682f9cd040b9
 Å
@@ -260,5 +248,7 @@ w
 G.idea/sonarlint/issuestore/0/5/0522ec9d3f42759933cb188335fb4dcec3191247,a\8\a8c8fdbc522ba9ca9123e840ee7ef5d0b74ce7b1
 Å
 Q.idea/sonarlint/securityhotspotstore/0/5/0522ec9d3f42759933cb188335fb4dcec3191247,8\f\8f5edc33df7ffcc6342c3951f1c50fc400191c2a
-Z
-*src/test/java/DuplicateEntryException.java,f\0\f06e921a914fa9e76aad27e69f8a717144432ecc
+<
+Progetto.iml,6\9\690a4bb6ce540858db9009ee62a8ce9067840ed6
+M
+.sonarlint/connectedMode.json,8\f\8f3fa759197f486b33c00258b36f2f896132da81

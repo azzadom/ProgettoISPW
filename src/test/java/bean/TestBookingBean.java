@@ -38,7 +38,7 @@ class TestBookingBean {
     }
 
     @Test
-    public void testSetTelephone() throws IncorrectDataException {
+    void testSetTelephone() throws IncorrectDataException {
         BookingBean bookingBean = new BookingBean();
         bookingBean.setTelephone("+393895996644");
         Assertions.assertEquals("+393895996644", bookingBean.getTelephone());
@@ -63,7 +63,7 @@ class TestBookingBean {
     }
 
     @Test
-    public void testSetFirstName() throws IncorrectDataException {
+    void testSetFirstName() throws IncorrectDataException {
         BookingBean bookingBean = new BookingBean();
         bookingBean.setFirstName("Luca Flavio");
         Assertions.assertEquals("Luca Flavio", bookingBean.getFirstName());
@@ -88,7 +88,7 @@ class TestBookingBean {
     }
 
     @Test
-    public void testSetLastName() throws IncorrectDataException {
+    void testSetLastName() throws IncorrectDataException {
         BookingBean bookingBean = new BookingBean();
         bookingBean.setLastName("Martorelli");
         Assertions.assertEquals("Martorelli", bookingBean.getLastName());
