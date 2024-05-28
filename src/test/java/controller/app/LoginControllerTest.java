@@ -5,7 +5,6 @@ import bean.UserBean;
 import exception.DuplicateEntryException;
 import exception.IncorrectDataException;
 import exception.OperationFailedException;
-import model.Organizer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,10 +15,10 @@ class LoginControllerTest {
     void login() throws IncorrectDataException, OperationFailedException {
         LoginController loginController = new LoginController();
         UserBean userBean = new UserBean();
-        userBean.setUsername("luca");
-        userBean.setPassword("l.luca");
+        userBean.setUsername("pippo");
+        userBean.setPassword("p.pippo");
         UserBean user = loginController.login(userBean);
-        assertEquals("luca", user.getUsername());
+        assertEquals("pippo", user.getUsername());
     }
 
     @Test

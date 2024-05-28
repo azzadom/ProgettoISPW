@@ -260,3 +260,5 @@ w
 G.idea/sonarlint/issuestore/0/5/0522ec9d3f42759933cb188335fb4dcec3191247,a\8\a8c8fdbc522ba9ca9123e840ee7ef5d0b74ce7b1
 Å
 Q.idea/sonarlint/securityhotspotstore/0/5/0522ec9d3f42759933cb188335fb4dcec3191247,8\f\8f5edc33df7ffcc6342c3951f1c50fc400191c2a
+Z
+*src/test/java/DuplicateEntryException.java,f\0\f06e921a914fa9e76aad27e69f8a717144432ecc

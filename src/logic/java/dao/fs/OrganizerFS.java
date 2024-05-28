@@ -33,7 +33,7 @@ public class OrganizerFS implements OrganizerDAO {
     public Organizer selectOrganizer(String username, String password) throws DAOException {
         try {
             ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILEPATH);
-            List<Organizer> orgs = handler.findObject(org -> org.getUsername().equals(username) && org.getPassword().equals(password));
+            List<Organizer> orgs = handler.findObject(org -> org.getUsername().equals(username) && org.checkPassword((password)));
             Organizer org =  orgs.getFirst();
             org.setTransientParams();
             return org;
