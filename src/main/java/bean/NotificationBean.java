@@ -1,16 +1,8 @@
 package bean;
 
-import java.sql.Time;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
 public class NotificationBean {
-
-	public NotificationBean() {
-	}
 
 	private String type;
 

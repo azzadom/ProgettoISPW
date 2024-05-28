@@ -90,8 +90,8 @@ class TestBookingBean {
     @Test
     void testSetLastName() throws IncorrectDataException {
         BookingBean bookingBean = new BookingBean();
-        bookingBean.setLastName("Martorelli");
-        Assertions.assertEquals("Martorelli", bookingBean.getLastName());
+        bookingBean.setLastName("O'Brien");
+        Assertions.assertEquals("O'Brien", bookingBean.getLastName());
     }
 
     @ParameterizedTest

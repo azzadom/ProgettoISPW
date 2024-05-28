@@ -6,6 +6,10 @@ import java.sql.Statement;
 
 public class EventQueries {
 
+    private EventQueries() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ResultSet selectEventsByCity(Statement stmt ,String city) throws SQLException {
         String query = String.format("SELECT * FROM Event WHERE City = '%s' AND Date >= CURDATE();", city);
         return stmt.executeQuery(query);

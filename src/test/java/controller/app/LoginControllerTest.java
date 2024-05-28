@@ -15,25 +15,25 @@ class LoginControllerTest {
     void login() throws IncorrectDataException, OperationFailedException {
         LoginController loginController = new LoginController();
         UserBean userBean = new UserBean();
-        userBean.setUsername("pippo");
-        userBean.setPassword("p.pippo");
+        userBean.setUsername("luca");
+        userBean.setPassword("l.luca");
         UserBean user = loginController.login(userBean);
-        assertEquals("pippo", user.getUsername());
+        assertEquals("luca", user.getUsername());
     }
 
     @Test
     void register() throws IncorrectDataException, OperationFailedException, DuplicateEntryException{
         OrganizerBean organizerBean = new OrganizerBean();
-        organizerBean.setUsername("pluto");
-        organizerBean.setPassword("p.pluto");
-        organizerBean.setEmail("pluto@hotmail.com");
-        organizerBean.setFirstName("Pluto");
-        organizerBean.setLastName("Minati");
-        organizerBean.setFiscalCode("MNTPLT74S08H501Z");
-        organizerBean.setInfoPayPal("pluto@hotmail.com");
+        organizerBean.setUsername("pippo");
+        organizerBean.setPassword("p.pippo");
+        organizerBean.setEmail("pippo@gmail.com");
+        organizerBean.setFirstName("Pippo");
+        organizerBean.setLastName("Mascara");
+        organizerBean.setFiscalCode("MSCPPP80A01C352J");
+        organizerBean.setInfoPayPal("pippo_wallet@gmail.com");
         LoginController loginController = new LoginController();
         UserBean user = loginController.register(organizerBean);
-        assertEquals("pluto", user.getUsername());
-        assertNotEquals("p.pluto", user.getPassword());
+        assertEquals("pippo", user.getUsername());
+        assertNotEquals("p.pippo", user.getPassword());
     }
 }

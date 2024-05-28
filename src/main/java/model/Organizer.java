@@ -1,7 +1,7 @@
 package model;
 
+import exception.EncryptionException;
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.*;
 
 public class Organizer extends User{
@@ -9,7 +9,7 @@ public class Organizer extends User{
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public Organizer(String username, String password, String email, String firstName, String lastName, String fiscalCode, String infoPayPal) {
+	public Organizer(String username, String password, String email, String firstName, String lastName, String fiscalCode, String infoPayPal) throws EncryptionException {
 		super(username, password);
 		this.firstName = firstName;
 		this.lastName = lastName;

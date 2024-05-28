@@ -6,6 +6,10 @@ import java.sql.Statement;
 
 public class OrganizerQueries {
 
+    private OrganizerQueries() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ResultSet selectOrganizer(Statement stmt, String idOrganizer) throws SQLException {
         String query = String.format("SELECT * FROM Organizer WHERE Username = '%s';", idOrganizer);
         return stmt.executeQuery(query);

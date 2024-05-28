@@ -2,12 +2,6 @@ package engineering.dao.factory;
 
 import dao.*;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 public abstract class FactorySingletonDAO {
 
     protected static FactorySingletonDAO instance = null;
@@ -16,7 +10,7 @@ public abstract class FactorySingletonDAO {
 
     public static synchronized FactorySingletonDAO getDefaultDAO (){
         if (instance == null) {
-            String daoType = System.getenv("DAO_TYPE"); //ENV -> DAO_TYPE=FS; or DAO_TYPE=JDBC;
+            String daoType = System.getenv("DAO_TYPE");
             switch (TypeDAO.valueOf(daoType)) {
                 case JDBC:
                     instance = new JDBCFactory();

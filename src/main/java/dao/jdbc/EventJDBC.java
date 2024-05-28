@@ -16,9 +16,19 @@ import java.util.List;
 
 public class EventJDBC implements EventDAO {
 
+    private static final String COLUMN_IDEVENT = "IdEvent";
+    private static final String COLUMN_NAME = "Name";
+    private static final String COLUMN_DESC = "Desc";
+    private static final String COLUMN_LOCATION = "Location";
+    private static final String COLUMN_ADDRESS = "Address";
+    private static final String COLUMN_CITY = "City";
+    private static final String COLUMN_DATE = "Date";
+    private static final String COLUMN_TIME = "Time";
+    private static final String COLUMN_BOOKINGCLOSED = "BookingClosed";
+    private static final String COLUMN_ORGANIZER = "Organizer";
+
     @Override
     public List<Event> selectEventsByCity(String city) throws DAOException {
-
         Statement stmt;
         List<Event> events = new ArrayList<>();
         try {
@@ -26,9 +36,9 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEventsByCity(stmt, city);
             while (rs.next()) {
-                Event event = new Event(rs.getInt("IdEvent"), rs.getString("Name"), rs.getString("Desc"), rs.getString("Location"),
-                        rs.getString("Address"), rs.getString("City"), rs.getDate("Date").toLocalDate(),
-                        rs.getTime("Time").toLocalTime(), rs.getBoolean("BookingClosed"), rs.getString("Organizer"));
+                Event event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
+                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
+                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
                 events.add(event);
             }
             rs.close();
@@ -49,9 +59,9 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEvent(stmt, idEvent);
             if (rs.next()) {
-                event = new Event(rs.getInt("IdEvent"), rs.getString("Name"), rs.getString("Desc"), rs.getString("Location"),
-                        rs.getString("Address"), rs.getString("City"), rs.getDate("Date").toLocalDate(),
-                        rs.getTime("Time").toLocalTime(), rs.getBoolean("BookingClosed"), rs.getString("Organizer"));
+                event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
+                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
+                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
             }
             rs.close();
             stmt.close();
@@ -73,9 +83,9 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEventsByOrganizer(stmt, idOrganizer);
             while (rs.next()) {
-                Event event = new Event(rs.getInt("IdEvent"), rs.getString("Name"), rs.getString("Desc"), rs.getString("Location"),
-                        rs.getString("Address"), rs.getString("City"), rs.getDate("Date").toLocalDate(),
-                        rs.getTime("Time").toLocalTime(), rs.getBoolean("BookingClosed"), rs.getString("Organizer"));
+                Event event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
+                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
+                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
                 events.add(event);
             }
             rs.close();

@@ -13,7 +13,7 @@ import java.util.Properties;
 public class SingletonConnector {
     protected static SingletonConnector instance = null;
     private Connection connection = null;
-    private final String CONNECTION_SETTINGS = "resources/db.properties";
+    private static final String CONNECTION_SETTINGS = "resources/db.properties";
 
     protected SingletonConnector() {}
 
@@ -30,11 +30,11 @@ public class SingletonConnector {
                 Properties properties = new Properties();
                 properties.load(input);
 
-                String connection_url = properties.getProperty("CONNECTION_URL");
+                String connectionUrl = properties.getProperty("CONNECTION_URL");
                 String user = properties.getProperty("USER");
                 String pass = properties.getProperty("PASS");
 
-                connection = DriverManager.getConnection(connection_url, user, pass);
+                connection = DriverManager.getConnection(connectionUrl, user, pass);
             } catch (IOException | SQLException e) {
                 throw new ConnectionException("Error in getConnection: " + e.getMessage(), e.getCause());
             }

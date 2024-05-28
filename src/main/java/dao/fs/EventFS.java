@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class EventFS implements EventDAO {
-    private final String FILEPATH = "resources/Files/Event.ser";
+    private static final String FILE_PATH = "resources/Files/Event.ser";
 
     @Override
     public List<Event> selectEventsByCity(String city) throws DAOException {
         try {
-            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILE_PATH);
             List <Event> events = hanlder.findObject(event -> event.getCity().equals(city) &&
                     event.getDate().isAfter(LocalDate.now()));
             for (Event event : events) {
@@ -33,7 +33,7 @@ public class EventFS implements EventDAO {
 
     public Event selectEvent(Integer idEvent) throws DAOException{
         try {
-            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILE_PATH);
             List<Event> events = hanlder.findObject(event -> event.getIdEvent().equals(idEvent));
             Event event = events.getFirst();
             event.setTransientParams();
@@ -46,7 +46,7 @@ public class EventFS implements EventDAO {
     @Override
     public List<Event> selectEventsByOrganizer(String idOrganizer) throws DAOException {
         try {
-            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILE_PATH);
             List<Event> events = hanlder.findObject(event -> event.getOrgUsername().equals(idOrganizer));
             for (Event event : events) {
                 event.setTransientParams();
@@ -59,7 +59,7 @@ public class EventFS implements EventDAO {
 
     public void insertEvent(Event event) throws DAOException {
         try {
-            ObjectSerializationHandler<Event> handler = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Event> handler = new ObjectSerializationHandler<>(FILE_PATH);
             handler.writeObjects(event);
         } catch (IOException | ClassNotFoundException e) {
             throw new DAOException("Error in insertEvent: " + e.getMessage(), e.getCause(), GENERIC);

@@ -16,14 +16,14 @@ import static exception.dao.TypeDAOException.*;
 
 public class NotificationFS implements NotificationDAO {
 
-    private final String FILEPATH = "resources/Files/Notification.csv";
+    private static final String FILE_PATH = "resources/Files/Notification.csv";
 
     @Override
     public List<Notification> selectNotifications(String idOrganizer) throws DAOException {
         try{
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             List<String[]> foundrs = handler.find(r -> r[4].equals(idOrganizer));
-            return foundrs.stream().map(this::fromCsvRecord).collect(Collectors.toList());
+            return foundrs.stream().map(this::fromCsvRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             throw new DAOException("Error in selectNotifications: " + e.getMessage(), e.getCause(), GENERIC);
         }
@@ -32,7 +32,7 @@ public class NotificationFS implements NotificationDAO {
     @Override
     public void addNotification(String idOrganizer, Notification notification) throws DAOException {
          try {
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             if(!(handler.find(uniqueKey(idOrganizer, notification.getDateAndTime().toString(),
                     notification.getEventName(), notification.getBookingCode())).isEmpty())) {
                 throw new DAOException("Notification already exists", DUPLICATE);
@@ -48,7 +48,7 @@ public class NotificationFS implements NotificationDAO {
     @Override
     public void deleteNotification(String idOrganizer, List<Notification> notification) throws DAOException {
         try{
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             List<Predicate<String[]>> predicates = new ArrayList<>();
             for (Notification n : notification) {
                 predicates.add(uniqueKey(idOrganizer, n.getDateAndTime().toString(), n.getEventName(), n.getBookingCode()));

@@ -13,12 +13,12 @@ import static exception.dao.TypeDAOException.*;
 
 public class OrganizerFS implements OrganizerDAO {
 
-    private final String FILEPATH = "resources/Files/Organizer.ser";
+    private static final String FILE_PATH = "resources/Files/Organizer.ser";
 
     @Override
     public Organizer selectOrganizer(String idOrganizer) throws DAOException {
         try {
-            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILE_PATH);
             List<Organizer> orgs = handler.findObject(org -> org.getUsername().equals(idOrganizer));
             Organizer org =  orgs.getFirst();
             org.setTransientParams();
@@ -32,8 +32,8 @@ public class OrganizerFS implements OrganizerDAO {
     @Override
     public Organizer selectOrganizer(String username, String password) throws DAOException {
         try {
-            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILEPATH);
-            List<Organizer> orgs = handler.findObject(org -> org.getUsername().equals(username) && org.checkPassword((password)));
+            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILE_PATH);
+            List<Organizer> orgs = handler.findObject(org -> org.getUsername().equals(username) && org.getPassword().equals(password));
             Organizer org =  orgs.getFirst();
             org.setTransientParams();
             return org;
@@ -44,7 +44,7 @@ public class OrganizerFS implements OrganizerDAO {
 
     public void insertOrganizer(Organizer organizer) throws DAOException {
         try {
-            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILEPATH);
+            ObjectSerializationHandler<Organizer> handler = new ObjectSerializationHandler<>(FILE_PATH);
             if (!(handler.findObject(uniqueKey(organizer.getUsername())).isEmpty())) {
                 throw new DAOException("Username already exists", DUPLICATE);
             } else if (!(handler.findObject(uniquePredicate(organizer.getFiscalCode(),
@@ -61,8 +61,8 @@ public class OrganizerFS implements OrganizerDAO {
         return org -> org.getUsername().equals(username);
     }
 
-    private Predicate<Organizer> uniquePredicate(String CF, String email){
-        return org -> org.getFiscalCode().equals(CF) && org.getEmail().equals(email);
+    private Predicate<Organizer> uniquePredicate(String cf, String email){
+        return org -> org.getFiscalCode().equals(cf) && org.getEmail().equals(email);
     }
 
 }

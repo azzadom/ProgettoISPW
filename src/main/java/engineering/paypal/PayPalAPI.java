@@ -5,9 +5,6 @@ import java.util.Random;
 
 public class PayPalAPI {
 
-    public PayPalAPI() {
-    }
-
     public PaymentResponse processPayment(PaymentRequest request) {
         PaymentResponse response = new PaymentResponse();
         Random random = new SecureRandom();

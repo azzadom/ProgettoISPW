@@ -1,13 +1,10 @@
 package bean;
 
 import exception.IncorrectDataException;
-import model.Ticket;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
 
 public class EventBean {
@@ -32,7 +29,7 @@ public class EventBean {
 
 	private List<TicketBean> tickets = new ArrayList<>();
 
-	private HashMap<String, Integer> ticketsAvailability = new HashMap<>();
+	private Map<String, Integer> ticketsAvailability = new HashMap<>();
 
 	public void setIdEvent(Integer idEvent) {
 		this.idEvent = idEvent;
@@ -168,7 +165,7 @@ public class EventBean {
 		return time.toString();
 	}
 
-	public HashMap<String, Integer> getTicketAvailability() {
+	public Map<String, Integer> getTicketAvailability() {
 		return this.ticketsAvailability;
 	}
 }

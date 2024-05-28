@@ -5,6 +5,7 @@ import bean.UserBean;
 import engineering.ToBeanConverter;
 import engineering.dao.factory.FactorySingletonDAO;
 import exception.DuplicateEntryException;
+import exception.EncryptionException;
 import exception.dao.DAOException;
 import exception.IncorrectDataException;
 import exception.OperationFailedException;
@@ -29,7 +30,7 @@ public class LoginController {
             } catch (DAOException e) {
                 Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
-            } catch (IncorrectDataException e) {
+            } catch (IncorrectDataException | EncryptionException e) {
                 Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }
@@ -49,7 +50,7 @@ public class LoginController {
                     Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
                     throw new OperationFailedException();
                 }
-            } catch (IncorrectDataException e) {
+            } catch (IncorrectDataException | EncryptionException e) {
                 Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }

@@ -27,7 +27,7 @@ public class OrganizerBean extends UserBean{
     }
 
     public void setFirstName(String firstName) throws IncorrectDataException {
-        String firstNamePattern = "^[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)*$";
+        String firstNamePattern = "^[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)?$";
         boolean match = Pattern.matches(firstNamePattern, firstName);
         if (!match) {
             throw new IncorrectDataException("Lastname is not valid.");
@@ -41,7 +41,7 @@ public class OrganizerBean extends UserBean{
     }
 
     public void setLastName(String lastName) throws IncorrectDataException {
-        String lastNamePattern = "^[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)?('[A-Z][a-zA-Z]*)*$";
+        String lastNamePattern = "^[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)?('[A-Z][a-zA-Z]*)?$";
         boolean match = Pattern.matches(lastNamePattern, lastName);
         if (!match) {
             throw new IncorrectDataException("Lastname is not valid.");

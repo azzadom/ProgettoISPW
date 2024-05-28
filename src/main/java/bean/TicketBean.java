@@ -10,9 +10,6 @@ public class TicketBean {
 
     private String description;
 
-    public TicketBean(){
-    }
-
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }

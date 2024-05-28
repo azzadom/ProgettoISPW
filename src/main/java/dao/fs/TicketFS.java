@@ -8,6 +8,7 @@ import model.Ticket;
 import static exception.dao.TypeDAOException.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -15,14 +16,14 @@ import java.util.stream.Collectors;
 
 public class TicketFS implements TicketDAO {
 
-    private final String FILEPATH = "resources/Files/Ticket.csv";
+    private static final String FILE_PATH = "resources/Files/Ticket.csv";
 
     @Override
     public List<Ticket> selectTickets(Integer idEvent) throws DAOException {
         try {
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             List<String[]> foundRecord = handler.find(r -> r[5].equals(String.valueOf(idEvent)));
-            return foundRecord.stream().map(this::fromCvsRecord).collect(Collectors.toList());
+            return foundRecord.stream().map(this::fromCvsRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             throw new DAOException("Error in selectTickets: " + e.getMessage(), e.getCause(), GENERIC);
         }

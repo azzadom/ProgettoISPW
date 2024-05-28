@@ -7,6 +7,10 @@ import java.sql.Timestamp;
 
 public class NotificationQueries {
 
+    private NotificationQueries() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ResultSet selectNotificationsByOrganizer(Statement stmt, String idOrganizer) throws SQLException {
         String query = String.format("SELECT * FROM Notif WHERE Organizer = '%s';", idOrganizer);
         return stmt.executeQuery(query);

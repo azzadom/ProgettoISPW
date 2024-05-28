@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class ObjectSerializationHandler<Object>{
+public class ObjectSerializationHandler<O>{
 
     private String filePath;
 
@@ -13,66 +13,55 @@ public class ObjectSerializationHandler<Object>{
         this.filePath = filePath;
     }
 
-    private void writeObjectsCleaned(List<Object> objects) throws IOException {
-        ObjectOutputStream outputStream = null;
-        try {
-            outputStream = new ObjectOutputStream(new FileOutputStream(filePath));
-            for (Object o : objects) {
-                outputStream.writeObject(o);
-            }
-        } finally {
-            if (outputStream != null) {
-                outputStream.close();
+    private void writeObjectsCleaned(List<O> objects) throws IOException {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
+            for (O object : objects) {
+                outputStream.writeObject(object);
             }
         }
     }
 
-    public void writeObjects(Object object) throws IOException, ClassNotFoundException {
-        List<Object> objs = readObjects();
+    public void writeObjects(O object) throws IOException, ClassNotFoundException {
+        List<O> objs = readObjects();
         objs.add(object);
         writeObjectsCleaned(objs);
 
     }
 
-    public void writeObjects(List<Object> objects) throws IOException, ClassNotFoundException {
-        List<Object> objs = readObjects();
+    public void writeObjects(List<O> objects) throws IOException, ClassNotFoundException {
+        List<O> objs = readObjects();
         objs.addAll(objects);
         writeObjectsCleaned(objs);
     }
 
-    public List<Object> readObjects() throws IOException, ClassNotFoundException {
-        List<Object> objects = new ArrayList<>();
-        ObjectInputStream inputStream = null;
-        try{
-            inputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePath)));
-            while (true){
-                Object object = (Object) inputStream.readObject();
+    public List<O> readObjects() throws IOException, ClassNotFoundException {
+        List<O> objects = new ArrayList<>();
+        try(ObjectInputStream inputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePath)))) {
+            O object;
+            while (true) {
+                object = (O) inputStream.readObject();
                 objects.add(object);
             }
-        } catch (EOFException e){
+        } catch (EOFException e) {
             return objects;
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
         }
     }
 
-    public List<Object> findObject(Predicate<Object> predicate) throws IOException, ClassNotFoundException {
-        List<Object> objects = readObjects();
+    public List<O> findObject(Predicate<O> predicate) throws IOException, ClassNotFoundException {
+        List<O> objects = readObjects();
         objects = objects.stream().filter(predicate).toList();
         return objects;
     }
 
-    public void deleteObjects(Predicate<Object> predicate) throws IOException, ClassNotFoundException {
-        List<Object> objects = readObjects();
+    public void deleteObjects(Predicate<O> predicate) throws IOException, ClassNotFoundException {
+        List<O> objects = readObjects();
         objects.removeIf(predicate);
         writeObjectsCleaned(objects);
     }
 
-    public void deleteObjects(List<Predicate<Object>> predicates) throws IOException, ClassNotFoundException {
-        List<Object> objs = readObjects();
-        for (Predicate<Object> p : predicates) {
+    public void deleteObjects(List<Predicate<O>> predicates) throws IOException, ClassNotFoundException {
+        List<O> objs = readObjects();
+        for (Predicate<O> p : predicates) {
                 objs.removeIf(p);
         }
         writeObjectsCleaned(objs);

@@ -112,7 +112,6 @@ public class Booking {
 		String characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 				+ "abcdefghijklmnopqrstuvwxyz"
 				+ "0123456789";
-				// + "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
 
 		Random random = new SecureRandom();
 		StringBuilder sb = new StringBuilder();

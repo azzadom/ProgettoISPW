@@ -15,12 +15,12 @@ import static exception.dao.TypeDAOException.*;
 
 public class BookingFS implements BookingDAO {
 
-    private final String FILEPATH = "resources/Files/Booking.csv";
+    private static final String FILE_PATH = "resources/Files/Booking.csv";
 
     @Override
     public Booking addBooking(Integer idEvent, Booking booking) throws DAOException{
         try{
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             int idBooking;
             if(!(handler.find(uniquePredicate(String.valueOf(idEvent), booking.getEmail(), booking.getTelephone())).isEmpty())){
                 throw new DAOException("Booking already exists", DUPLICATE);
@@ -46,9 +46,9 @@ public class BookingFS implements BookingDAO {
     @Override
     public List<Booking> selectBooking(Integer idEvent) throws DAOException {
         try {
-            CSVHandler handler = new CSVHandler(FILEPATH, ",");
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             List<String[]> found = handler.find(r -> r[9].equals(String.valueOf(idEvent)));
-            return found.stream().map(this::fromCsvRecord).collect(Collectors.toList());
+            return found.stream().map(this::fromCsvRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
             throw new DAOException("Error in selectBooking: " + e.getMessage(), e.getCause(), GENERIC);
         }

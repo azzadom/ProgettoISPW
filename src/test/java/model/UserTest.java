@@ -1,5 +1,6 @@
 package model;
 
+import exception.EncryptionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
 
     @Test
-    void getUsername() {
+    void getUsername() throws EncryptionException {
         User user = new User("user", "password");
         assertEquals("user", user.getUsername());
     }
 
     @Test
-    void checkPassword() {
+    void checkPassword() throws EncryptionException {
         User user = new User("user", "password");
         assertTrue(user.checkPassword("password"));
     }

@@ -8,6 +8,7 @@ import exception.IncorrectDataException;
 import exception.OperationFailedException;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ class BookTicketControllerTest {
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = null;
         eventBeans = bookTicketController.findCityEvents("Milan");
-        assertNotNull(eventBeans);
+        assertNotEquals(new ArrayList<>(),eventBeans);
     }
 
     @Test
