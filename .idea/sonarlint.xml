@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SonarLintProjectSettings">
     <option name="bindingEnabled" value="true" />
-    <option name="projectKey" value="azzadom_ProgettoISPW" />
+    <option name="projectKey" value="ProgettoISPW" />
     <option name="serverId" value="SonarCloud" />
   </component>
 </project>
