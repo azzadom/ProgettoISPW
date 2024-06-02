@@ -38,8 +38,7 @@ public class LoginController {
 
         public UserBean register(OrganizerBean orgBean) throws OperationFailedException, DuplicateEntryException {
             try{
-                User user = new User(orgBean.getUsername(), orgBean.getPassword());
-                Organizer org = new Organizer(user.getUsername(), user.getPassword(), orgBean.getEmail(),
+                Organizer org = new Organizer(orgBean.getUsername(), orgBean.getPassword(), orgBean.getEmail(),
                         orgBean.getFirstName(), orgBean.getLastName(), orgBean.getFiscalCode(), orgBean.getInfoPayPal());
                 FactorySingletonDAO.getDefaultDAO().getOrganizerDAO().insertOrganizer(org);
                 return ToBeanConverter.fromOrganizerToOrganizerBean(org);

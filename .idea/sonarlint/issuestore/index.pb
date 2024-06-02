@@ -152,3 +152,15 @@ U
 %src/main/java/dao/jdbc/EventJDBC.java,3\2\323f363de457d5aa43f98b55b044cb0450ee3b49
 `
 0src/main/java/exception/EncryptionException.java,1\1\1176ce38e8462357032b25852de6dbb31fe826fe
+P
+ src/main/java/view/HomeView.fxml,c\9\c92f6cd4179952d41f67c6997b00a154aac74ae0
+M
+src/main/java/view/styles.css,9\a\9aa53e5b32f5fa34a825759932e220577feff3d0
+Q
+!src/main/java/view/EventView.fxml,e\a\ea09e1a6ce562199feb743eb4435543768549e03
+Q
+!src/main/java/view/NotifView.fxml,5\1\51c113422c02c09674e763e41f58c3e7b6b271e2
+O
+src/main/java/view/OrgHome.fxml,5\f\5fc69acb8e9e04a998c3d9237563abdac0040a72
+Z
+*src/test/java/model/EventFSTestDELETE.java,7\2\7261ca84e9bc8d77005c6e4610a0213daac6bcdd
