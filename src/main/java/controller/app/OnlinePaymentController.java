@@ -1,14 +1,35 @@
 package controller.app;
 
-import engineering.paypal.*;
+import engineering.payment.*;
 import model.Organizer;
 
-public class OnlinePaymentController {
+public class OnlinePaymentController extends Observer {
+
+    private PaymentAPI paymentAPI;
+
+    private Boolean response;
 
     protected boolean payPayPal(Organizer organizer, Double amount, String reason) {
         PaymentRequest request = new PaymentRequest(organizer.getInfoPayPal(), amount, reason);
-        PaymentResponse response = new PayPalAPI().processPayment(request);
-        return response.isSuccess();
+        paymentAPI = new PayPalAPI();
+        paymentAPI.registerObserver(this);
+        long startTime = System.currentTimeMillis();
+        long timeout = 60000L;
+
+        paymentAPI.processPayment(request);
+        while(response == null) {
+            if(System.currentTimeMillis() - startTime > timeout) {
+                return false;
+            }
+        }
+        return response;
+    }
+
+    @Override
+    protected void update(){
+        if (paymentAPI != null){
+            response = paymentAPI.getResponse();
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-package engineering.paypal;
+package engineering.payment;
 
 public class PaymentRequest {
     private String recipient;
