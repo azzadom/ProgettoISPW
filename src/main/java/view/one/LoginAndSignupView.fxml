@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gui.one.EventDetailsGUIController">
+   <stylesheets>
+      <URL value="@css/loginAndSignupStyle.css" />
+      <URL value="@css/globalStyle.css" />
+   </stylesheets>
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0">
+         <top>
+            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10" styleClass="navbar" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="147.0" styleClass="navbar-title" text="PrivateEvents" />
+                  <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="509.0" />
+                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="80.0" styleClass="navbar-button" text="Home" />
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="400.0">
+                     <children>
+                        <Button layoutX="139.0" layoutY="326.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="121.0" text="Log In" />
+                        <TextField layoutX="67.0" layoutY="195.0" prefHeight="34.0" prefWidth="266.0" promptText="Username" styleClass="input-field" />
+                        <PasswordField layoutX="66.0" layoutY="261.0" prefHeight="34.0" prefWidth="267.0" promptText="Password" styleClass="input-field" />
+                        <Label layoutX="132.0" layoutY="76.0" styleClass="main-title" stylesheets="@css/loginAndSignupStyle.css" text="Log In" />
+                        <Line endX="31.0" endY="425.6000061035156" layoutX="369.0" layoutY="76.0" startX="31.0" startY="-76.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="400.0">
+                     <children>
+                        <Label layoutX="115.0" layoutY="68.0" styleClass="main-title" stylesheets="@css/loginAndSignupStyle.css" text="Sign Up" />
+                        <TextField layoutX="213.0" layoutY="174.0" prefHeight="34.0" prefWidth="130.0" promptText="Lastname" styleClass="input-field" />
+                        <PasswordField layoutX="213.0" layoutY="319.0" prefHeight="34.0" prefWidth="130.0" promptText="Password" styleClass="input-field" />
+                        <Button layoutX="139.0" layoutY="384.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="121.0" text="Sign Up" />
+                        <TextField layoutX="55.0" layoutY="269.0" prefHeight="34.0" prefWidth="290.0" promptText="PayPal Email" styleClass="input-field" />
+                        <TextField layoutX="55.0" layoutY="174.0" prefHeight="34.0" prefWidth="134.0" promptText="Firstname" styleClass="input-field" />
+                        <TextField layoutX="55.0" layoutY="220.0" prefHeight="34.0" prefWidth="288.0" promptText="Email" styleClass="input-field" />
+                        <TextField layoutX="56.0" layoutY="319.0" prefHeight="34.0" prefWidth="132.0" promptText="Username" styleClass="input-field" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </center>
+         <bottom>
+            <Pane prefHeight="48.0" prefWidth="600.0" styleClass="navbar" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="772.0" styleClass="text-error" text="Impossibile completare l'operazione. Se il problema persiste contattare l'assistenza." wrapText="true" />
+               </children>
+            </Pane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

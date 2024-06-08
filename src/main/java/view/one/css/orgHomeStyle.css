@@ -1,0 +1,13 @@
+.button-style {
+    -fx-font-size: 15px;
+    -fx-padding: 5px 10px;
+    -fx-background-color: rgb(49, 49, 49);
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.main-title {
+    -fx-font-size: 46px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}

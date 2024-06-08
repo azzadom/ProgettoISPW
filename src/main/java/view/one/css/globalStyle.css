@@ -1,0 +1,30 @@
+.navbar-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+.navbar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-padding: 15px;
+}
+
+.navbar {
+    -fx-background-color: #333;
+    -fx-padding: 10px;
+}
+
+.text-alert {
+    -fx-text-fill: #737580;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-color: #333333;
+}
+
+.text-error {
+    -fx-text-fill: #ca1313;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-color: #cb1515;
+}
