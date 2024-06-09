@@ -10,6 +10,7 @@ import static exception.dao.TypeDAOException.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 public class EventFS implements EventDAO {
@@ -19,7 +20,7 @@ public class EventFS implements EventDAO {
     public List<Event> selectEventsByCity(String city) throws DAOException {
         try {
             ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILE_PATH);
-            List <Event> events = hanlder.findObject(event -> event.getCity().equals(city) &&
+            List <Event> events = hanlder.findObject(event -> event.getCity().equalsIgnoreCase(city) &&
                     event.getDate().isAfter(LocalDate.now()));
             for (Event event : events) {
                 event.setTransientParams();
@@ -33,12 +34,15 @@ public class EventFS implements EventDAO {
 
     public Event selectEvent(Integer idEvent) throws DAOException{
         try {
-            ObjectSerializationHandler<Event> hanlder = new ObjectSerializationHandler<>(FILE_PATH);
-            List<Event> events = hanlder.findObject(event -> event.getIdEvent().equals(idEvent));
+            ObjectSerializationHandler<Event> handler = new ObjectSerializationHandler<>(FILE_PATH);
+            List<Event> events = handler.findObject(event -> event.getIdEvent().equals(idEvent));
+            if (events.isEmpty()) {
+                return null;
+            }
             Event event = events.getFirst();
             event.setTransientParams();
             return event;
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             throw new DAOException("Error in selectEvent: " + e.getMessage(), e.getCause(), GENERIC);
         }
     }

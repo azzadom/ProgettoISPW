@@ -12,8 +12,6 @@ public class OrganizerBean extends UserBean{
 
     private String lastName;
 
-    private String fiscalCode;
-
     private String email;
 
     private String infoPayPal;
@@ -47,20 +45,6 @@ public class OrganizerBean extends UserBean{
             throw new IncorrectDataException("Lastname is not valid.");
         } else {
             this.lastName = lastName;
-        }
-    }
-
-    public String getFiscalCode() {
-        return fiscalCode;
-    }
-
-    public void setFiscalCode(String fiscalCode) throws IncorrectDataException {
-        String fiscalCodePattern = "^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$";
-        boolean match = Pattern.matches(fiscalCodePattern, fiscalCode);
-        if (!match) {
-            throw new IncorrectDataException("Fiscal code is not valid.");
-        } else {
-            this.fiscalCode = fiscalCode;
         }
     }
 

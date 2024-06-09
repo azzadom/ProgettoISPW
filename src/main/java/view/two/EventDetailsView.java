@@ -12,7 +12,8 @@ public class EventDetailsView extends AbstractView{
         System.out.println("2. Book ticket");
         System.out.println("3. Booking management");
         System.out.println("4. Back");
-        System.out.println("5. Exit");
+        System.out.println("5. Home");
+        System.out.println("6. Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;
@@ -21,8 +22,8 @@ public class EventDetailsView extends AbstractView{
             try {
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
-                if(choice >= 1 && choice <= 5) {
-                    break;
+                if(choice >= 1 && choice <= 6) {
+                    return choice;
                 } else {
                     throw new InputMismatchException();
                 }
@@ -31,7 +32,6 @@ public class EventDetailsView extends AbstractView{
                 input.next();
             }
         }
-        return choice;
     }
 
     public void showInfo(String[] info) {

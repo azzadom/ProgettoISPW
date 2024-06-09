@@ -41,10 +41,13 @@ public class BookingJDBC implements BookingDAO {
             rs.close();
             return booking;
         } catch (SQLException e) {
-            if(e.getErrorCode() == 1062) {
+            if (e.getErrorCode() == 1062) {
                 throw new DAOException("Booking already exists", DUPLICATE);
+            }else if (e.getErrorCode() == 45000) {
+                throw new DAOException("Tickets sold out", LIMIT_REACHED);
+            }else {
+                throw new DAOException("Error adding booking: " + e.getMessage(), e.getCause(), GENERIC);
             }
-            throw new DAOException("Error adding booking: " + e.getMessage(), e.getCause(), GENERIC);
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
@@ -57,9 +60,7 @@ public class BookingJDBC implements BookingDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = BookingQueries.selectBookingByEvent(stmt, idEvent);
             while (rs.next()) {
-                Booking booking = new Booking(rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_FIRSTNAME), rs.getInt(COLUMN_AGE), rs.getString(COLUMN_GENDER).charAt(0), rs.getString(COLUMN_EMAIL),
-                        rs.getString(COLUMN_TELEPHONE), rs.getString(COLUMN_TICKET_TYPE), rs.getBoolean(COLUMN_ONLINE_PAYMENT));
-                booking.setIdAndCodeBooking(rs.getString(COLUMN_CODE_BOOKING));
+                Booking booking = fromResultSet(rs);
                 bookings.add(booking);
             }
             rs.close();
@@ -69,5 +70,12 @@ public class BookingJDBC implements BookingDAO {
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
+    }
+
+    private Booking fromResultSet(ResultSet rs) throws SQLException {
+        Booking booking = new Booking(rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_FIRSTNAME), rs.getInt(COLUMN_AGE), rs.getString(COLUMN_GENDER).charAt(0), rs.getString(COLUMN_EMAIL),
+                rs.getString(COLUMN_TELEPHONE), rs.getString(COLUMN_TICKET_TYPE), rs.getBoolean(COLUMN_ONLINE_PAYMENT));
+        booking.setIdAndCodeBooking(rs.getString(COLUMN_CODE_BOOKING));
+        return booking;
     }
 }

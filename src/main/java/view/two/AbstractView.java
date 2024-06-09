@@ -8,13 +8,13 @@ public abstract class AbstractView {
     private static final String ANSI_RED = "\u001B[31m";
 
 
-    protected static void printSeparator() {
+    protected void printSeparator() {
         System.out.println(SEPARATOR);
     }
 
-    public abstract int showMenu();
+    public abstract  int showMenu();
 
-    public static void printTitle(String title) {
+    public void printTitle(String title) {
 
         if (title == null) {
             throw new IllegalArgumentException("Title cannot be null");
@@ -50,11 +50,11 @@ public abstract class AbstractView {
         }
     }
 
-    public static void showError(String message) {
+    public void showError(String message) {
         System.out.println(ANSI_RED + message + ANSI_RESET);
     }
 
-    public static void showMessage(String message) {
+    public void showMessage(String message) {
         System.out.println(message);
     }
 

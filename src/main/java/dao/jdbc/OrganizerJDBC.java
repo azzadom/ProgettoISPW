@@ -19,7 +19,6 @@ public class OrganizerJDBC implements OrganizerDAO {
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_FIRSTNAME = "FirstName";
     private static final String COLUMN_LASTNAME = "LastName";
-    private static final String COLUMN_FISCAL_CODE = "FiscalCode";
     private static final String COLUMN_INFO_PAYPAL = "InfoPayPal";
 
     @Override
@@ -31,8 +30,7 @@ public class OrganizerJDBC implements OrganizerDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = OrganizerQueries.selectOrganizer(stmt, idOrganizer);
             if (rs.first()) {
-                org = new Organizer(rs.getString(COLUMN_USERNAME),rs.getString(COLUMN_PASSWORD),rs.getString(COLUMN_EMAIL), rs.getString(COLUMN_FIRSTNAME),
-                        rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_FISCAL_CODE), rs.getString(COLUMN_INFO_PAYPAL));
+                org = fromResultSet(rs);
             }
             rs.close();
             return org;
@@ -50,8 +48,7 @@ public class OrganizerJDBC implements OrganizerDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = OrganizerQueries.selectOrganizer(stmt, username, password);
             if (rs.first()) {
-                org = new Organizer(rs.getString(COLUMN_USERNAME),rs.getString(COLUMN_PASSWORD),rs.getString(COLUMN_EMAIL), rs.getString(COLUMN_FIRSTNAME),
-                        rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_FISCAL_CODE), rs.getString(COLUMN_INFO_PAYPAL));
+                org = fromResultSet(rs);
             }
             rs.close();
             return org;
@@ -67,7 +64,7 @@ public class OrganizerJDBC implements OrganizerDAO {
         try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             OrganizerQueries.insertOrganizer(stmt, organizer.getUsername(), organizer.getPassword(),
-                    organizer.getFirstName(), organizer.getLastName(), organizer.getFiscalCode(),
+                    organizer.getFirstName(), organizer.getLastName(),
                     organizer.getEmail(), organizer.getInfoPayPal());
         } catch (SQLException e) {
             if(e.getErrorCode() == 1061) {
@@ -79,6 +76,11 @@ public class OrganizerJDBC implements OrganizerDAO {
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
+    }
+
+    private Organizer fromResultSet(ResultSet rs) throws SQLException, EncryptionException {
+        return new Organizer(rs.getString(COLUMN_USERNAME),rs.getString(COLUMN_PASSWORD),rs.getString(COLUMN_EMAIL), rs.getString(COLUMN_FIRSTNAME),
+                rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_INFO_PAYPAL));
     }
 }
 

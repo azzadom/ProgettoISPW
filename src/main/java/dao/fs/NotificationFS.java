@@ -59,6 +59,15 @@ public class NotificationFS implements NotificationDAO {
         }
     }
 
+    public void deleteNotificationByOrg(String idOrganizer) throws DAOException {
+        try{
+            CSVHandler handler = new CSVHandler(FILE_PATH, ",");
+            handler.remove(n -> n[4].equals(idOrganizer));
+        } catch (IOException e) {
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
+        }
+    }
+
     private Predicate<String[]> uniqueKey(String organizer, String datetime, String event, String code) {
         return r -> r[1].equals(datetime) && r[2].equals(event) && r[3].equals(code) && r[4].equals(organizer);
     }

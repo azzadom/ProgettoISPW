@@ -76,7 +76,6 @@ public class ToBeanConverter {
         organizerBean.setUsername(organizer.getUsername());
         organizerBean.setFirstName(organizer.getFirstName());
         organizerBean.setLastName(organizer.getLastName());
-        organizerBean.setFiscalCode(organizer.getFiscalCode());
         organizerBean.setEmail(organizer.getEmail());
         organizerBean.setInfoPayPal(organizer.getInfoPayPal());
 

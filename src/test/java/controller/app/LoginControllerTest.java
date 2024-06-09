@@ -24,16 +24,15 @@ class LoginControllerTest {
     @Test
     void register() throws IncorrectDataException, OperationFailedException, DuplicateEntryException{
         OrganizerBean organizerBean = new OrganizerBean();
-        organizerBean.setUsername("pippo");
-        organizerBean.setPassword("p.pippo");
-        organizerBean.setEmail("pippo@gmail.com");
-        organizerBean.setFirstName("Pippo");
-        organizerBean.setLastName("Mascara");
-        organizerBean.setFiscalCode("MSCPPP80A01C352J");
-        organizerBean.setInfoPayPal("pippo_wallet@gmail.com");
+        organizerBean.setUsername("pluto");
+        organizerBean.setPassword("p.pluto");
+        organizerBean.setEmail("pluto@hotmail.com");
+        organizerBean.setFirstName("Pluto");
+        organizerBean.setLastName("Minati");
+        organizerBean.setInfoPayPal("pluto@hotmail.com");
         LoginController loginController = new LoginController();
         UserBean user = loginController.register(organizerBean);
-        assertEquals("pippo", user.getUsername());
-        assertNotEquals("p.pippo", user.getPassword());
+        assertEquals("pluto", user.getUsername());
+        assertNotEquals("p.pluto", user.getPassword());
     }
 }

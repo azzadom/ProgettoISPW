@@ -29,5 +29,8 @@ public class NotificationQueries {
     }
 
 
-
+    public static void deleteNotificationByOrg(Statement stmt, String idOrganizer) throws SQLException {
+        String query = String.format("DELETE FROM Notif WHERE Organizer = '%s'", idOrganizer);
+        stmt.executeUpdate(query);
+    }
 }

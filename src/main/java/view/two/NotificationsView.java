@@ -1,6 +1,8 @@
 package view.two;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class NotificationsView extends AbstractView{
@@ -10,7 +12,8 @@ public class NotificationsView extends AbstractView{
         printTitle("NOTIFICATIONS PAGE");
         System.out.println("1. View Notifications");
         System.out.println("2. Delete");
-        System.out.println("4. Home");
+        System.out.println("3. Home");
+        System.out.println("4. Log Out");
         System.out.println("5. Exit");
 
         Scanner input = new Scanner(System.in);
@@ -20,8 +23,8 @@ public class NotificationsView extends AbstractView{
             try {
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
-                if(choice >= 1 && choice <= 4) {
-                    break;
+                if(choice >= 1 && choice <= 5) {
+                    return choice;
                 } else {
                     throw new InputMismatchException();
                 }
@@ -30,7 +33,6 @@ public class NotificationsView extends AbstractView{
                 input.next();
             }
         }
-        return choice;
     }
 
     public void showNotifications(String[] notifications) {
@@ -40,28 +42,40 @@ public class NotificationsView extends AbstractView{
         }
     }
 
-    public int deleteNotification() {
+    public List<Integer> deleteNotification() {
+
+        List<Integer> notifs = new ArrayList<>();
+
         Scanner input = new Scanner(System.in);
-        System.out.println("Do you want to delete all notification? (yes/no)");
+        System.out.println("Do you want to delete all notification? (Y/N)");
         String choice = input.nextLine();
-        if (choice.equals("yes")) {
-            return -1;
+        if (choice.equals("Y")) {
+            notifs.add(-1);
+            return notifs;
         }
 
         int inputNumber;
+
         while (true){
             try {
                 System.out.println("Enter the number of the notification you want to delete: ");
-                inputNumber = input.nextInt();
-                if (inputNumber < 0) {
+                inputNumber = Integer.parseInt(input.nextLine());
+                if (inputNumber <= 0) {
                     throw new InputMismatchException();
                 }
-                break;
+
+                notifs.add(inputNumber);
+
+                System.out.println("Do you want to delete another notification? (Y/N): ");
+                choice = input.nextLine();
+                if (choice.equals("N")) {
+                    break;
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
                 input.next();
             }
         }
-        return inputNumber;
+        return notifs;
     }
 }

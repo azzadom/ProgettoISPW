@@ -10,8 +10,9 @@ public class BookingView extends AbstractView {
         printTitle("BOOKING TICKET PAGE");
         System.out.println("1. Show all tickets");
         System.out.println("2. New booking");
-        System.out.println("5. Back");
-        System.out.println("6. Exit");
+        System.out.println("3. Back");
+        System.out.println("4. Home");
+        System.out.println("5. Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;
@@ -20,8 +21,8 @@ public class BookingView extends AbstractView {
             try {
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
-                if (choice >= 1 && choice <= 6) {
-                    break;
+                if (choice >= 1 && choice <= 5) {
+                    return choice;
                 } else {
                     throw new InputMismatchException();
                 }
@@ -30,7 +31,6 @@ public class BookingView extends AbstractView {
                 input.next();
             }
         }
-        return choice;
     }
 
     public void showTickets(String[] tickets) {
@@ -50,11 +50,11 @@ public class BookingView extends AbstractView {
         data[1] = input.nextLine();
         System.out.println("Enter your Age: ");
         data[2] = input.nextLine();
-        System.out.println("Enter your Gender: ");
+        System.out.println("Enter your Gender (M/F): ");
         data[3] = input.nextLine();
         System.out.println("Enter your Email: ");
         data[4] = input.nextLine();
-        System.out.println("Enter your Telephone Number: ");
+        System.out.println("Enter your Telephone Number (with national prefix): ");
         data[5] = input.nextLine();
         System.out.println("Enter the Ticket Number: ");
         data[6] = input.nextLine();

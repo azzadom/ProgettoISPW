@@ -7,12 +7,13 @@ import java.time.ZoneId;
 public class Session {
 
     private UserBean user;
-    private Integer view;
     private ZoneId defaultZone;
+    private Boolean returningHome;
 
-    public Session(Integer view) {
-        this.view = view;
+
+    public Session() {
         this.defaultZone = ZoneId.systemDefault();
+        this.returningHome = false;
     }
 
     public void setUser(UserBean user) {
@@ -23,15 +24,15 @@ public class Session {
         return user;
     }
 
-    public void setView(Integer view) {
-        this.view = view;
-    }
-
-    public Integer getView() {
-        return view;
-    }
-
     public ZoneId getDefaultZone() {
         return defaultZone;
+    }
+
+    public void setReturningHome(Boolean returningHome) {
+        this.returningHome = returningHome;
+    }
+
+    public Boolean getReturningHome() {
+        return returningHome;
     }
 }

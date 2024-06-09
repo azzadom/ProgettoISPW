@@ -36,9 +36,7 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEventsByCity(stmt, city);
             while (rs.next()) {
-                Event event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
-                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
-                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
+                Event event = fromResultSet(rs);
                 events.add(event);
             }
             rs.close();
@@ -59,9 +57,7 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEvent(stmt, idEvent);
             if (rs.next()) {
-                event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
-                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
-                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
+                event = fromResultSet(rs);
             }
             rs.close();
             stmt.close();
@@ -83,9 +79,7 @@ public class EventJDBC implements EventDAO {
 
             ResultSet rs = EventQueries.selectEventsByOrganizer(stmt, idOrganizer);
             while (rs.next()) {
-                Event event = new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
-                        rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
-                        rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
+                Event event = fromResultSet(rs);
                 events.add(event);
             }
             rs.close();
@@ -96,5 +90,11 @@ public class EventJDBC implements EventDAO {
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
+    }
+
+    private Event fromResultSet(ResultSet rs) throws SQLException {
+        return new Event(rs.getInt(COLUMN_IDEVENT), rs.getString(COLUMN_NAME), rs.getString(COLUMN_DESC), rs.getString(COLUMN_LOCATION),
+                rs.getString(COLUMN_ADDRESS), rs.getString(COLUMN_CITY), rs.getDate(COLUMN_DATE).toLocalDate(),
+                rs.getTime(COLUMN_TIME).toLocalTime(), rs.getBoolean(COLUMN_BOOKINGCLOSED), rs.getString(COLUMN_ORGANIZER));
     }
 }

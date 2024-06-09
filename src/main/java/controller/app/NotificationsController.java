@@ -5,6 +5,7 @@ import bean.OrganizerBean;
 import dao.NotificationDAO;
 import engineering.ToBeanConverter;
 import engineering.dao.factory.FactorySingletonDAO;
+import exception.NotFoundException;
 import exception.dao.DAOException;
 import exception.OperationFailedException;
 import model.Notification;
@@ -48,9 +49,21 @@ public class NotificationsController {
         }
     }
 
-    public List<NotificationBean> getNotifications(OrganizerBean org) throws OperationFailedException {
+    public void deleteNotificationsByOrg(OrganizerBean organizerBean) throws OperationFailedException {
+        try {
+            FactorySingletonDAO.getDefaultDAO().getNotificationDAO().deleteNotificationByOrg(organizerBean.getUsername());
+        } catch (DAOException e) {
+            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            throw new OperationFailedException();
+        }
+    }
+
+    public List<NotificationBean> getNotifications(OrganizerBean org) throws OperationFailedException, NotFoundException {
         try {
             List<Notification> notifs = FactorySingletonDAO.getDefaultDAO().getNotificationDAO().selectNotifications(org.getUsername());
+            if (notifs.isEmpty()) {
+                throw new NotFoundException("No notifications found.");
+            }
             List<NotificationBean> notifBean = new ArrayList<>();
             for (Notification notif : notifs) {
                 notifBean.add(ToBeanConverter.fromNotificationToNotificationBean(notif));

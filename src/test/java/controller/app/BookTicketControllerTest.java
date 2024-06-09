@@ -5,6 +5,7 @@ import bean.EventBean;
 import bean.TicketBean;
 import exception.DuplicateEntryException;
 import exception.IncorrectDataException;
+import exception.NotFoundException;
 import exception.OperationFailedException;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookTicketControllerTest {
 
     @Test
-    void findCityEvents() throws OperationFailedException{
+    void findCityEvents() throws OperationFailedException, NotFoundException {
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = null;
         eventBeans = bookTicketController.findCityEvents("Milan");
@@ -24,7 +25,7 @@ class BookTicketControllerTest {
     }
 
     @Test
-    void eventDetails() throws OperationFailedException {
+    void eventDetails() throws OperationFailedException, NotFoundException {
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = bookTicketController.findCityEvents("Milan");
         EventBean eventBean = bookTicketController.eventDetails(eventBeans.getFirst());
@@ -33,7 +34,7 @@ class BookTicketControllerTest {
     }
 
     @Test
-    void sendReservation() throws OperationFailedException, IncorrectDataException, DuplicateEntryException {
+    void sendReservation() throws OperationFailedException, IncorrectDataException, DuplicateEntryException, NotFoundException {
         BookTicketController bookTicketController = new BookTicketController();
         EventBean eventBean = bookTicketController.findCityEvents("Milan").getFirst();
         eventBean = bookTicketController.eventDetails(eventBean);

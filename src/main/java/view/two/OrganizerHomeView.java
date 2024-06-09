@@ -22,7 +22,7 @@ public class OrganizerHomeView extends AbstractView{
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
                 if(choice >= 1 && choice <= 4) {
-                    break;
+                    return choice;
                 } else {
                     throw new InputMismatchException();
                 }
@@ -31,6 +31,5 @@ public class OrganizerHomeView extends AbstractView{
                 input.next();
             }
         }
-        return choice;
     }
 }

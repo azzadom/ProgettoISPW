@@ -21,7 +21,7 @@ public class HomeView extends AbstractView{
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
                 if(choice >= 1 && choice <= 3) {
-                    break;
+                    return choice;
                 } else {
                     throw new InputMismatchException();
                 }
@@ -30,12 +30,11 @@ public class HomeView extends AbstractView{
                 input.next();
             }
         }
-        return choice;
     }
 
     public String searchEvent() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the name of the event: ");
+        System.out.println("Enter the name of the city: ");
         return input.nextLine();
     }
 

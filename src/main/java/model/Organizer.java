@@ -9,11 +9,10 @@ public class Organizer extends User{
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public Organizer(String username, String password, String email, String firstName, String lastName, String fiscalCode, String infoPayPal) throws EncryptionException {
+	public Organizer(String username, String password, String email, String firstName, String lastName, String infoPayPal) throws EncryptionException {
 		super(username, password);
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.fiscalCode = fiscalCode;
 		this.email = email;
 		this.infoPayPal = infoPayPal;
 	}
@@ -21,8 +20,6 @@ public class Organizer extends User{
 	private final String firstName;
 
 	private final String lastName;
-
-	private final String fiscalCode;
 
 	private String email;
 
@@ -54,10 +51,6 @@ public class Organizer extends User{
 
 	public String getLastName() {
 		return this.lastName;
-	}
-
-	public String getFiscalCode() {
-		return this.fiscalCode;
 	}
 
 	public String getInfoPayPal() {

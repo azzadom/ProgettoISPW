@@ -7,8 +7,8 @@ public class OperationFailedException extends Exception{
     }
 
     public OperationFailedException(){
-        super("Impossibile completare l'operazione.\n" +
-                "Se il problema persiste contattare l'assistenza.");
+        super("Unable to complete the operation.\n" +
+                "If problem persists, contact support.");
     }
 
 }

@@ -13,4 +13,5 @@ public interface NotificationDAO {
 
     public void deleteNotification(String idOrganizer, List<Notification> notification) throws DAOException;
 
+    public void deleteNotificationByOrg(String idOrganizer) throws DAOException;
 }

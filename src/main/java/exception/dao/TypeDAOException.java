@@ -2,7 +2,8 @@ package exception.dao;
 
 public enum TypeDAOException {
     GENERIC(1),
-    DUPLICATE(2);
+    DUPLICATE(2),
+    LIMIT_REACHED(3);
 
     private final int id;
 

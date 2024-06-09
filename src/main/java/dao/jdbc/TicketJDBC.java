@@ -29,8 +29,7 @@ public class TicketJDBC implements TicketDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = TicketQueries.selectTicketsByEvent(stmt, idEvent);
             while (rs.next()) {
-                Ticket ticket = new Ticket(rs.getString(COLUMN_TYPE), rs.getDouble(COLUMN_PRICE),
-                        rs.getInt(COLUMN_MINIMUM_AGE), rs.getString(COLUMN_DESC), rs.getInt(COLUMN_MAX_TICKETS));
+                Ticket ticket = fromResultSet(rs);
                 tickets.add(ticket);
             }
             rs.close();
@@ -40,5 +39,10 @@ public class TicketJDBC implements TicketDAO {
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
+    }
+
+    private Ticket fromResultSet(ResultSet rs) throws SQLException {
+        return new Ticket(rs.getString(COLUMN_TYPE), rs.getDouble(COLUMN_PRICE),
+                rs.getInt(COLUMN_MINIMUM_AGE), rs.getString(COLUMN_DESC), rs.getInt(COLUMN_MAX_TICKETS));
     }
 }

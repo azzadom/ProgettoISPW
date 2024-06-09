@@ -26,9 +26,7 @@ public class NotificationJDBC implements NotificationDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = NotificationQueries.selectNotificationsByOrganizer(stmt, idOrganizer);
             while (rs.next()) {
-                Notification notification = new Notification(TypeNotif.valueOf(rs.getString(COLUMN_TYPE)),
-                        rs.getTimestamp(COLUMN_DATETIME).toLocalDateTime(),
-                        rs.getString(COLUMN_EVENTNAME),rs.getString(COLUMN_BOOKINGCODE));
+                Notification notification = fromResultSet(rs);
                 notifications.add(notification);
             }
             rs.close();
@@ -74,5 +72,23 @@ public class NotificationJDBC implements NotificationDAO {
         } finally {
             SingletonConnector.getConnector().endConnection();
         }
+    }
+
+    public void deleteNotificationByOrg(String idOrganizer) throws DAOException {
+        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY)){
+
+                NotificationQueries.deleteNotificationByOrg(stmt, idOrganizer);
+        } catch (SQLException e) {
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
+        } finally {
+            SingletonConnector.getConnector().endConnection();
+        }
+    }
+
+    private Notification fromResultSet(ResultSet rs) throws SQLException {
+        return new Notification(TypeNotif.valueOf(rs.getString(COLUMN_TYPE)),
+                        rs.getTimestamp(COLUMN_DATETIME).toLocalDateTime(),
+                        rs.getString(COLUMN_EVENTNAME),rs.getString(COLUMN_BOOKINGCODE));
     }
 }
