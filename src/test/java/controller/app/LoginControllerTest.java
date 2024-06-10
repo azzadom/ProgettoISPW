@@ -4,6 +4,7 @@ import bean.OrganizerBean;
 import bean.UserBean;
 import exception.DuplicateEntryException;
 import exception.IncorrectDataException;
+import exception.NotFoundException;
 import exception.OperationFailedException;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginControllerTest {
 
     @Test
-    void login() throws IncorrectDataException, OperationFailedException {
+    void login() throws IncorrectDataException, OperationFailedException, NotFoundException {
         LoginController loginController = new LoginController();
         UserBean userBean = new UserBean();
         userBean.setUsername("pippo");

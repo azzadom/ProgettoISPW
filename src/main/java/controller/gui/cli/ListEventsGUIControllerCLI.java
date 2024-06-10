@@ -1,26 +1,32 @@
-package controller.gui.two;
+package controller.gui.cli;
 
 import bean.EventBean;
 import controller.app.BookTicketController;
 import engineering.Session;
 import exception.NotFoundException;
 import exception.OperationFailedException;
-import view.two.ListEventsView;
+import view.cli.ListEventsView;
 
 import java.util.List;
 
-public class ListEventsGUIController extends AbstractGUIController {
+public class ListEventsGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final ListEventsView listEventsView = new ListEventsView();
-    private final List<EventBean> events;
+    private List<EventBean> events;
+    private final String city;
 
-    ListEventsGUIController(Session session,List<EventBean> events){
+    ListEventsGUIControllerCLI(Session session, String city){
         this.currentSession = session;
-        this.events = events;
+        this.city = city;
     }
 
     @Override
     public void start() {
+        BookTicketController bookTicketController = new BookTicketController();
+
+        try {
+            events = bookTicketController.findCityEvents(city);
+
             int choice;
             choice = listEventsView.showMenu();
 
@@ -31,6 +37,12 @@ public class ListEventsGUIController extends AbstractGUIController {
                 case 4 -> exit();
                 default -> throw new IllegalArgumentException("Invalid case!");
             }
+
+        } catch (OperationFailedException e) {
+            listEventsView.showError(e.getMessage());
+        } catch (NotFoundException e) {
+            listEventsView.showMessage(e.getMessage());
+        }
     }
 
     private void showEvents() {
@@ -49,25 +61,15 @@ public class ListEventsGUIController extends AbstractGUIController {
         if (num < 1 || num > events.size()){
             listEventsView.showMessage("Event not found!");
             start();
-        }
-
-        EventBean event = events.get(num-1);
-        if (event != null) {
-            BookTicketController controller = new BookTicketController();
-            try {
-                event = controller.eventDetails(event);
-            } catch (OperationFailedException e) {
-                listEventsView.showError(e.getMessage());
-                start();
-            } catch (NotFoundException e) {
-                listEventsView.showMessage(e.getMessage());
+        } else {
+            EventBean event = events.get(num - 1);
+            if (event != null) {
+                EventDetailsGUIControllerCLI eventDetailsGUIController = new EventDetailsGUIControllerCLI(currentSession, event);
+                eventDetailsGUIController.start();
+            }
+            if (Boolean.FALSE.equals(currentSession.getReturningHome())) {
                 start();
             }
-            EventDetailsGUIController eventDetailsGUIController = new EventDetailsGUIController(currentSession, event);
-            eventDetailsGUIController.start();
-        }
-        if(Boolean.FALSE.equals(currentSession.getReturningHome())){
-            start();
         }
     }
 

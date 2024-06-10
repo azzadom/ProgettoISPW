@@ -1,4 +1,4 @@
-package view.two;
+package view.cli;
 
 public abstract class AbstractView {
 

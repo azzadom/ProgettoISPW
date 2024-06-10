@@ -1,4 +1,4 @@
-package view.two;
+package view.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

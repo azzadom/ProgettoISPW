@@ -1,4 +1,4 @@
-package view.two;
+package view.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -70,6 +70,12 @@ public class BookingView extends AbstractView {
         System.out.println("Telephone Number: " + data[5]);
         System.out.println("Ticket Number: " + data[6]);
         System.out.println("PayPal: " + data[7]);
+
+        if(data[7].equalsIgnoreCase("Y")){
+            data[7] = "true";
+        } else {
+            data[7] = "false";
+        }
 
         int choice;
         while (true) {

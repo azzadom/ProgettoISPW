@@ -1,4 +1,4 @@
-package controller.gui.two;
+package controller.gui.cli;
 
 import bean.OrganizerBean;
 import bean.UserBean;
@@ -8,13 +8,13 @@ import exception.DuplicateEntryException;
 import exception.IncorrectDataException;
 import exception.NotFoundException;
 import exception.OperationFailedException;
-import view.two.LoginAndRegisterView;
+import view.cli.LoginAndRegisterView;
 
-public class LoginAndRegisterGUIController extends AbstractGUIController {
+public class LoginAndRegisterGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final LoginAndRegisterView view = new LoginAndRegisterView();
 
-    public LoginAndRegisterGUIController(Session session){
+    public LoginAndRegisterGUIControllerCLI(Session session){
         this.currentSession = session;
     }
 
@@ -43,13 +43,14 @@ public class LoginAndRegisterGUIController extends AbstractGUIController {
             LoginController loginController = new LoginController();
             user = loginController.login(user);
             currentSession.setUser(user);
-            OrganizerHomeGUIController organizerHomeGUIController = new OrganizerHomeGUIController(currentSession);
+            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession);
             organizerHomeGUIController.start();
         } catch (IncorrectDataException | NotFoundException e) {
             view.showMessage(e.getMessage());
-            start();
         } catch (OperationFailedException e) {
             view.showError(e.getMessage());
+        }
+        if (Boolean.FALSE.equals(currentSession.getReturningHome())) {
             start();
         }
     }
@@ -70,13 +71,14 @@ public class LoginAndRegisterGUIController extends AbstractGUIController {
             LoginController loginController = new LoginController();
             UserBean user = loginController.register(org);
             currentSession.setUser(user);
-            OrganizerHomeGUIController organizerHomeGUIController = new OrganizerHomeGUIController(currentSession);
+            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession);
             organizerHomeGUIController.start();
         } catch (IncorrectDataException e) {
             view.showMessage(e.getMessage());
-            start();
         } catch (OperationFailedException | DuplicateEntryException e) {
             view.showError(e.getMessage());
+        }
+        if (Boolean.FALSE.equals(currentSession.getReturningHome())) {
             start();
         }
     }

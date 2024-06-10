@@ -1,18 +1,17 @@
-package view.two;
+package view.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class OrganizerHomeView extends AbstractView{
+public class HomeView extends AbstractView{
 
     @Override
     public int showMenu() {
-        printTitle("ORGANIZER HOME PAGE");
-        System.out.println("1. View Events");
-        System.out.println("2. View Notifications");
-        System.out.println("3. View Settings");
-        System.out.println("4. Log Out");
-        System.out.println("5. Exit");
+        printTitle("HOME PAGE");
+        System.out.println("Welcome in PrivateEvents!");
+        System.out.println("1. Search Events");
+        System.out.println("2. Login or register");
+        System.out.println("3. Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;
@@ -21,7 +20,7 @@ public class OrganizerHomeView extends AbstractView{
             try {
                 System.out.println("Choose an option: ");
                 choice = input.nextInt();
-                if(choice >= 1 && choice <= 4) {
+                if(choice >= 1 && choice <= 3) {
                     return choice;
                 } else {
                     throw new InputMismatchException();
@@ -32,4 +31,12 @@ public class OrganizerHomeView extends AbstractView{
             }
         }
     }
+
+    public String searchEvent() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the name of the city: ");
+        return input.nextLine();
+    }
+
+
 }

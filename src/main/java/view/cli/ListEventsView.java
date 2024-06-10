@@ -1,4 +1,4 @@
-package view.two;
+package view.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -51,33 +51,36 @@ public class ListEventsView extends AbstractView{
         printTitle("EVENTS LIST");
         int lengthToPrint = events.length;
 
-        while(lengthToPrint > 0) {
+        while (lengthToPrint > 0) {
             int max = Math.min(5, lengthToPrint);
             for (int i = 0; i < max; i++) {
                 System.out.println(events[i]);
             }
             lengthToPrint -= max;
-            if (lengthToPrint < 0) {
-                break;
-            }
-            System.out.println("Insert 0 to show more events or 1 to show menu: ");
-            Scanner input = new Scanner(System.in);
-            while (true) {
-                try {
-                    int choice = input.nextInt();
-                    switch (choice) {
-                        case 0:
-                            break;
-                        case 1:
-                            return;
-                        default:
-                            throw new InputMismatchException();
+            if (lengthToPrint > 0) {
+                System.out.println("Insert 0 to show more events or 1 to show menu: ");
+                Scanner input = new Scanner(System.in);
+                int choice;
+                do {
+                    choice = getIntChoice(input);
+                    if (choice == 0) {
+                        break;
+                    } else if (choice == 1) {
+                        return;
+                    } else {
+                        System.out.println(INPUT_ERROR);
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println(INPUT_ERROR);
-                    input.next();
-                }
+                } while (true);
             }
+        }
+    }
+
+    private int getIntChoice(Scanner input) {
+        try {
+            return input.nextInt();
+        } catch (InputMismatchException e) {
+            input.next();
+            return -1;
         }
     }
 

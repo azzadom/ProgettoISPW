@@ -1,13 +1,13 @@
 package starters;
 
-import controller.gui.two.HomeGUIController;
+import controller.gui.cli.HomeGUIControllerCLI;
 import engineering.Session;
 
 public class MainCLI {
 
     void run() {
         Session currentSession = new Session();
-        HomeGUIController controller = new HomeGUIController(currentSession);
+        HomeGUIControllerCLI controller = new HomeGUIControllerCLI(currentSession);
         controller.start();
     }
 }
