@@ -7,8 +7,7 @@ public class OperationFailedException extends Exception{
     }
 
     public OperationFailedException(){
-        super("Unable to complete the operation.\n" +
-                "If problem persists, contact support.");
+        super("Unable to complete the operation. If problem persists, contact support.");
     }
 
 }

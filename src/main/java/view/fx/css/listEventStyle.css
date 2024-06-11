@@ -11,11 +11,10 @@
 .event-title {
     -fx-background-color: transparent;
     -fx-font-size: 18px;
-
     -fx-font-weight: bold;
 }
 
 .event-date, .event-organizer {
     -fx-font-size: 14px;
-    -fx-text-fill: #555;
+    -fx-text-fill: #292929;
 }

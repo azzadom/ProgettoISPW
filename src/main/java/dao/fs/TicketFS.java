@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class TicketFS implements TicketDAO {
 
-    private static final String FILE_PATH = "resources/Files/Ticket.csv";
+    private static final String FILE_PATH = "resources/data/Ticket.csv";
 
     @Override
     public List<Ticket> selectTickets(Integer idEvent) throws DAOException {

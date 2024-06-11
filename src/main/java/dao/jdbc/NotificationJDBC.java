@@ -44,7 +44,7 @@ public class NotificationJDBC implements NotificationDAO {
                 ResultSet.CONCUR_READ_ONLY)){
             Timestamp timestamp = Timestamp.valueOf(notification.getDateAndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-            NotificationQueries.addNotification(stmt, timestamp,notification.getType().ordinal(),notification.getEventName(),
+            NotificationQueries.addNotification(stmt, timestamp,notification.getType().getId(),notification.getEventName(),
                     idOrganizer, notification.getBookingCode());
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) {

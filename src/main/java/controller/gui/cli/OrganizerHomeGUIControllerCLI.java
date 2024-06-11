@@ -1,14 +1,16 @@
 package controller.gui.cli;
 
-import engineering.Session;
+import engineering.view.SessionManager;
+import engineering.view.cli.ReturnigHome;
 import view.cli.OrganizerHomeView;
 
 public class OrganizerHomeGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final OrganizerHomeView view = new OrganizerHomeView();
 
-    public OrganizerHomeGUIControllerCLI(Session session){
+    public OrganizerHomeGUIControllerCLI(Integer session, ReturnigHome returningHome){
         this.currentSession = session;
+        this.returningHome = returningHome;
     }
 
     public void start(){
@@ -27,25 +29,24 @@ public class OrganizerHomeGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private void event() {
         view.showError("View Events not implemented yet!");
-        start();
+        if(Boolean.FALSE.equals(returningHome.getReturningHome())) {
+            start();
+        }
     }
 
     private void notif() {
-        NotificationsGUIControllerCLI notificationsGUIController = new NotificationsGUIControllerCLI(currentSession);
+        NotificationsGUIControllerCLI notificationsGUIController = new NotificationsGUIControllerCLI(currentSession, returningHome);
         notificationsGUIController.start();
-        if(Boolean.FALSE.equals(currentSession.getReturningHome())) {
+        if(Boolean.FALSE.equals(returningHome.getReturningHome())) {
             start();
         }
     }
 
     private void setting() {
         view.showError("View Settings not implemented yet!");
-        start();
-    }
-
-    private void logout() {
-        currentSession.setUser(null);
-        goHome();
+        if(Boolean.FALSE.equals(returningHome.getReturningHome())) {
+            start();
+        }
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 public class EventFS implements EventDAO {
-    private static final String FILE_PATH = "resources/Files/Event.ser";
+    private static final String FILE_PATH = "resources/data/Event.ser";
 
     @Override
     public List<Event> selectEventsByCity(String city) throws DAOException {

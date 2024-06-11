@@ -15,7 +15,7 @@ import static exception.dao.TypeDAOException.*;
 
 public class BookingFS implements BookingDAO {
 
-    private static final String FILE_PATH = "resources/Files/Booking.csv";
+    private static final String FILE_PATH = "resources/data/Booking.csv";
 
     @Override
     public Booking addBooking(Integer idEvent, Booking booking) throws DAOException{

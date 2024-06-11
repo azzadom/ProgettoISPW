@@ -13,7 +13,7 @@ import java.util.Properties;
 public class SingletonConnector {
     protected static SingletonConnector instance = null;
     private Connection connection = null;
-    private static final String CONNECTION_SETTINGS = "resources/db.properties";
+    private static final String CONNECTION_SETTINGS = "resources/properties/db.properties";
 
     protected SingletonConnector() {}
 

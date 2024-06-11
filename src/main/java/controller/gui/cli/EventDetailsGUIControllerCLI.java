@@ -2,7 +2,8 @@ package controller.gui.cli;
 
 import bean.EventBean;
 import controller.app.BookTicketController;
-import engineering.Session;
+import engineering.view.SessionManager;
+import engineering.view.cli.ReturnigHome;
 import exception.NotFoundException;
 import exception.OperationFailedException;
 import view.cli.EventDetailsView;
@@ -12,9 +13,10 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
     private final EventDetailsView eventDetailsView = new EventDetailsView();
     private EventBean event;
 
-    public EventDetailsGUIControllerCLI(Session session, EventBean event) {
+    public EventDetailsGUIControllerCLI(Integer session, ReturnigHome returnigHome) {
         this.currentSession = session;
-        this.event = event;
+        this.event = SessionManager.getSessionManager().getSessionFromId(session).getEvent();
+        this.returningHome = returnigHome;
     }
 
     @Override
@@ -58,9 +60,9 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
     }
 
     private void bookTicket() {
-        BookingGUIControllerCLI bookingGUIController = new BookingGUIControllerCLI(currentSession, event);
+        BookingGUIControllerCLI bookingGUIController = new BookingGUIControllerCLI(currentSession, returningHome);
         bookingGUIController.start();
-        if(Boolean.FALSE.equals(currentSession.getReturningHome())){
+        if(Boolean.FALSE.equals(returningHome.getReturningHome())){
             start();
         }
     }

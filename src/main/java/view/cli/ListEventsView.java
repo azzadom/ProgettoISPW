@@ -61,16 +61,17 @@ public class ListEventsView extends AbstractView{
                 System.out.println("Insert 0 to show more events or 1 to show menu: ");
                 Scanner input = new Scanner(System.in);
                 int choice;
-                do {
+                while (true){
                     choice = getIntChoice(input);
-                    if (choice == 0) {
-                        break;
-                    } else if (choice == 1) {
-                        return;
-                    } else {
-                        System.out.println(INPUT_ERROR);
+                    switch (choice) {
+                        case 0:
+                            break;
+                        case 1:
+                            return;
+                        default:
+                            System.out.println(INPUT_ERROR);
                     }
-                } while (true);
+                }
             }
         }
     }

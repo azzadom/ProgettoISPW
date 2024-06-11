@@ -13,7 +13,7 @@ import static exception.dao.TypeDAOException.*;
 
 public class OrganizerFS implements OrganizerDAO {
 
-    private static final String FILE_PATH = "resources/Files/Organizer.ser";
+    private static final String FILE_PATH = "resources/data/Organizer.ser";
 
     @Override
     public Organizer selectOrganizer(String idOrganizer) throws DAOException {

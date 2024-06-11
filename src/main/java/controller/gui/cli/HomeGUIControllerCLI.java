@@ -1,14 +1,16 @@
 package controller.gui.cli;
 
-import engineering.Session;
+import engineering.view.SessionManager;
+import engineering.view.cli.ReturnigHome;
 import view.cli.HomeView;
 
 public class HomeGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final HomeView view = new HomeView();
 
-    public HomeGUIControllerCLI(Session session){
+    public HomeGUIControllerCLI(Integer session, ReturnigHome returningHome){
         this.currentSession = session;
+        this.returningHome = returningHome;
     }
 
     public void start(){
@@ -24,17 +26,19 @@ public class HomeGUIControllerCLI extends AbstractGUIControllerCLI {
     }
 
     private void loginPage(){
-        LoginAndRegisterGUIControllerCLI loginAndRegisterGUIController = new LoginAndRegisterGUIControllerCLI(currentSession);
+        LoginAndRegisterGUIControllerCLI loginAndRegisterGUIController = new LoginAndRegisterGUIControllerCLI(currentSession, returningHome);
         loginAndRegisterGUIController.start();
-        currentSession.setReturningHome(false);
+        returningHome.setReturningHome(false);
         start();
     }
 
     private void searchEvents(){
         String city = view.searchEvent();
-        ListEventsGUIControllerCLI listEventsGUIController = new ListEventsGUIControllerCLI(currentSession, city);
+        SessionManager.getSessionManager().getSessionFromId(currentSession).setCity(city);
+        ListEventsGUIControllerCLI listEventsGUIController = new ListEventsGUIControllerCLI(currentSession, returningHome);
         listEventsGUIController.start();
-        currentSession.setReturningHome(false);
+        SessionManager.getSessionManager().getSessionFromId(currentSession).resetCity();
+        returningHome.setReturningHome(false);
         start();
     }
 }

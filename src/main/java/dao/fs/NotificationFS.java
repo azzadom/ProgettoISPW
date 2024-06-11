@@ -16,7 +16,7 @@ import static exception.dao.TypeDAOException.*;
 
 public class NotificationFS implements NotificationDAO {
 
-    private static final String FILE_PATH = "resources/Files/Notification.csv";
+    private static final String FILE_PATH = "resources/data/Notification.csv";
 
     @Override
     public List<Notification> selectNotifications(String idOrganizer) throws DAOException {

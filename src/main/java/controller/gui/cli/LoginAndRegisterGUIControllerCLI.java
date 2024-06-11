@@ -3,7 +3,8 @@ package controller.gui.cli;
 import bean.OrganizerBean;
 import bean.UserBean;
 import controller.app.LoginController;
-import engineering.Session;
+import engineering.view.SessionManager;
+import engineering.view.cli.ReturnigHome;
 import exception.DuplicateEntryException;
 import exception.IncorrectDataException;
 import exception.NotFoundException;
@@ -14,8 +15,9 @@ public class LoginAndRegisterGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final LoginAndRegisterView view = new LoginAndRegisterView();
 
-    public LoginAndRegisterGUIControllerCLI(Session session){
+    public LoginAndRegisterGUIControllerCLI(Integer session, ReturnigHome returningHome){
         this.currentSession = session;
+        this.returningHome = returningHome;
     }
 
     public void start(){
@@ -42,15 +44,15 @@ public class LoginAndRegisterGUIControllerCLI extends AbstractGUIControllerCLI {
             user.setPassword(loginInfo[1]);
             LoginController loginController = new LoginController();
             user = loginController.login(user);
-            currentSession.setUser(user);
-            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession);
+            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(user);
+            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession,returningHome);
             organizerHomeGUIController.start();
         } catch (IncorrectDataException | NotFoundException e) {
             view.showMessage(e.getMessage());
         } catch (OperationFailedException e) {
             view.showError(e.getMessage());
         }
-        if (Boolean.FALSE.equals(currentSession.getReturningHome())) {
+        if (Boolean.FALSE.equals(returningHome.getReturningHome())) {
             start();
         }
     }
@@ -70,15 +72,15 @@ public class LoginAndRegisterGUIControllerCLI extends AbstractGUIControllerCLI {
             org.setPassword(registerInfo[5]);
             LoginController loginController = new LoginController();
             UserBean user = loginController.register(org);
-            currentSession.setUser(user);
-            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession);
+            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(user);
+            OrganizerHomeGUIControllerCLI organizerHomeGUIController = new OrganizerHomeGUIControllerCLI(currentSession, returningHome);
             organizerHomeGUIController.start();
         } catch (IncorrectDataException e) {
             view.showMessage(e.getMessage());
         } catch (OperationFailedException | DuplicateEntryException e) {
             view.showError(e.getMessage());
         }
-        if (Boolean.FALSE.equals(currentSession.getReturningHome())) {
+        if (Boolean.FALSE.equals(returningHome.getReturningHome())) {
             start();
         }
     }
