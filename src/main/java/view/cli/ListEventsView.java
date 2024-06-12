@@ -10,24 +10,7 @@ public class ListEventsView extends AbstractView{
     @Override
     public int showMenu() {
         printMenu("EVENTS PAGE", "Show all events", "Select event", "Home", "Exit");
-
-        Scanner input = new Scanner(System.in);
-        int choice;
-
-        while(true) {
-            try {
-                System.out.println("Choose an option: ");
-                choice = input.nextInt();
-                if(choice >= 1 && choice <= 4) {
-                    return choice;
-                } else {
-                    throw new InputMismatchException();
-                }
-            } catch (InputMismatchException e) {
-                System.out.println(INPUT_ERROR);
-                input.next();
-            }
-        }
+        return getInputMenu(4);
     }
 
     public Integer selectEvent() {

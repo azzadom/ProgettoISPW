@@ -1,6 +1,8 @@
 package view.cli;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public abstract class AbstractView {
 
@@ -70,6 +72,26 @@ public abstract class AbstractView {
         for(int i = 0; i < options.length; i++) {
             System.out.println((i + 1) + ". " + options[i]);
         }
+    }
+    protected Integer getInputMenu(Integer options){
+        Scanner input = new Scanner(System.in);
+        int choice;
+
+        while (true) {
+            try {
+                System.out.println("Choose an option: ");
+                choice = input.nextInt();
+                if (choice >= Math.min(1,options) && choice <= Math.max(1,options)) {
+                    return choice;
+                } else {
+                    throw new InputMismatchException();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+                input.next();
+            }
+        }
+
     }
 
 

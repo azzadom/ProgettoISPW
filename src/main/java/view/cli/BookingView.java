@@ -8,24 +8,7 @@ public class BookingView extends AbstractView {
     @Override
     public int showMenu() {
         printMenu("BOOKING TICKET PAGE", "Show all tickets", "New booking", "Back", "Home", "Exit");
-
-        Scanner input = new Scanner(System.in);
-        int choice;
-
-        while (true) {
-            try {
-                System.out.println("Choose an option: ");
-                choice = input.nextInt();
-                if (choice >= 1 && choice <= 5) {
-                    return choice;
-                } else {
-                    throw new InputMismatchException();
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
-                input.next();
-            }
-        }
+        return getInputMenu(5);
     }
 
     public void showTickets(String[] tickets) {

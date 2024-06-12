@@ -1,7 +1,7 @@
 
 ˆ
-AY_5Trac2ce_0pA4DZol	java:S106"+Replace this use of System.out by a logger.(°ç½Ñúÿÿÿÿ8¨Û·Êÿ1J$64066322-eecd-47f7-a954-e89d0407db45
-ˆ
-AY_5Trac2ce_0pA4DZom	java:S106"+Replace this use of System.out by a logger.(ÅãØİúÿÿÿÿ8¨Û·Êÿ1J$62194619-26cf-4ead-bfe2-4457ca23e578
-ˆ
-AY_5Trac2ce_0pA4DZon	java:S106""+Replace this use of System.out by a logger.(Å­Ëİúÿÿÿÿ8¨Û·Êÿ1J$170c657a-9f1f-483d-a22b-8dd4fac8d402
+AY_5Trac2ce_0pA4DZon	java:S106"+Replace this use of System.out by a logger.(Å­Ëİúÿÿÿÿ8¨Û·Êÿ1J$29657d36-3b8c-4135-bb24-221227c7ad0d
+Y
+java:S1128"=Remove this unused import 'java.util.InputMismatchException'.(İ§18œà¥Ï€2
+P
+java:S1128".Remove this unused import 'java.util.Scanner'.(ÒÜÅ¸úÿÿÿÿ8œà¥Ï€2
