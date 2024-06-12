@@ -5,19 +5,19 @@ module PrivateEvents {
     requires javafx.graphics;
     requires java.sql;
 
-    opens controller.gui.fx;
-    opens engineering.view;
-    opens engineering.view.fx;
-    opens bean;
-    opens engineering.payment;
-    opens engineering.dao;
+    opens com.privateevents.controller.gui.fx;
+    opens com.privateevents.utils.view;
+    opens com.privateevents.utils.view.fx;
+    opens com.privateevents.bean;
+    opens com.privateevents.engineering.payment;
+    opens com.privateevents.utils.dao;
 
-    exports controller.gui.fx;
-    exports bean;
-    exports engineering;
-    exports engineering.view.fx;
-    exports engineering.dao;
-    exports engineering.payment;
-    exports starters;
-    exports exception;
+    exports com.privateevents.controller.gui.fx;
+    exports com.privateevents.bean;
+    exports com.privateevents.utils.view.fx;
+    exports com.privateevents.utils.dao;
+    exports com.privateevents.engineering.payment;
+    exports com.privateevents.exception;
+    exports com.privateevents;
+    exports com.privateevents.utils;
 }

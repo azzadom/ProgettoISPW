@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.privateevents.controller.gui.fx.EventDetailsGUIControllerFX">
+    <stylesheets>
+        <URL value="@css/eventDetailsStyle.css" />
+        <URL value="@css/globalStyle.css" />
+    </stylesheets>
+    <BorderPane prefHeight="600.0" prefWidth="800.0">
+        <top>
+            <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10" styleClass="navbar" BorderPane.alignment="CENTER">
+                <Label prefHeight="30.0" prefWidth="147.0" styleClass="navbar-title" text="PrivateEvents" />
+                <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="425.0" />
+                <Button fx:id="home" mnemonicParsing="false" onAction="#goHome" prefHeight="52.0" prefWidth="80.0" styleClass="navbar-button" text="Home" />
+                <Button fx:id="login" mnemonicParsing="false" onAction="#login" prefHeight="52.0" prefWidth="74.0" styleClass="navbar-button" text="Log In" />
+            </HBox>
+        </top>
+        <center>
+
+        </center>
+        <bottom>
+            <Pane prefHeight="48.0" prefWidth="600.0" styleClass="navbar" BorderPane.alignment="CENTER">
+                <Label fx:id="errorMsg" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="772.0" styleClass="text-error" text="Impossibile completare l'operazione. Se il problema persiste contattare l'assistenza." wrapText="true" />
+            </Pane>
+        </bottom>
+      <center>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="640.0">
+                  <children>
+                     <Label fx:id="details" alignment="TOP_LEFT" layoutX="17.0" layoutY="101.0" mouseTransparent="true" prefHeight="386.0" prefWidth="538.0" styleClass="event-info-box" text="Event Information" wrapText="true">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="title" layoutX="18.0" layoutY="8.0" prefHeight="54.0" prefWidth="486.0" styleClass="title-label" text="Event Title" />
+                     <Label fx:id="info" layoutX="18.0" layoutY="64.0" prefHeight="27.0" prefWidth="485.0" styleClass="date-label" text="DD - MM - YYYY | HH:MM " />
+                  </children>
+               </AnchorPane>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="294.0">
+                  <children>
+                     <Button fx:id="management" layoutX="26.0" layoutY="322.0" mnemonicParsing="false" onAction="#bookManagement" prefHeight="55.0" prefWidth="174.0" styleClass="button-booking" text="Booking Management" textAlignment="CENTER" wrapText="true" />
+                     <Button fx:id="book" layoutX="26.0" layoutY="200.0" mnemonicParsing="false" onAction="#bookTicket" prefHeight="50.0" prefWidth="176.0" styleClass="button-booking" text="Book Ticket" />
+                     <Button fx:id="back" layoutX="137.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" prefHeight="32.0" prefWidth="67.0" styleClass="back-button" text="&gt; Back" />
+                  </children>
+               </AnchorPane>
+            </children>
+         </HBox>
+      </center>
+    </BorderPane>
+</AnchorPane>

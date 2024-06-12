@@ -1,0 +1,11 @@
+
+p
+java:S2699"-Add at least one assertion to this test case.(ØÔÔÎ8†¯Ñî€2J$8f67adeb-2e28-4567-9198-c5ce0cda6fa4
+Ù
+java:S3577"Rename class "EventFSTestDELETE" to match the regular expression: '^((Test|IT)[a-zA-Z0-9_]+|[A-Z][a-zA-Z0-9_]*(Test|Tests|TestCase|IT|ITCase))$'(µ‰¼ƒÿÿÿÿÿ8ˆ¯Ñî€2J$08630aa6-8817-4108-bfe6-913cd92f1238
+}
+java:S1854":Remove this useless assignment to local variable "events".(ó·Ç8Š¯Ñî€2J$90491c8c-e3d9-49ba-8696-47375d83cb80
+¯
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ØÔÔÎ8Œ¯Ñî€2J$35e78e7c-b0c1-4167-8bcd-337406cf1b08
+n
+java:S1481"+Remove this unused "events" local variable.(ó·Ç8¯Ñî€2J$67d1675c-2554-47af-859a-67758c477a81
