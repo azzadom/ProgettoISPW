@@ -1,5 +1,7 @@
 package view.cli;
 
+import java.util.Scanner;
+
 public abstract class AbstractView {
 
     private static final String SEPARATOR = "****************************************";
@@ -56,6 +58,11 @@ public abstract class AbstractView {
 
     public void showMessage(String message) {
         System.out.println(message);
+    }
+
+    public void getInput(Scanner scanner, String[] data, Integer index, String message) {
+        System.out.println(message);
+        data[index] = scanner.nextLine();
     }
 
 

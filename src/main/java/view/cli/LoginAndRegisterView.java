@@ -36,10 +36,8 @@ public class LoginAndRegisterView extends AbstractView {
         printTitle("LOGIN PROCEDURE");
         String[] credentials = new String[2];
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter your Username: ");
-        credentials[0] = input.nextLine();
-        System.out.println("Enter your Password: ");
-        credentials[1] = input.nextLine();
+        getInput(input, credentials, 0, "Enter your Username: ");
+        getInput(input, credentials, 1, "Enter your Password: ");
         return credentials;
     }
 
@@ -48,18 +46,12 @@ public class LoginAndRegisterView extends AbstractView {
         printTitle("REGISTRATION PROCEDURE");
         String[] user = new String[6];
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter your Firstname: ");
-        user[0] = input.nextLine();
-        System.out.println("Enter your Lastname: ");
-        user[1] = input.nextLine();
-        System.out.println("Enter your Email: ");
-        user[2] = input.nextLine();
-        System.out.println("Enter your PayPal Email: ");
-        user[3] = input.nextLine();
-        System.out.println("Enter your Username: ");
-        user[4] = input.nextLine();
-        System.out.println("Enter your Password: ");
-        user[5] = input.nextLine();
+        getInput(input, user, 0, "Enter your Firstname: ");
+        getInput(input, user, 1, "Enter your Lastname: ");
+        getInput(input, user, 2, "Enter your Email: ");
+        getInput(input, user, 3, "Enter your PayPal Email: ");
+        getInput(input, user, 4, "Enter your Username: ");
+        getInput(input, user, 5, "Enter your Password: ");
 
         System.out.println("DATA INSERTED CHECK");
         System.out.println("Firstname: " + user[0]);

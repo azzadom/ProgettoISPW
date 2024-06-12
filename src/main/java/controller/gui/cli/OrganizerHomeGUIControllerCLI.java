@@ -1,6 +1,5 @@
 package controller.gui.cli;
 
-import engineering.view.SessionManager;
 import engineering.view.cli.ReturnigHome;
 import view.cli.OrganizerHomeView;
 
