@@ -34,24 +34,26 @@ public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
 
     EventBean event;
 
+    @FXML
     public void goBack() {
         resetMsg(errorMsg);
         try {
             SessionManager.getSessionManager().getSessionFromId(currentSession).setEvent(null);
             PageManagerSingleton.getInstance().goBack(currentSession);
         } catch (OperationFailedException | NotFoundException e) {
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
+    @FXML
     public void bookTicket() {
         goNext(FilesFXML.BOOKING.getPath());
     }
 
+    @FXML
     public void bookManagement() {
-        setErrorMsg("Not implemented yet.");
+        setMsg(errorMsg,"Not implemented yet.");
     }
-
 
     public void initialize(Integer session) throws OperationFailedException, NotFoundException {
         this.currentSession = session;

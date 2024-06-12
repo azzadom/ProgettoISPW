@@ -102,19 +102,19 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
 
     List<TicketBean> tickets;
 
+    @FXML
     public void goBack() {
-        errorMsg.setVisible(false);
-        message.setVisible(false);
+        resetMsg(errorMsg, message);
         try {
             PageManagerSingleton.getInstance().goBack(currentSession);
         } catch (OperationFailedException | NotFoundException e) {
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
+    @FXML
     public void bookTicket() {
-        message.setVisible(false);
-        errorMsg.setVisible(false);
+        resetMsg(errorMsg, message);
 
         TicketBean ticketChosen = null;
         RadioButton radio = (RadioButton) ticketSelection.getSelectedToggle();
@@ -131,13 +131,11 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
 
             BookTicketController bookTicketController = new BookTicketController();
             String code = bookTicketController.sendReservation(event, booking);
-            message.setText("Booking successful! Your booking code is: " + code);
-            message.setVisible(true);
+            setMsg(message, "Booking successful! Your booking code is: " + code);
         } catch (IncorrectDataException | DuplicateEntryException e) {
-            message.setText(e.getMessage());
-            message.setVisible(true);
+            setMsg(message, e.getMessage());
         } catch (OperationFailedException e) {
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
@@ -170,11 +168,7 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
 
     public void initialize(Integer session) throws OperationFailedException {
         this.currentSession = session;
-        message.setVisible(false);
-        errorMsg.setVisible(false);
-        sold1.setVisible(false);
-        sold2.setVisible(false);
-        sold3.setVisible(false);
+        resetMsg(errorMsg, message, sold1, sold2, sold3);
         ticket1.setVisible(false);
         ticket2.setVisible(false);
         ticket3.setVisible(false);

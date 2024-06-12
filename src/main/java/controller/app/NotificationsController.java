@@ -27,9 +27,9 @@ public class NotificationsController {
         notifDAO.addNotification(organizer.getUsername(), notif);
         } catch (DAOException e) {
             if (e.getTypeException().equals(DUPLICATE)) {
-                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             } else {
-                Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             }
                 throw new OperationFailedException();
         }
@@ -40,11 +40,11 @@ public class NotificationsController {
         List<Notification> notifs = new ArrayList<>();
         for (NotificationBean notif : notifBean) {
             notifs.add(new Notification(TypeNotif.valueOf(notif.getType()), notif.getDateAndTime().toLocalDateTime(),
-                    notif.getName(),notif.getBooking()));
+                    notif.getEventName(),notif.getBookingCode()));
         }
         FactorySingletonDAO.getDefaultDAO().getNotificationDAO().deleteNotification(organizerBean.getUsername(), notifs);
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }
@@ -53,7 +53,7 @@ public class NotificationsController {
         try {
             FactorySingletonDAO.getDefaultDAO().getNotificationDAO().deleteNotificationByOrg(organizerBean.getUsername());
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }
@@ -71,7 +71,7 @@ public class NotificationsController {
 
             return notifBean;
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }

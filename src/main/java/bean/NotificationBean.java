@@ -16,11 +16,11 @@ public class NotificationBean {
 		return type;
 	}
 
-	public String getName() {
+	public String getEventName() {
 		return this.eventName;
 	}
 
-	public String getBooking() {
+	public String getBookingCode() {
 		return this.bookingCode;
 	}
 

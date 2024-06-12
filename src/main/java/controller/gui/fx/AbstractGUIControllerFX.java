@@ -24,9 +24,9 @@ public abstract class AbstractGUIControllerFX {
 
     public abstract void initialize(Integer session)  throws OperationFailedException, NotFoundException;
 
-    public void setErrorMsg(String msg){
-        errorMsg.setText(msg);
-        errorMsg.setVisible(true);
+    public void setMsg(Label label, String msg){
+        label.setText(msg);
+        label.setVisible(true);
     }
 
     public void resetMsg(Label ... labels){
@@ -40,30 +40,33 @@ public abstract class AbstractGUIControllerFX {
         try{
             PageManagerSingleton.getInstance().goNext(path, currentSession);
         }catch (OperationFailedException | NotFoundException e){
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
+    @FXML
     public void goHome(){
         resetMsg(errorMsg);
         SessionManager.getSessionManager().getSessionFromId(currentSession).softReset();
         try{
             PageManagerSingleton.getInstance().goHome(currentSession);
         }catch (OperationFailedException | NotFoundException e){
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
+    @FXML
     public void logout(){
         resetMsg(errorMsg);
         SessionManager.getSessionManager().getSessionFromId(currentSession).reset();
         try{
             PageManagerSingleton.getInstance().setHome(FilesFXML.HOME.getPath(), currentSession);
         }catch (OperationFailedException | NotFoundException e){
-            setErrorMsg(e.getMessage());
+            setMsg(errorMsg,e.getMessage());
         }
     }
 
+    @FXML
     public void login(){
         goNext(FilesFXML.LOGIN.getPath());
     }

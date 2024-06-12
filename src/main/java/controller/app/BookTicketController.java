@@ -38,10 +38,10 @@ public class BookTicketController {
             }
             return eventBeans;
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         } catch (IncorrectDataException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }
@@ -55,7 +55,7 @@ public class BookTicketController {
             List<Ticket> tickets = FactorySingletonDAO.getDefaultDAO().getTicketDAO().selectTickets(eventBean.getIdEvent());
             if (tickets.isEmpty()){
                 String msg = "Inconsistent data. No tickets found for event: " + eventBean.getIdEvent();
-                Logger.getAnonymousLogger().log(Level.SEVERE, msg);
+                Logger.getGlobal().log(Level.SEVERE, msg);
                 throw new OperationFailedException();
             }
             List<Booking> bookings = FactorySingletonDAO.getDefaultDAO().getBookingDAO().selectBooking(eventBean.getIdEvent());
@@ -63,10 +63,10 @@ public class BookTicketController {
             eventBean = ToBeanConverter.fromEventToEventBeanWithoutBook(event);
             return eventBean;
         } catch (DAOException e) {
-            Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         } catch (IncorrectDataException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }
@@ -83,7 +83,7 @@ public class BookTicketController {
             Organizer organizer = organizerDAO.selectOrganizer(eventBean.getOrgName());
             if (organizer == null) {
                 String msg = "Inconsistent data. Organizer not found for event: " + eventBean.getIdEvent();
-                Logger.getAnonymousLogger().log(Level.SEVERE, msg);
+                Logger.getGlobal().log(Level.SEVERE, msg);
                 throw new OperationFailedException();
             }
 
@@ -121,7 +121,7 @@ public class BookTicketController {
             } else if (e.getTypeException().equals(LIMIT_REACHED)) {
                 throw new OperationFailedException("No tickets available for this type.");
             }else {
-                Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }
         }

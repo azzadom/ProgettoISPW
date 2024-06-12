@@ -53,9 +53,16 @@ public class PageManagerSingleton {
     }
 
     public void setHome(String fxmlPath, Integer session)  throws OperationFailedException, NotFoundException{
-        viewStack.clear();
-        viewStack.push(fxmlPath);
-        changeView(fxmlPath,session);
+        Deque<String> oldStack = new ArrayDeque<>(viewStack);
+        try {
+            viewStack.clear();
+            viewStack.push(fxmlPath);
+            changeView(fxmlPath, session);
+        } catch (OperationFailedException | NotFoundException e){
+            viewStack.clear();
+            viewStack.addAll(oldStack);
+            throw e;
+        }
     }
 
     public void changeView(String fxmlPath, Integer session) throws OperationFailedException, NotFoundException {
@@ -72,7 +79,7 @@ public class PageManagerSingleton {
         } catch (IOException e){
             viewStack.pop();
             String errorMsg = "Impossible to load the view: " + fxmlPath;
-            Logger.getAnonymousLogger().log(Level.SEVERE, errorMsg);
+            Logger.getGlobal().log(Level.SEVERE, errorMsg);
             throw new OperationFailedException();
         } catch (OperationFailedException | NotFoundException e){
             viewStack.pop();

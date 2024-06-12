@@ -57,7 +57,7 @@ public class NotificationsGUIControllerCLI extends AbstractGUIControllerCLI {
             String date = String.valueOf(dateAndTime.toLocalDate());
             String time = String.format("%s:%s",dateAndTime.getHour(), dateAndTime.getMinute());
             notifStrings[i] = String.format("%d - Type: %s, Event: %s, Booking Code: %s, DateTime: %s - %s%n", i+1, notifications.get(i).getType(),
-                    notifications.get(i).getName(), notifications.get(i).getBooking(), date, time);
+                    notifications.get(i).getEventName(), notifications.get(i).getBookingCode(), date, time);
         }
         view.showNotifications(notifStrings);
         start();

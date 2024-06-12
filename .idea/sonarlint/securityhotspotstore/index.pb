@@ -244,10 +244,6 @@ k
 ;src/main/java/controller/gui/fx/BookingGUIControllerFX.java,5\3\53bcba95691a24a432aeee46ac12b714f8f1a554
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-_
-/src/main/java/controller/gui/GUIController.java,0\3\038cf15055d82ced18eac0c032e87145982d7f90
-b
-2src/main/java/controller/gui/cli/ReturnigHome.java,f\2\f2fa5722ea0f65a79c4e59424577dd48863aa4f5
 d
 4src/main/java/engineering/view/cli/ReturnigHome.java,a\f\affcacde5be81c90a087832e776da53ec50c9157
 r
@@ -258,3 +254,9 @@ q
 Asrc/main/java/controller/gui/fx/NotificationsGUIControllerFX.java,a\f\af4bb142447a2a1fade0cc099bf6775acaf81209
 q
 Asrc/main/java/controller/gui/fx/OrganizerHomeGUIControllerFX.java,2\b\2b8abd0318665dade0225cc5f1db4fb25e3086e3
+Å
+Q.idea/sonarlint/securityhotspotstore/a/a/aad106156ce052c46448a7f48a8fda2ae3a359f6,9\4\9413a48e811d95803462dd79131e1d76235728d5
+Å
+Q.idea/sonarlint/securityhotspotstore/2/b/2b8abd0318665dade0225cc5f1db4fb25e3086e3,2\5\2560464769214b44a1c9a23a0aeb7295889c6148
+Å
+Q.idea/sonarlint/securityhotspotstore/a/f/af4bb142447a2a1fade0cc099bf6775acaf81209,b\8\b8d934f9ee9c09bf0a5d984d78ebefff1f18ebea

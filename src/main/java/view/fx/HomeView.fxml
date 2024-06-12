@@ -13,7 +13,7 @@
       <top>
          <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10" styleClass="navbar" BorderPane.alignment="CENTER">
             <Label prefHeight="30.0" prefWidth="147.0" styleClass="navbar-title" text="PrivateEvents" />
-            <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="508.0" />
+            <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="517.0" />
             <Button fx:id="login" mnemonicParsing="false" onAction="#login" prefHeight="52.0" prefWidth="74.0" styleClass="navbar-button" text="Log In" />
          </HBox>
       </top>
@@ -24,7 +24,7 @@
             <Pane prefHeight="36.0" prefWidth="800.0" />
             <VBox prefHeight="278.0" prefWidth="800.0">
                <HBox alignment="CENTER" prefHeight="68.0" prefWidth="800.0" spacing="10" styleClass="search-bar">
-                  <TextField fx:id="searchBar" prefHeight="34.0" prefWidth="411.0" promptText="Search city" styleClass="search-field" />
+                  <TextField fx:id="searchBar" onKeyPressed="#searchCityEnter" prefHeight="34.0" prefWidth="411.0" promptText="Search city" styleClass="search-field" />
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchCity" styleClass="search-button" text="🔍" textFill="WHITE" />
                </HBox>
                <HBox alignment="CENTER" prefHeight="68.0" prefWidth="600.0" spacing="10" styleClass="search-bar">

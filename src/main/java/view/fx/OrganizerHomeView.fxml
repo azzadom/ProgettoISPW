@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gui.fx.EventDetailsGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.gui.fx.OrganizerHomeGUIControllerFX">
     <stylesheets>
         <URL value="@css/orgHomeStyle.css" />
         <URL value="@css/globalStyle.css" />
@@ -13,9 +13,8 @@
         <top>
             <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="10" styleClass="navbar" BorderPane.alignment="CENTER">
                 <Label prefHeight="30.0" prefWidth="147.0" styleClass="navbar-title" text="PrivateEvents" />
-                <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="411.0" />
-                <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="80.0" styleClass="navbar-button" text="Home" />
-                <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="86.0" styleClass="navbar-button" text="Log Out" />
+                <Pane minHeight="-Infinity" prefHeight="30.0" prefWidth="509.0" />
+                <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" prefHeight="52.0" prefWidth="86.0" styleClass="navbar-button" text="Log Out" />
             </HBox>
         </top>
         <center>
@@ -23,16 +22,16 @@
         </center>
         <bottom>
             <Pane prefHeight="48.0" prefWidth="600.0" styleClass="navbar" BorderPane.alignment="CENTER">
-                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="772.0" styleClass="text-error" text="Impossibile completare l'operazione. Se il problema persiste contattare l'assistenza." wrapText="true" />
+                <Label fx:id="errorMsg" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="772.0" styleClass="text-error" text="Impossibile completare l'operazione. Se il problema persiste contattare l'assistenza." wrapText="true" />
             </Pane>
         </bottom>
       <center>
          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                <Label layoutX="177.0" layoutY="126.0" prefHeight="68.0" prefWidth="446.0" styleClass="main-title" text="Welcome organizer!" />
-               <Button layoutX="549.0" layoutY="276.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="Account Settings" />
-               <Button layoutX="325.0" layoutY="276.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="Notifications" />
-               <Button layoutX="100.0" layoutY="276.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="View Events" />
+               <Button fx:id="settings" layoutX="549.0" layoutY="276.0" mnemonicParsing="false" onAction="#viewSettings" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="Account Settings" />
+               <Button fx:id="notifications" layoutX="325.0" layoutY="276.0" mnemonicParsing="false" onAction="#viewNotifications" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="Notifications" />
+               <Button fx:id="events" layoutX="100.0" layoutY="276.0" mnemonicParsing="false" onAction="#viewEvents" prefHeight="47.0" prefWidth="150.0" styleClass="button-style" text="View Events" />
             </children>
          </AnchorPane>
       </center>

@@ -25,10 +25,10 @@ public class LoginController {
                 }
                 return ToBeanConverter.fromOrganizerToOrganizerBean(org);
             } catch (DAOException e) {
-                Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             } catch (IncorrectDataException | EncryptionException e) {
-                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }
         }
@@ -43,11 +43,11 @@ public class LoginController {
                 if (e.getTypeException().equals(DUPLICATE)) {
                     throw new DuplicateEntryException(e.getMessage());
                 } else {
-                    Logger.getAnonymousLogger().log(Level.WARNING, e.getMessage(), e.getCause());
+                    Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
                     throw new OperationFailedException();
                 }
             } catch (IncorrectDataException | EncryptionException e) {
-                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage(), e.getCause());
+                Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }
         }

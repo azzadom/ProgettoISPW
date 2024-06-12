@@ -44,6 +44,7 @@ public class ListEventsGUIControllerFX extends AbstractGUIControllerFX{
 
     List<EventBean> events;
 
+    @FXML
     public void selectEvent(ActionEvent event) {
         Button button = (Button) event.getSource();
         String eventName = button.getText();
