@@ -9,12 +9,7 @@ public class NotificationsView extends AbstractView{
 
     @Override
     public int showMenu() {
-        printTitle("NOTIFICATIONS PAGE");
-        System.out.println("1. View Notifications");
-        System.out.println("2. Delete");
-        System.out.println("3. Home");
-        System.out.println("4. Log Out");
-        System.out.println("5. Exit");
+        printMenu("NOTIFICATIONS PAGE", "View Notifications", "Delete", "Home", "Log Out", "Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;

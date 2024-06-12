@@ -7,12 +7,7 @@ public class BookingView extends AbstractView {
 
     @Override
     public int showMenu() {
-        printTitle("BOOKING TICKET PAGE");
-        System.out.println("1. Show all tickets");
-        System.out.println("2. New booking");
-        System.out.println("3. Back");
-        System.out.println("4. Home");
-        System.out.println("5. Exit");
+        printMenu("BOOKING TICKET PAGE", "Show all tickets", "New booking", "Back", "Home", "Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;

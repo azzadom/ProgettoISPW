@@ -60,9 +60,16 @@ public abstract class AbstractView {
         System.out.println(message);
     }
 
-    public void getInput(Scanner scanner, String[] data, Integer index, String message) {
+    protected void getInput(Scanner scanner, String[] data, Integer index, String message) {
         System.out.println(message);
         data[index] = scanner.nextLine();
+    }
+
+    protected void printMenu(String title, String ... options) {
+        printTitle(title);
+        for(int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
     }
 
 

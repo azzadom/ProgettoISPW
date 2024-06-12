@@ -7,13 +7,7 @@ public class EventDetailsView extends AbstractView{
 
     @Override
     public int showMenu() {
-        printTitle("DETAILS PAGE");
-        System.out.println("1. Show all info");
-        System.out.println("2. Book ticket");
-        System.out.println("3. Booking management");
-        System.out.println("4. Back");
-        System.out.println("5. Home");
-        System.out.println("6. Exit");
+        printMenu("EVENT DETAILS PAGE", "Show all info", "Book ticket", "Booking management", "Back", "Home", "Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;

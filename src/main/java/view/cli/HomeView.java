@@ -7,11 +7,7 @@ public class HomeView extends AbstractView{
 
     @Override
     public int showMenu() {
-        printTitle("HOME PAGE");
-        System.out.println("Welcome in PrivateEvents!");
-        System.out.println("1. Search Events");
-        System.out.println("2. Login or register");
-        System.out.println("3. Exit");
+        printMenu("HOME PAGE", "Search Events", "Login or register", "Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;

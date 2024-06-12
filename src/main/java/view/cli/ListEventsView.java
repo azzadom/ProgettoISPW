@@ -9,11 +9,7 @@ public class ListEventsView extends AbstractView{
 
     @Override
     public int showMenu() {
-        printTitle("EVENTS PAGE");
-        System.out.println("1. Show all events");
-        System.out.println("2. Select event");
-        System.out.println("3. Home");
-        System.out.println("4. Exit");
+        printMenu("EVENTS PAGE", "Show all events", "Select event", "Home", "Exit");
 
         Scanner input = new Scanner(System.in);
         int choice;
