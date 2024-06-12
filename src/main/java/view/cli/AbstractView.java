@@ -2,7 +2,6 @@ package view.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.function.Function;
 
 public abstract class AbstractView {
 
@@ -73,6 +72,7 @@ public abstract class AbstractView {
             System.out.println((i + 1) + ". " + options[i]);
         }
     }
+
     protected Integer getInputMenu(Integer options){
         Scanner input = new Scanner(System.in);
         int choice;

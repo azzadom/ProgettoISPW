@@ -28,7 +28,9 @@ public class OrganizerBean extends UserBean{
         String firstNamePattern = "^[A-Z][a-zA-Z]*( [A-Z][a-zA-Z]*)?$";
         boolean match = Pattern.matches(firstNamePattern, firstName);
         if (!match) {
-            throw new IncorrectDataException("Lastname is not valid.");
+            throw new IncorrectDataException("Firstname is not valid.");
+        } else if (firstName.length() > 45){
+            throw new IncorrectDataException("Firstname too long (max 45 characters).");
         } else {
             this.firstName = firstName;
         }
@@ -43,6 +45,8 @@ public class OrganizerBean extends UserBean{
         boolean match = Pattern.matches(lastNamePattern, lastName);
         if (!match) {
             throw new IncorrectDataException("Lastname is not valid.");
+        } else if (lastName.length() > 45){
+            throw new IncorrectDataException("Lastname too long (max 45 characters).");
         } else {
             this.lastName = lastName;
         }
@@ -57,6 +61,8 @@ public class OrganizerBean extends UserBean{
         boolean match = Pattern.matches(emailPattern, email);
         if (!match) {
             throw new IncorrectDataException("Email is not valid.");
+        } else if (email.length() > 45){
+            throw new IncorrectDataException("Email too long (max 45 characters).");
         } else {
             this.email = email;
         }
@@ -71,6 +77,8 @@ public class OrganizerBean extends UserBean{
         boolean match = Pattern.matches(infoPayPalPattern, infoPayPal);
         if (!match) {
             throw new IncorrectDataException("InfoPayPal is not valid.");
+        } else if (infoPayPal.length() > 45){
+            throw new IncorrectDataException("InfoPayPal too long (max 45 characters).");
         } else {
             this.infoPayPal = infoPayPal;
         }

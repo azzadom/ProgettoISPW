@@ -38,6 +38,8 @@ public class BookingBean {
         boolean match = Pattern.matches(lastNamePattern, lastName);
         if (!match) {
             throw new IncorrectDataException("Lastname is not valid.");
+        }else if(lastName.length() > 45) {
+            throw new IncorrectDataException("Lastname is too long (max 45 characters)");
         } else {
             this.lastName = lastName;
         }
@@ -52,6 +54,8 @@ public class BookingBean {
         boolean match = Pattern.matches(firstNamePattern, firstName);
         if (!match) {
             throw new IncorrectDataException("Firstname is not valid.");
+        }else if(firstName.length() > 45) {
+                throw new IncorrectDataException("Firstname is too long (max 45 characters)");
         } else {
             this.firstName = firstName;
         }
@@ -66,6 +70,8 @@ public class BookingBean {
         boolean match = Pattern.matches(emailPattern, email);
         if (!match) {
             throw new IncorrectDataException("Email is not valid.");
+        }else if(email.length() > 45) {
+            throw new IncorrectDataException("Email is too long (max 45 characters)");
         } else {
             this.email = email;
         }
@@ -90,7 +96,7 @@ public class BookingBean {
     }
 
     public void setAge(Integer age) throws IncorrectDataException {
-        if(age <= 0) {
+        if(age <= 0 || age > 120) {
             throw new IncorrectDataException("Age is not valid.");
         } else {
             this.age = age;

@@ -56,14 +56,18 @@ public class EventBean {
 	public void setOrgName(String orgName) throws IncorrectDataException {
 		if(orgName == null || orgName.isEmpty()) {
 			throw new IncorrectDataException("Organizer Username cannot be empty");
+		}else if(orgName.length() > 45) {
+			throw new IncorrectDataException("Organizer Username is too long (max 45 characters)");
 		}else {
 			this.orgName = orgName;
 		}
 	}
 
-	public void setDescription(String desc) {
+	public void setDescription(String desc) throws IncorrectDataException {
 		if(desc == null || desc.isEmpty()) {
 			this.description = "No description available.";
+		}else if(desc.length() > 1000) {
+			throw new IncorrectDataException("Description is too long (max 1000 characters)");
 		}else {
 			this.description = desc;
 		}
@@ -92,6 +96,8 @@ public class EventBean {
 	public void setLocationName(String locationName) throws IncorrectDataException {
 		if(locationName == null || locationName.isEmpty()) {
 			throw new IncorrectDataException("Location Name cannot be empty");
+		}else if(locationName.length() > 45) {
+			throw new IncorrectDataException("Location is too long (max 45 characters)");
 		}else {
 			this.locationName = locationName;
 		}
@@ -102,6 +108,8 @@ public class EventBean {
 		//In una reale iplementazione si potrebbe usare un API come quella di google che assoccia a qualsiasi indirizzo un ID univoco
 		if (addr == null || addr.isEmpty()) {
 			throw new IncorrectDataException("Address is not valid.");
+		}else if(addr.length() > 45) {
+			throw new IncorrectDataException("Address is too long (max 45 characters)");
 		} else {
 			this.address = addr;
 		}
@@ -112,6 +120,8 @@ public class EventBean {
 		boolean match = Pattern.matches(cityPattern, city);
 		if (!match) {
 			throw new IncorrectDataException("City is not valid.");
+		}else if(city.length() > 45) {
+			throw new IncorrectDataException("City is too long (max 45 characters)");
 		} else {
 			this.city = city;
 		}

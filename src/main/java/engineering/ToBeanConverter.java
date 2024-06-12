@@ -62,7 +62,7 @@ public class ToBeanConverter {
         return bookingBean;
     }
 
-    public static TicketBean fromTicketToTicketBean(Ticket ticket) {
+    public static TicketBean fromTicketToTicketBean(Ticket ticket) throws IncorrectDataException {
         TicketBean ticketBean = new TicketBean();
         ticketBean.setTypeName(ticket.getType());
         ticketBean.setPrice(ticket.getPrice());

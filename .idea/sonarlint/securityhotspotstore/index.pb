@@ -247,8 +247,6 @@ N
 d
 4src/main/java/engineering/view/cli/ReturnigHome.java,a\f\affcacde5be81c90a087832e776da53ec50c9157
 r
-Bsrc/test/java/controller/gui/fx/ListEventsGUIControllerFXTest.java,0\8\0849624bead0e20aecff41bf980f0b5e2bd187bb
-r
 Bsrc/main/java/controller/gui/fx/LoginAndSignupGUIControllerFX.java,a\a\aad106156ce052c46448a7f48a8fda2ae3a359f6
 q
 Asrc/main/java/controller/gui/fx/NotificationsGUIControllerFX.java,a\f\af4bb142447a2a1fade0cc099bf6775acaf81209
