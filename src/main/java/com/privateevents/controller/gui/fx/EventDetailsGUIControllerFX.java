@@ -64,7 +64,8 @@ public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
         SessionManager.getSessionManager().getSessionFromId(currentSession).setEvent(event);
 
         title.setText(event.getName());
-        info.setText(event.getDate() + " - " + event.getTime());
+        info.setText("Date: " + event.getDate() + " | " + "Start Time: " + event.getTime() + "\n"
+                + "Location: " + event.getLocationName() + " (" + event.getAddress() + ")");
         details.setText(event.getDescription());
     }
 }

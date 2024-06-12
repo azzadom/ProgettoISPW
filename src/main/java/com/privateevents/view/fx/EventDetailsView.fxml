@@ -32,13 +32,13 @@
             <children>
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="640.0">
                   <children>
-                     <Label fx:id="details" alignment="TOP_LEFT" layoutX="17.0" layoutY="101.0" mouseTransparent="true" prefHeight="386.0" prefWidth="538.0" styleClass="event-info-box" text="Event Information" wrapText="true">
+                     <Label fx:id="details" alignment="TOP_LEFT" layoutX="17.0" layoutY="128.0" mouseTransparent="true" prefHeight="359.0" prefWidth="538.0" styleClass="event-info-box" text="Event Information" wrapText="true">
                         <font>
                            <Font size="14.0" />
                         </font>
                      </Label>
                      <Label fx:id="title" layoutX="18.0" layoutY="8.0" prefHeight="54.0" prefWidth="486.0" styleClass="title-label" text="Event Title" />
-                     <Label fx:id="info" layoutX="18.0" layoutY="64.0" prefHeight="27.0" prefWidth="485.0" styleClass="date-label" text="DD - MM - YYYY | HH:MM " />
+                     <Label fx:id="info" alignment="TOP_LEFT" layoutX="18.0" layoutY="64.0" prefHeight="62.0" prefWidth="584.0" styleClass="date-label" text="DD - MM - YYYY | HH:MM " />
                   </children>
                </AnchorPane>
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="294.0">

@@ -51,9 +51,10 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
         String[] info = {
             "Event Name: " + event.getName(),
             "Event Date: " + event.getDate(),
-            "Event Time: " + event.getTime() + " (Local Time)",
+            "Event Time: " + event.getTime() + " (" + event.getCity() + " Time)",
             "Event Location: " + event.getLocationName(),
-            "Event Description\n" + event.getDescription(),
+            "Event Address: " + event.getAddress(),
+            "Event Description\n" + event.getDescription()
         };
         eventDetailsView.showInfo(info);
         start();
