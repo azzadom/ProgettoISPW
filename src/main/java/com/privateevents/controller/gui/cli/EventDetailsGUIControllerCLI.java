@@ -24,6 +24,7 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
         try {
             BookTicketController controller = new BookTicketController();
             event = controller.eventDetails(event);
+            SessionManager.getSessionManager().getSessionFromId(currentSession).setEvent(event);
 
             int choice;
             choice = eventDetailsView.showMenu();

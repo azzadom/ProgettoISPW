@@ -9,7 +9,6 @@ import com.privateevents.dao.OrganizerDAO;
 import com.privateevents.utils.ToBeanConverter;
 import com.privateevents.utils.dao.factory.FactorySingletonDAO;
 
-import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,20 +77,7 @@ public class BookTicketController {
 
         try {
 
-            List<TicketBean> tickets = eventBean.getTickets();
-            boolean found = false;
-            for (TicketBean t : tickets) {
-                if(t.getTypeName().equals(bookingBean.getTicketType())){
-                    found = true;
-                    if (bookingBean.getAge() <  t.getMinimumAge()){
-                        throw new OperationFailedException("Invalid age!");
-                    }
-                    break;
-                }
-            }
-            if (!found){
-                throw new OperationFailedException("Invalid ticket type.");
-            }
+            checkBookingValid(bookingBean, eventBean);
 
             BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
 
@@ -156,4 +142,24 @@ public class BookTicketController {
         }
     }
 
+    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException {
+        if (eventBean.getClosed()){
+            throw new OperationFailedException("Booking is closed.");
+        }
+
+        List<TicketBean> tickets = eventBean.getTickets();
+        boolean found = false;
+        for (TicketBean t : tickets) {
+            if (t.getTypeName().equals(bookingBean.getTicketType())) {
+                found = true;
+                if (bookingBean.getAge() < t.getMinimumAge()) {
+                    throw new OperationFailedException("Invalid age!");
+                }
+                break;
+            }
+        }
+        if (!found) {
+            throw new OperationFailedException("Invalid ticket type.");
+        }
+    }
 }

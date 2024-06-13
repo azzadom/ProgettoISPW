@@ -27,6 +27,8 @@ public class EventBean {
 
 	private String city;
 
+	private Boolean closed;
+
 	private List<TicketBean> tickets = new ArrayList<>();
 
 	private Map<String, Integer> ticketsAvailability = new HashMap<>();
@@ -43,6 +45,14 @@ public class EventBean {
 			throw new IncorrectDataException("Available tickets cannot be negative.");
 		}
 		this.ticketsAvailability.put(type, available);
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
+	}
+
+	public Boolean getClosed() {
+		return closed;
 	}
 
 	public void setName(String name) throws IncorrectDataException {

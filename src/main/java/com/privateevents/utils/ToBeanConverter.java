@@ -27,6 +27,7 @@ public class ToBeanConverter {
         eventBean.setDescription(event.getDescription());
         eventBean.setLocationName(event.getLocation());
         eventBean.setOrgName(event.getOrgUsername());
+        eventBean.setClosed(event.getBookingClosed());
 
         List<Ticket> tickets = event.getTickets();
         if(tickets != null) {

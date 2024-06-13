@@ -43,7 +43,7 @@ public class BookingJDBC implements BookingDAO {
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) {
                 throw new DAOException("Booking already exists", DUPLICATE);
-            }else if (e.getErrorCode() == 45000) {
+            }else if (e.getSQLState().equals("45000")) {
                 throw new DAOException("Tickets sold out", LIMIT_REACHED);
             }else {
                 throw new DAOException("Error adding booking: " + e.getMessage(), e.getCause(), GENERIC);

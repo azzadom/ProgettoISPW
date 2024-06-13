@@ -11,7 +11,7 @@ public class EventQueries {
     }
 
     public static ResultSet selectEventsByCity(Statement stmt ,String city) throws SQLException {
-        String query = String.format("SELECT * FROM Event WHERE City = '%s' AND Date >= CURDATE();", city);
+        String query = String.format("SELECT * FROM Event WHERE City = '%s' AND Date >= CURDATE() ORDER BY Date ASC;", city);
         return stmt.executeQuery(query);
     }
 

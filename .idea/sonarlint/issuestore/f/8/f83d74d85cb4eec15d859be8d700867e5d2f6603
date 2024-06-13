@@ -1,16 +1,0 @@
-
-p
-java:S2699"-Add at least one assertion to this test case.(ØÔÔÎ8çÊî€2J$ce7bb609-00d1-442a-95cb-14c4fa24ddb6
-Ù
-java:S3577"Rename class "EventFSTestDELETE" to match the regular expression: '^((Test|IT)[a-zA-Z0-9_]+|[A-Z][a-zA-Z0-9_]*(Test|Tests|TestCase|IT|ITCase))$'(µ‰¼ƒÿÿÿÿÿ8‘çÊî€2J$5522c29a-f291-490b-94b0-97aeff1382ac
-}
-java:S1854":Remove this useless assignment to local variable "events".(ó·Ç8“çÊî€2J$891035e9-bf71-44c4-8fcd-6fad88296c4a
-¯
-java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ØÔÔÎ8•çÊî€2J$665d8277-0dfc-4145-820e-0e1a792737c8
-n
-java:S1481"+Remove this unused "events" local variable.(ó·Ç8—çÊî€2J$b9c3191c-115c-4125-bc67-3dd5e67d35d2
-ƒ	java:S125"<This block of commented-out lines of code should be removed.(öé›…ùÿÿÿÿ8˜çÊî€2J$47077749-7e84-45a2-9887-7372701f0025
-z
-java:S6126"2Replace this String concatenation with Text block.(øˆ•®üÿÿÿÿ8™çÊî€2J$db23d2f2-f09c-4636-be4d-ae0d6f6f09a3
-‹
-java:S1128"CRemove this unused import 'com.privateevents.utils.dao.CSVHandler'.(§Ø¬ÿÿÿÿÿÿ8›çÊî€2J$5ddf1e24-ed19-4048-a6f4-fed60a783c04

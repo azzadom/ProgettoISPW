@@ -141,7 +141,11 @@ public class Event implements Serializable {
 	}
 
 	public Integer getTicketAvailability(String type) {
-		Integer availability = getLimitTicket(type) - ticketsSold.get(type);
+		if (getLimitTicket(type) == 0){
+			return 0;
+		}
+
+		int availability = getLimitTicket(type) - ticketsSold.get(type);
 		if(availability < 0) {
 			throw new IllegalStateException("Impossible to have negative availability.");
 		}

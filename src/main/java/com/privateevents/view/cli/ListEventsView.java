@@ -29,21 +29,24 @@ public class ListEventsView extends AbstractView{
     public void showEvents(String[] events) {
         printTitle("EVENTS LIST");
         int lengthToPrint = events.length;
-
+        int i = 0;
         while (lengthToPrint > 0) {
-            int max = Math.min(5, lengthToPrint);
-            for (int i = 0; i < max; i++) {
+            int max = Math.min(5, lengthToPrint) + i;
+            while (i < max) {
                 System.out.println(events[i]);
+                i++;
             }
             lengthToPrint -= max;
             if (lengthToPrint > 0) {
                 System.out.println("Insert 0 to show more events or 1 to show menu: ");
                 Scanner input = new Scanner(System.in);
                 int choice;
-                while (true){
+                boolean choiceFlag = true;
+                while (choiceFlag){
                     choice = getIntChoice(input);
                     switch (choice) {
                         case 0:
+                            choiceFlag = false;
                             break;
                         case 1:
                             return;
