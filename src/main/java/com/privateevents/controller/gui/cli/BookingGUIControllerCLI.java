@@ -42,7 +42,7 @@ public class BookingGUIControllerCLI extends AbstractGUIControllerCLI {
     }
 
     private void showTickets() {
-        String[] ts = new String[event.getTickets().size()];
+        String[] ts = new String[tickets.size()];
         int i = 0;
         for (TicketBean t : tickets) {
             if (event.getTicketsAvailability(t.getTypeName()) == 0) {
@@ -52,6 +52,7 @@ public class BookingGUIControllerCLI extends AbstractGUIControllerCLI {
                 ts[i] = String.format("%d - Ticket type: %s, Ticket price: %s$, Ticket Description: %s (Minimum Age: %d)%n", i + 1, t.getTypeName(), t.getPrice(), t.getDescription(), t.getMinimumAge());
                 i++;
             }
+
         }
         bookingView.showTickets(ts);
         start();
@@ -62,37 +63,36 @@ public class BookingGUIControllerCLI extends AbstractGUIControllerCLI {
             String[] data = bookingView.insertData();
             BookingBean booking = new BookingBean();
 
-            if(data[0].isEmpty() || data[1].isEmpty() || data[2].isEmpty() || data[3].isEmpty() || data[4].isEmpty() || data[5].isEmpty() || data[6].isEmpty()){
+            if (data[0].isEmpty() || data[1].isEmpty() || data[2].isEmpty() || data[3].isEmpty() || data[4].isEmpty() || data[5].isEmpty() || data[6].isEmpty() || data[7].isEmpty()) {
                 throw new IncorrectDataException("All fields are required!");
             }
-            if((Integer.parseInt(data[6]) - 1) < 0 || (Integer.parseInt(data[6]) - 1) >= tickets.size()){
+
+            if ((Integer.parseInt(data[6]) - 1) < 0 || (Integer.parseInt(data[6]) - 1) >= tickets.size()) {
                 throw new IncorrectDataException("Invalid ticket type!");
             }
 
-            if (Integer.parseInt(data[2]) <  tickets.get(Integer.parseInt(data[6]) - 1).getMinimumAge()){
-                throw new IncorrectDataException("Invalid age!");
-            }
-
-            booking.setTicketType(tickets.get(Integer.parseInt(data[6]) - 1).getTypeName());
-            if (event.getTicketsAvailability(booking.getTicketType()) == 0) {
-                throw new OperationFailedException("No tickets available for this type.");
-            }
             booking.setFirstName(data[0]);
             booking.setLastName(data[1]);
             booking.setAge(Integer.parseInt(data[2]));
             booking.setGender(data[3].charAt(0));
             booking.setEmail(data[4]);
             booking.setTelephone(data[5]);
-            booking.setOnlinePayment(Boolean.valueOf(data[7]));
             booking.setTicketType(tickets.get(Integer.parseInt(data[6]) - 1).getTypeName());
+            booking.setOnlinePayment(Boolean.valueOf(data[7]));
+
+            if (event.getTicketsAvailability(booking.getTicketType()) == 0) {
+                throw new OperationFailedException("No tickets available for this type.");
+            }
 
             BookTicketController controller = new BookTicketController();
             String bookingCode = controller.sendReservation(event, booking);
             bookingView.showMessage("Booking successful! Your booking code is: " + bookingCode);
         } catch (OperationFailedException | DuplicateEntryException e) {
             bookingView.showError(e.getMessage());
-        }catch (IncorrectDataException e){
+        } catch (IncorrectDataException e) {
             bookingView.showMessage(e.getMessage());
+        } catch (NumberFormatException e){
+            bookingView.showMessage("Invalid ticket type!");
         }
         start();
     }

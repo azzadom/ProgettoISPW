@@ -23,12 +23,13 @@ public class BookingView extends AbstractView {
         String[] data = new String[8];
         Scanner input = new Scanner(System.in);
         getInput(input, data, 0, "Enter your Firstname: ");
-        getInput(input, data, 1, "Enter your Age: ");
-        getInput(input, data, 2, "Enter your Gender (M/F): ");
-        getInput(input, data, 3, "Enter your Email: ");
-        getInput(input, data, 4, "Enter your Telephone Number (with national prefix): ");
-        getInput(input, data, 5, "Enter the Ticket Number: ");
-        getInput(input, data, 6, "Do you want to pay online using PayPal? (Y/N): ");
+        getInput(input, data, 1, "Enter your Lastname: ");
+        getInput(input, data, 2, "Enter your Age: ");
+        getInput(input, data, 3, "Enter your Gender (M/F): ");
+        getInput(input, data, 4, "Enter your Email: ");
+        getInput(input, data, 5, "Enter your Telephone Number (with national prefix): ");
+        getInput(input, data, 6, "Enter the Ticket Number: ");
+        getInput(input, data, 7, "Do you want to pay online using PayPal? (Y/N): ");
 
         System.out.println("DATA INSERTED CHECK");
         System.out.println("Firstname: " + data[0]);

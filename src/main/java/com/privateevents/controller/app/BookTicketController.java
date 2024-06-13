@@ -9,6 +9,7 @@ import com.privateevents.dao.OrganizerDAO;
 import com.privateevents.utils.ToBeanConverter;
 import com.privateevents.utils.dao.factory.FactorySingletonDAO;
 
+import java.awt.print.Book;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,30 @@ public class BookTicketController {
 
         try {
 
+            List<TicketBean> tickets = eventBean.getTickets();
+            boolean found = false;
+            for (TicketBean t : tickets) {
+                if(t.getTypeName().equals(bookingBean.getTicketType())){
+                    found = true;
+                    if (bookingBean.getAge() <  t.getMinimumAge()){
+                        throw new OperationFailedException("Invalid age!");
+                    }
+                    break;
+                }
+            }
+            if (!found){
+                throw new OperationFailedException("Invalid ticket type.");
+            }
+
+            BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
+
+            List<Booking> bookings = bookingDAO.selectBooking(eventBean.getIdEvent());
+            for (Booking b : bookings) {
+                if (b.getEmail().equals(bookingBean.getEmail()) || b.getTelephone().equals(bookingBean.getTelephone())) {
+                    throw new DuplicateEntryException("Booking already exists.");
+                }
+            }
+
             Booking booking = new Booking(bookingBean.getLastName(), bookingBean.getFirstName(), bookingBean.getAge(),
                     bookingBean.getGender(), bookingBean.getEmail(), bookingBean.getTelephone(),
                     bookingBean.getTicketType(), bookingBean.getOnlinePayment());
@@ -88,8 +113,6 @@ public class BookTicketController {
                 Logger.getGlobal().log(Level.SEVERE, msg);
                 throw new OperationFailedException();
             }
-
-            BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
 
             if (bookingBean.getOnlinePayment().equals(true)) {
 
@@ -116,6 +139,7 @@ public class BookTicketController {
                     new Notification(TypeNotif.NEW, LocalDateTime.now(),
                             eventBean.getName(), booking.getCodeBooking()), organizer);
 
+            eventBean.setTicketsAvailability(bookingBean.getTicketType(),eventBean.getTicketsAvailability(booking.getTicketType()) - 1);
             return booking.getCodeBooking();
         } catch (DAOException e) {
             if (e.getTypeException().equals(DUPLICATE)) {
@@ -126,6 +150,9 @@ public class BookTicketController {
                 Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
                 throw new OperationFailedException();
             }
+        } catch (IncorrectDataException e) {
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
+            throw new OperationFailedException();
         }
     }
 

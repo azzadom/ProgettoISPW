@@ -4,6 +4,7 @@ module PrivateEvents {
     requires javafx.controls;
     requires javafx.graphics;
     requires java.sql;
+    requires java.desktop;
 
     opens com.privateevents.controller.gui.fx;
     opens com.privateevents.utils.view;

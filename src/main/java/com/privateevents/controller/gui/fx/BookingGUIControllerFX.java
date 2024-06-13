@@ -128,7 +128,6 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
 
         try {
             BookingBean booking = getBooking(ticketChosen);
-
             BookTicketController bookTicketController = new BookTicketController();
             String code = bookTicketController.sendReservation(event, booking);
             setMsg(message, "Booking successful! Your booking code is: " + code);
@@ -148,9 +147,8 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
                 throw new IncorrectDataException("Please select a payment method!");
             } else if (ticketSelection.getSelectedToggle() == null) {
                 throw new IncorrectDataException("Please select a ticket type!");
-            } else if (Integer.parseInt(data[4]) < ticketType.getMinimumAge()) {
-                throw new IncorrectDataException("Invalid age!");
             }
+
             BookingBean booking = new BookingBean();
             booking.setFirstName(data[0]);
             booking.setLastName(data[1]);
@@ -160,6 +158,7 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
             booking.setGender(data[5].charAt(0));
             booking.setOnlinePayment(paypalRadio.isSelected());
             booking.setTicketType(ticketType.getTypeName());
+            this.setTickets();
             return booking;
         } catch (NumberFormatException e) {
             throw new IncorrectDataException("Invalid age!");
