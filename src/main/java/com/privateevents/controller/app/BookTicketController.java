@@ -78,16 +78,6 @@ public class BookTicketController {
         try {
 
             checkBookingValid(bookingBean, eventBean);
-
-            BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
-
-            List<Booking> bookings = bookingDAO.selectBooking(eventBean.getIdEvent());
-            for (Booking b : bookings) {
-                if (b.getEmail().equals(bookingBean.getEmail()) || b.getTelephone().equals(bookingBean.getTelephone())) {
-                    throw new DuplicateEntryException("Booking already exists.");
-                }
-            }
-
             Booking booking = new Booking(bookingBean.getLastName(), bookingBean.getFirstName(), bookingBean.getAge(),
                     bookingBean.getGender(), bookingBean.getEmail(), bookingBean.getTelephone(),
                     bookingBean.getTicketType(), bookingBean.getOnlinePayment());
@@ -118,6 +108,8 @@ public class BookTicketController {
                 }
             }
 
+            BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
+
             booking = bookingDAO.addBooking(eventBean.getIdEvent(), booking);
 
             NotificationsController notificationsController = new NotificationsController();
@@ -142,8 +134,8 @@ public class BookTicketController {
         }
     }
 
-    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException {
-        if (eventBean.getClosed()){
+    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException, DAOException, DuplicateEntryException {
+        if (Boolean.TRUE.equals(eventBean.getClosed())){
             throw new OperationFailedException("Booking is closed.");
         }
 
@@ -161,5 +153,15 @@ public class BookTicketController {
         if (!found) {
             throw new OperationFailedException("Invalid ticket type.");
         }
+
+        BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
+
+        List<Booking> bookings = bookingDAO.selectBooking(eventBean.getIdEvent());
+        for (Booking b : bookings) {
+            if (b.getEmail().equals(bookingBean.getEmail()) || b.getTelephone().equals(bookingBean.getTelephone())) {
+                throw new DuplicateEntryException("Booking already exists.");
+            }
+        }
+
     }
 }
