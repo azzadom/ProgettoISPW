@@ -9,5 +9,5 @@ public interface BookingDAO {
 
     public Booking addBooking(Integer idEvent, Booking booking) throws DAOException;
 
-    public List<Booking> selectBooking(Integer idEvent) throws DAOException;
+    public List<Booking> selectBookingsByEvent(Integer idEvent) throws DAOException;
 }

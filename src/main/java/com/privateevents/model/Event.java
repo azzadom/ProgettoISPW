@@ -61,7 +61,11 @@ public class Event implements Serializable {
 	}
 
 	public void setTicketsAndBookings(List<Ticket> tickets, List<Booking> bookings) {
-        for (Ticket ticket : tickets) {
+		if(!this.tickets.isEmpty() || !this.bookings.isEmpty()) {
+			return;
+		}
+
+		for (Ticket ticket : tickets) {
 			this.tickets.add(new Ticket(ticket.getType(), ticket.getPrice(), ticket.restriction(), ticket.getDescription(), ticket.getLimit()));
 			this.ticketsSold.put(ticket.getType(), 0);
 		}
@@ -90,7 +94,6 @@ public class Event implements Serializable {
 	public void setBookingClosed(Boolean bookingClosed) {
 		this.bookingClosed = bookingClosed;
 	}
-
 
 	public String getName() {
 		return this.name;

@@ -53,7 +53,7 @@ public class NotificationsGUIControllerFX extends AbstractGUIControllerFX{
         resetMsg(errorMsg);
         try {
             NotificationsController notificationsController = new NotificationsController();
-            notificationsController.deleteNotificationsByOrg(organizerBean);
+            notificationsController.deleteAllNotifications(organizerBean);
             showNotifications.clear();
         } catch (OperationFailedException e) {
             setMsg(errorMsg, e.getMessage());

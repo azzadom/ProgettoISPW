@@ -33,14 +33,10 @@ public abstract class AbstractView {
             return;
         }
 
-        int spaces = ((separatorLength - titleLength) / 2) - 2;
+        int spaces = ((separatorLength - titleLength) / 2) - 1;
         int odd = (separatorLength - titleLength) % 2;
 
-        StringBuilder spacesBuilder = new StringBuilder();
-        for(int i = 0; i < spaces; i++) {
-            spacesBuilder.append(" ");
-        }
-        String spacesString = spacesBuilder.toString();
+        String spacesString = " ".repeat(Math.max(0, spaces));
 
         if (odd == 0) {
             printSeparator();

@@ -21,37 +21,41 @@ import static com.privateevents.exception.dao.TypeDAOException.DUPLICATE;
 
 public class NotificationsController {
 
-    protected void notifyOrganizer(Notification notif, Organizer organizer) throws OperationFailedException {
+    private final NotificationDAO notificationDAO;
+
+    public NotificationsController() {
+        this.notificationDAO = FactorySingletonDAO.getDefaultDAO().getNotificationDAO();
+    }
+
+    protected void notifyOrganizer(Notification notif, Organizer organizer) {
         try{
-        NotificationDAO notifDAO = FactorySingletonDAO.getDefaultDAO().getNotificationDAO();
-        notifDAO.addNotification(organizer.getUsername(), notif);
+            notificationDAO.addNotification(organizer.getUsername(), notif);
         } catch (DAOException e) {
             if (e.getTypeException().equals(DUPLICATE)) {
                 Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
             } else {
                 Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             }
-                throw new OperationFailedException();
         }
     }
 
     public void deleteNotifications(List<NotificationBean> notifBean, OrganizerBean organizerBean) throws OperationFailedException {
         try {
-        List<Notification> notifs = new ArrayList<>();
-        for (NotificationBean notif : notifBean) {
-            notifs.add(new Notification(TypeNotif.valueOf(notif.getType()), notif.getDateAndTime().toLocalDateTime(),
-                    notif.getEventName(),notif.getBookingCode()));
-        }
-        FactorySingletonDAO.getDefaultDAO().getNotificationDAO().deleteNotification(organizerBean.getUsername(), notifs);
+            List<Notification> notifs = new ArrayList<>();
+            for (NotificationBean notif : notifBean) {
+                notifs.add(new Notification(TypeNotif.valueOf(notif.getType()), notif.getDateAndTime().toLocalDateTime(),
+                        notif.getEventName(),notif.getBookingCode()));
+            }
+            notificationDAO.deleteNotification(organizerBean.getUsername(), notifs);
         } catch (DAOException e) {
             Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
         }
     }
 
-    public void deleteNotificationsByOrg(OrganizerBean organizerBean) throws OperationFailedException {
+    public void deleteAllNotifications(OrganizerBean organizerBean) throws OperationFailedException {
         try {
-            FactorySingletonDAO.getDefaultDAO().getNotificationDAO().deleteNotificationByOrg(organizerBean.getUsername());
+            notificationDAO.deleteNotificationByOrg(organizerBean.getUsername());
         } catch (DAOException e) {
             Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
@@ -60,7 +64,7 @@ public class NotificationsController {
 
     public List<NotificationBean> getNotifications(OrganizerBean org) throws OperationFailedException, NotFoundException {
         try {
-            List<Notification> notifs = FactorySingletonDAO.getDefaultDAO().getNotificationDAO().selectNotifications(org.getUsername());
+            List<Notification> notifs = notificationDAO.selectNotifications(org.getUsername());
             if (notifs.isEmpty()) {
                 throw new NotFoundException("No notifications found.");
             }

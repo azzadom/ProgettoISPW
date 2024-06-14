@@ -6,6 +6,7 @@ import com.privateevents.bean.TicketBean;
 import com.privateevents.dao.BookingDAO;
 import com.privateevents.dao.EventDAO;
 import com.privateevents.dao.OrganizerDAO;
+import com.privateevents.dao.TicketDAO;
 import com.privateevents.utils.ToBeanConverter;
 import com.privateevents.utils.dao.factory.FactorySingletonDAO;
 
@@ -26,9 +27,21 @@ import static com.privateevents.exception.dao.TypeDAOException.*;
 
 public class BookTicketController {
 
+    private final BookingDAO bookingDAO;
+    private final EventDAO eventDAO;
+    private final OrganizerDAO organizerDAO;
+    private final TicketDAO ticketDAO;
+
+
+    public BookTicketController() {
+        this.bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
+        this.eventDAO = FactorySingletonDAO.getDefaultDAO().getEventDAO();
+        this.organizerDAO = FactorySingletonDAO.getDefaultDAO().getOrganizerDAO();
+        this.ticketDAO = FactorySingletonDAO.getDefaultDAO().getTicketDAO();
+    }
+
     public List<EventBean> findCityEvents(String city) throws OperationFailedException, NotFoundException {
         try {
-            EventDAO eventDAO = FactorySingletonDAO.getDefaultDAO().getEventDAO();
             List<Event> events = eventDAO.selectEventsByCity(city);
             if (events.isEmpty()) {
                 throw new NotFoundException("No events found in the city: " + city);
@@ -50,17 +63,17 @@ public class BookTicketController {
 
     public EventBean eventDetails(EventBean eventBean) throws OperationFailedException, NotFoundException {
         try {
-            Event event = FactorySingletonDAO.getDefaultDAO().getEventDAO().selectEvent(eventBean.getIdEvent());
+            Event event = eventDAO.selectEvent(eventBean.getIdEvent());
             if (event == null) {
                 throw new NotFoundException("Event not found.");
             }
-            List<Ticket> tickets = FactorySingletonDAO.getDefaultDAO().getTicketDAO().selectTickets(eventBean.getIdEvent());
+            List<Ticket> tickets = ticketDAO.selectTickets(eventBean.getIdEvent());
             if (tickets.isEmpty()){
                 String msg = "Inconsistent data. No tickets found for event: " + eventBean.getIdEvent();
                 Logger.getGlobal().log(Level.SEVERE, msg);
                 throw new OperationFailedException();
             }
-            List<Booking> bookings = FactorySingletonDAO.getDefaultDAO().getBookingDAO().selectBooking(eventBean.getIdEvent());
+            List<Booking> bookings = bookingDAO.selectBookingsByEvent(eventBean.getIdEvent());
             event.setTicketsAndBookings(tickets, bookings);
             eventBean = ToBeanConverter.fromEventToEventBeanWithoutBook(event);
             return eventBean;
@@ -78,11 +91,7 @@ public class BookTicketController {
         try {
 
             checkBookingValid(bookingBean, eventBean);
-            Booking booking = new Booking(bookingBean.getLastName(), bookingBean.getFirstName(), bookingBean.getAge(),
-                    bookingBean.getGender(), bookingBean.getEmail(), bookingBean.getTelephone(),
-                    bookingBean.getTicketType(), bookingBean.getOnlinePayment());
 
-            OrganizerDAO organizerDAO = FactorySingletonDAO.getDefaultDAO().getOrganizerDAO();
             Organizer organizer = organizerDAO.selectOrganizer(eventBean.getOrgName());
             if (organizer == null) {
                 String msg = "Inconsistent data. Organizer not found for event: " + eventBean.getIdEvent();
@@ -90,8 +99,11 @@ public class BookTicketController {
                 throw new OperationFailedException();
             }
 
-            if (bookingBean.getOnlinePayment().equals(true)) {
+            Booking booking = new Booking(bookingBean.getLastName(), bookingBean.getFirstName(), bookingBean.getAge(),
+                    bookingBean.getGender(), bookingBean.getEmail(), bookingBean.getTelephone(),
+                    bookingBean.getTicketType(), bookingBean.getOnlinePayment());
 
+            if (bookingBean.getOnlinePayment().equals(true)) {
                 Double amount = 0.0;
                 for (TicketBean t : eventBean.getTickets()) {
                     if (t.getTypeName().equals(booking.getTicketType())) {
@@ -99,7 +111,6 @@ public class BookTicketController {
                         break;
                     }
                 }
-
                 OnlinePaymentController onlinePaymentController = new OnlinePaymentController();
                 boolean response = onlinePaymentController.payPayPal(organizer, amount,
                         "Booking for event: " + eventBean.getName());
@@ -108,33 +119,27 @@ public class BookTicketController {
                 }
             }
 
-            BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
-
             booking = bookingDAO.addBooking(eventBean.getIdEvent(), booking);
 
             NotificationsController notificationsController = new NotificationsController();
-            notificationsController.notifyOrganizer(
-                    new Notification(TypeNotif.NEW, LocalDateTime.now(),
-                            eventBean.getName(), booking.getCodeBooking()), organizer);
+            notificationsController.notifyOrganizer(new Notification(TypeNotif.NEW, LocalDateTime.now(), eventBean.getName(), booking.getCodeBooking()), organizer);
 
             eventBean.setTicketsAvailability(bookingBean.getTicketType(),eventBean.getTicketsAvailability(booking.getTicketType()) - 1);
+
             return booking.getCodeBooking();
         } catch (DAOException e) {
             if (e.getTypeException().equals(DUPLICATE)) {
-                throw new DuplicateEntryException(e.getMessage());
+                throw new DuplicateEntryException(e.getMessage() + ", if you have already paid, contact support.");
             } else if (e.getTypeException().equals(LIMIT_REACHED)) {
-                throw new OperationFailedException("No tickets available for this type.");
+                throw new OperationFailedException("No tickets available for this type. If you have already paid, contact support.");
             }else {
                 Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
-                throw new OperationFailedException();
+                throw new OperationFailedException("Unable to complete the operation. If you have already paid, contact support.");
             }
-        } catch (IncorrectDataException e) {
-            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e.getCause());
-            throw new OperationFailedException();
         }
     }
 
-    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException, DAOException, DuplicateEntryException {
+    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException {
         if (Boolean.TRUE.equals(eventBean.getClosed())){
             throw new OperationFailedException("Bookings are closed.");
         }
@@ -153,15 +158,5 @@ public class BookTicketController {
         if (!found) {
             throw new OperationFailedException("Invalid ticket type.");
         }
-
-        BookingDAO bookingDAO = FactorySingletonDAO.getDefaultDAO().getBookingDAO();
-
-        List<Booking> bookings = bookingDAO.selectBooking(eventBean.getIdEvent());
-        for (Booking b : bookings) {
-            if (b.getEmail().equals(bookingBean.getEmail()) || b.getTelephone().equals(bookingBean.getTelephone())) {
-                throw new DuplicateEntryException("Booking already exists.");
-            }
-        }
-
     }
 }

@@ -54,7 +54,7 @@ public class BookingJDBC implements BookingDAO {
     }
 
     @Override
-    public List<Booking> selectBooking(Integer idEvent) throws DAOException {
+    public List<Booking> selectBookingsByEvent(Integer idEvent) throws DAOException {
         List<Booking> bookings = new ArrayList<>();
         try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){

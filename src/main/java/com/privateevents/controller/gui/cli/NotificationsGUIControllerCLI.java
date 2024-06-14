@@ -68,7 +68,7 @@ public class NotificationsGUIControllerCLI extends AbstractGUIControllerCLI {
             List<Integer> numDelete = view.deleteNotification();
             NotificationsController notificationsController = new NotificationsController();
             if (numDelete.contains(-1)) {
-                notificationsController.deleteNotificationsByOrg((OrganizerBean) SessionManager.getSessionManager().getSessionFromId(currentSession).getUser());
+                notificationsController.deleteAllNotifications((OrganizerBean) SessionManager.getSessionManager().getSessionFromId(currentSession).getUser());
                 notifications.clear();
             } else {
                 List<NotificationBean> notifsToDelete = new ArrayList<>();

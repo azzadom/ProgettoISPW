@@ -37,13 +37,11 @@ public class EventBean {
 		this.idEvent = idEvent;
 	}
 
-	public void setTicketsAvailability(String type, Integer available) throws IncorrectDataException {
-		if (type == null || type.isEmpty()) {
-			throw new IncorrectDataException("Type is not valid.");
+	public void setTicketsAvailability(String type, Integer available){
+		if (type == null || type.isEmpty() || available < 0) {
+			return;
 		}
-		if (available < 0) {
-			throw new IncorrectDataException("Available tickets cannot be negative.");
-		}
+
 		this.ticketsAvailability.put(type, available);
 	}
 
@@ -185,7 +183,4 @@ public class EventBean {
 		return time.toString();
 	}
 
-	public Map<String, Integer> getTicketAvailability() {
-		return this.ticketsAvailability;
-	}
 }
