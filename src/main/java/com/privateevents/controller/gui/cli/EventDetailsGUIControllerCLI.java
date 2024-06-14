@@ -62,8 +62,13 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
     }
 
     private void bookTicket() {
-        BookingGUIControllerCLI bookingGUIController = new BookingGUIControllerCLI(currentSession, returningHome);
-        bookingGUIController.start();
+        EventBean eventBean = SessionManager.getSessionManager().getSessionFromId(currentSession).getEvent();
+        if (Boolean.TRUE.equals(eventBean.getClosed())){
+            eventDetailsView.showError("Event is closed for booking.");
+        }else {
+            BookingGUIControllerCLI bookingGUIController = new BookingGUIControllerCLI(currentSession, returningHome);
+            bookingGUIController.start();
+        }
         if(Boolean.FALSE.equals(returningHome.getReturningHome())){
             start();
         }

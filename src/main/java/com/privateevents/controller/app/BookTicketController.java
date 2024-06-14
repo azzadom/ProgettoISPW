@@ -136,7 +136,7 @@ public class BookTicketController {
 
     private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException, DAOException, DuplicateEntryException {
         if (Boolean.TRUE.equals(eventBean.getClosed())){
-            throw new OperationFailedException("Booking is closed.");
+            throw new OperationFailedException("Bookings are closed.");
         }
 
         List<TicketBean> tickets = eventBean.getTickets();

@@ -47,7 +47,12 @@ public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
 
     @FXML
     public void bookTicket() {
-        goNext(FilesFXML.BOOKING.getPath());
+        EventBean eventBean = SessionManager.getSessionManager().getSessionFromId(currentSession).getEvent();
+        if (Boolean.TRUE.equals(eventBean.getClosed())){
+            setMsg(errorMsg,"Event is closed for booking.");
+        }else {
+            goNext(FilesFXML.BOOKING.getPath());
+        }
     }
 
     @FXML
