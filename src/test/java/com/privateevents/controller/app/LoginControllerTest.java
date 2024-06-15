@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginControllerTest {
 
     @Test
-    void login() throws IncorrectDataException, OperationFailedException, NotFoundException {
+    void testLogin() throws IncorrectDataException, OperationFailedException, NotFoundException {
         System.setProperty("DAO_TYPE", "JDBC");
         LoginController loginController = new LoginController();
         UserBean userBean = new UserBean();
@@ -24,7 +24,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void register() throws IncorrectDataException, OperationFailedException, DuplicateEntryException{
+    void testRegister() throws IncorrectDataException, OperationFailedException, DuplicateEntryException{
         System.setProperty("DAO_TYPE", "JDBC");
         OrganizerBean organizerBean = new OrganizerBean();
         organizerBean.setUsername("mimmo");

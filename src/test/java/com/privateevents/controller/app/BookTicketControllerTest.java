@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookTicketControllerTest {
 
     @Test
-    void findCityEvents() throws OperationFailedException, NotFoundException {
+    void testFindCityEvents() throws OperationFailedException, NotFoundException {
         System.setProperty("DAO_TYPE", "JDBC");
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = null;
@@ -26,7 +26,7 @@ class BookTicketControllerTest {
     }
 
     @Test
-    void getEventTickets() throws OperationFailedException, NotFoundException {
+    void testGetEventTickets() throws OperationFailedException, NotFoundException {
         System.setProperty("DAO_TYPE", "JDBC");
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = bookTicketController.findCityEvents("Milan");
@@ -35,7 +35,7 @@ class BookTicketControllerTest {
     }
 
     @Test
-    void sendReservation() throws OperationFailedException, IncorrectDataException, DuplicateEntryException, NotFoundException {
+    void testSendReservation() throws OperationFailedException, IncorrectDataException, DuplicateEntryException, NotFoundException {
         System.setProperty("DAO_TYPE", "JDBC");
         BookTicketController bookTicketController = new BookTicketController();
         EventBean eventBean = bookTicketController.findCityEvents("Milan").getFirst();
