@@ -4,6 +4,7 @@ import com.privateevents.bean.BookingBean;
 import com.privateevents.bean.EventBean;
 import com.privateevents.bean.TicketBean;
 import com.privateevents.controller.app.BookTicketController;
+import com.privateevents.exception.NotFoundException;
 import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
 import com.privateevents.exception.DuplicateEntryException;
@@ -17,27 +18,36 @@ public class BookingGUIControllerCLI extends AbstractGUIControllerCLI {
 
     private final BookingView bookingView = new BookingView();
     private final EventBean event;
-    private final List<TicketBean> tickets;
+    private List<TicketBean> tickets;
 
     public BookingGUIControllerCLI(Integer session, ReturnigHome returningHome) {
         this.currentSession = session;
         this.event = SessionManager.getSessionManager().getSessionFromId(session).getEvent();
-        this.tickets = event.getTickets();
         this.returningHome = returningHome;
     }
 
     @Override
     public void start() {
-        int choice;
-        choice = bookingView.showMenu();
+        BookTicketController controller = new BookTicketController();
 
-        switch (choice) {
-            case 1 -> showTickets();
-            case 2 -> bookTicket();
-            case 3 -> goBack();
-            case 4 -> goHome();
-            case 5 -> exit();
-            default -> throw new IllegalArgumentException("Invalid case!");
+        try {
+            this.tickets = controller.getEventTickets(event);
+
+            int choice;
+            choice = bookingView.showMenu();
+
+            switch (choice) {
+                case 1 -> showTickets();
+                case 2 -> bookTicket();
+                case 3 -> goBack();
+                case 4 -> goHome();
+                case 5 -> exit();
+                default -> throw new IllegalArgumentException("Invalid case!");
+            }
+        }catch (OperationFailedException e){
+            bookingView.showError(e.getMessage());
+        } catch (NotFoundException e) {
+            bookingView.showMessage(e.getMessage());
         }
     }
 
@@ -85,8 +95,8 @@ public class BookingGUIControllerCLI extends AbstractGUIControllerCLI {
             }
 
             BookTicketController controller = new BookTicketController();
-            String bookingCode = controller.sendReservation(event, booking);
-            bookingView.showMessage("Booking successful! Your booking code is: " + bookingCode);
+            controller.sendReservation(event, booking, tickets.get(Integer.parseInt(data[6]) - 1));
+            bookingView.showMessage("Booking successful! Your booking code is: " + booking.getCodeBooking());
         } catch (OperationFailedException | DuplicateEntryException e) {
             bookingView.showError(e.getMessage());
         } catch (IncorrectDataException e) {

@@ -129,8 +129,8 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
         try {
             BookingBean booking = getBooking(ticketChosen);
             BookTicketController bookTicketController = new BookTicketController();
-            String code = bookTicketController.sendReservation(event, booking);
-            setMsg(message, "Booking successful! Your booking code is: " + code);
+            bookTicketController.sendReservation(event, booking, ticketChosen);
+            setMsg(message, "Booking successful! Your booking code is: " + booking.getCodeBooking());
         } catch (IncorrectDataException | DuplicateEntryException e) {
             setMsg(message, e.getMessage());
         } catch (OperationFailedException e) {
@@ -165,15 +165,18 @@ public class BookingGUIControllerFX extends AbstractGUIControllerFX {
         }
     }
 
-    public void initialize(Integer session) throws OperationFailedException {
+    public void initialize(Integer session) throws OperationFailedException, NotFoundException {
         this.currentSession = session;
         resetMsg(errorMsg, message, sold1, sold2, sold3);
+
+        event = SessionManager.getSessionManager().getSessionFromId(session).getEvent();
+        BookTicketController controller = new BookTicketController();
+        tickets = controller.getEventTickets(event);
+
         ticket1.setVisible(false);
         ticket2.setVisible(false);
         ticket3.setVisible(false);
 
-        event = SessionManager.getSessionManager().getSessionFromId(session).getEvent();
-        tickets = event.getTickets();
         if(tickets.isEmpty()) {
             throw new OperationFailedException("No tickets available for this event.");
         } else if (tickets.size() > 3) {

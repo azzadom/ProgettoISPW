@@ -29,8 +29,6 @@ public class EventBean {
 
 	private Boolean closed;
 
-	private List<TicketBean> tickets = new ArrayList<>();
-
 	private Map<String, Integer> ticketsAvailability = new HashMap<>();
 
 	public void setIdEvent(Integer idEvent) {
@@ -135,10 +133,6 @@ public class EventBean {
 		}
 	}
 
-	public void setTickets(List<TicketBean> tickets) {
-		this.tickets = tickets;
-	}
-
 	public Integer getIdEvent() {
 		return idEvent;
 	}
@@ -173,10 +167,6 @@ public class EventBean {
 
 	public Integer getTicketsAvailability(String type) {
 		return ticketsAvailability.get(type);
-	}
-
-	public List<TicketBean> getTickets() {
-		return tickets;
 	}
 
 	public String getTime() {

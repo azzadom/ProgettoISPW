@@ -1,6 +1,5 @@
 package com.privateevents.controller.gui.fx;
 
-import com.privateevents.controller.app.BookTicketController;
 import com.privateevents.utils.view.fx.FilesFXML;
 import com.privateevents.utils.view.fx.PageManagerSingleton;
 import com.privateevents.exception.NotFoundException;
@@ -11,6 +10,7 @@ import javafx.scene.control.Label;
 
 import com.privateevents.bean.EventBean;
 import com.privateevents.utils.SessionManager;
+
 
 public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
 
@@ -60,13 +60,11 @@ public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
         setMsg(errorMsg,"Not implemented yet.");
     }
 
-    public void initialize(Integer session) throws OperationFailedException, NotFoundException {
+    public void initialize(Integer session) {
         this.currentSession = session;
         resetMsg(errorMsg);
 
-        BookTicketController bookTicketController = new BookTicketController();
-        event = bookTicketController.eventDetails(SessionManager.getSessionManager().getSessionFromId(currentSession).getEvent());
-        SessionManager.getSessionManager().getSessionFromId(currentSession).setEvent(event);
+        event = SessionManager.getSessionManager().getSessionFromId(currentSession).getEvent();
 
         title.setText(event.getName());
         info.setText("Date: " + event.getDate() + " | " + "Start Time: " + event.getTime() + "\n"

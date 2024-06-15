@@ -1,11 +1,8 @@
 package com.privateevents.controller.gui.cli;
 
 import com.privateevents.bean.EventBean;
-import com.privateevents.controller.app.BookTicketController;
 import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
-import com.privateevents.exception.NotFoundException;
-import com.privateevents.exception.OperationFailedException;
 import com.privateevents.view.cli.EventDetailsView;
 
 public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
@@ -21,30 +18,18 @@ public class EventDetailsGUIControllerCLI extends AbstractGUIControllerCLI {
 
     @Override
     public void start() {
-        try {
-            BookTicketController controller = new BookTicketController();
-            event = controller.eventDetails(event);
-            SessionManager.getSessionManager().getSessionFromId(currentSession).setEvent(event);
+        int choice;
+        choice = eventDetailsView.showMenu();
 
-            int choice;
-            choice = eventDetailsView.showMenu();
+        switch (choice) {
+            case 1 -> showInfo();
+            case 2 -> bookTicket();
+            case 3 -> bookingManagement();
+            case 4 -> goBack();
+            case 5 -> goHome();
+            case 6 -> exit();
+            default -> throw new IllegalArgumentException("Invalid case!");
 
-            switch (choice) {
-                case 1 -> showInfo();
-                case 2 -> bookTicket();
-                case 3 -> bookingManagement();
-                case 4 -> goBack();
-                case 5 -> goHome();
-                case 6 -> exit();
-                default -> throw new IllegalArgumentException("Invalid case!");
-
-            }
-        }catch(OperationFailedException e){
-            eventDetailsView.showError(e.getMessage());
-            start();
-        } catch(NotFoundException e){
-            eventDetailsView.showMessage(e.getMessage());
-            start();
         }
     }
 

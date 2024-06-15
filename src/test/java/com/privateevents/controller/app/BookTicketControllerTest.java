@@ -26,12 +26,11 @@ class BookTicketControllerTest {
     }
 
     @Test
-    void eventDetails() throws OperationFailedException, NotFoundException {
+    void getEventTickets() throws OperationFailedException, NotFoundException {
         System.setProperty("DAO_TYPE", "JDBC");
         BookTicketController bookTicketController = new BookTicketController();
         List<EventBean> eventBeans = bookTicketController.findCityEvents("Milan");
-        EventBean eventBean = bookTicketController.eventDetails(eventBeans.getFirst());
-        List<TicketBean> ticketBeans = eventBean.getTickets();
+        List<TicketBean> ticketBeans = bookTicketController.getEventTickets(eventBeans.getFirst());
         assertFalse(ticketBeans.isEmpty());
     }
 
@@ -40,19 +39,19 @@ class BookTicketControllerTest {
         System.setProperty("DAO_TYPE", "JDBC");
         BookTicketController bookTicketController = new BookTicketController();
         EventBean eventBean = bookTicketController.findCityEvents("Milan").getFirst();
-        eventBean = bookTicketController.eventDetails(eventBean);
-        TicketBean ticketBean = eventBean.getTickets().getFirst();
+        List<TicketBean> ticketBeans = bookTicketController.getEventTickets(eventBean);
+        TicketBean ticketChoosen = ticketBeans.get(0);
         BookingBean bookingBean = new BookingBean();
         bookingBean.setIdEvent(eventBean.getIdEvent());
-        bookingBean.setEmail("mimmo@gmail.com");
-        bookingBean.setTelephone("+393895203040");
-        bookingBean.setTicketType(ticketBean.getTypeName());
+        bookingBean.setEmail("bianchi.mimmo@gmail.com");
+        bookingBean.setTelephone("+393899903040");
+        bookingBean.setTicketType(ticketChoosen.getTypeName());
         bookingBean.setFirstName("Mimmo");
         bookingBean.setLastName("Bianchi");
         bookingBean.setAge(25);
         bookingBean.setGender('M');
         bookingBean.setOnlinePayment(false);
-        String code = bookTicketController.sendReservation(eventBean, bookingBean);
-        assertNotNull(code);
+        bookTicketController.sendReservation(eventBean, bookingBean,ticketChoosen);
+        assertNotNull(bookingBean.getCodeBooking());
     }
 }

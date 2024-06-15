@@ -48,7 +48,7 @@ public class BookTicketController {
             }
             List<EventBean> eventBeans = new ArrayList<>();
             for (Event event : events) {
-                EventBean eventBean = ToBeanConverter.fromEventToEventBeanWithoutBook(event);
+                EventBean eventBean = ToBeanConverter.fromEventToEventBean(event);
                 eventBeans.add(eventBean);
             }
             return eventBeans;
@@ -61,7 +61,7 @@ public class BookTicketController {
         }
     }
 
-    public EventBean eventDetails(EventBean eventBean) throws OperationFailedException, NotFoundException {
+    public List<TicketBean> getEventTickets(EventBean eventBean) throws OperationFailedException, NotFoundException {
         try {
             Event event = eventDAO.selectEvent(eventBean.getIdEvent());
             if (event == null) {
@@ -75,8 +75,13 @@ public class BookTicketController {
             }
             List<Booking> bookings = bookingDAO.selectBookingsByEvent(eventBean.getIdEvent());
             event.setTicketsAndBookings(tickets, bookings);
-            eventBean = ToBeanConverter.fromEventToEventBeanWithoutBook(event);
-            return eventBean;
+
+            List<TicketBean> ticketBeans = new ArrayList<>();
+            for (Ticket t: tickets){
+                ticketBeans.add(ToBeanConverter.fromTicketToTicketBean(t));
+                eventBean.setTicketsAvailability(t.getType(), event.getTicketAvailability(t.getType()));
+            }
+            return ticketBeans;
         } catch (DAOException e) {
             Logger.getGlobal().log(Level.WARNING, e.getMessage(), e.getCause());
             throw new OperationFailedException();
@@ -86,11 +91,11 @@ public class BookTicketController {
         }
     }
 
-    public String sendReservation(EventBean eventBean, BookingBean bookingBean) throws OperationFailedException, DuplicateEntryException {
+    public void sendReservation(EventBean eventBean, BookingBean bookingBean, TicketBean ticketBean) throws OperationFailedException, DuplicateEntryException {
 
         try {
 
-            checkBookingValid(bookingBean, eventBean);
+            checkBookingValid(bookingBean, eventBean, ticketBean);
 
             Organizer organizer = organizerDAO.selectOrganizer(eventBean.getOrgName());
             if (organizer == null) {
@@ -103,14 +108,9 @@ public class BookTicketController {
                     bookingBean.getGender(), bookingBean.getEmail(), bookingBean.getTelephone(),
                     bookingBean.getTicketType(), bookingBean.getOnlinePayment());
 
+
             if (bookingBean.getOnlinePayment().equals(true)) {
-                Double amount = 0.0;
-                for (TicketBean t : eventBean.getTickets()) {
-                    if (t.getTypeName().equals(booking.getTicketType())) {
-                        amount = t.getPrice();
-                        break;
-                    }
-                }
+                Double amount = ticketBean.getPrice();
                 OnlinePaymentController onlinePaymentController = new OnlinePaymentController();
                 boolean response = onlinePaymentController.payPayPal(organizer, amount,
                         "Booking for event: " + eventBean.getName());
@@ -126,7 +126,7 @@ public class BookTicketController {
 
             eventBean.setTicketsAvailability(bookingBean.getTicketType(),eventBean.getTicketsAvailability(booking.getTicketType()) - 1);
 
-            return booking.getCodeBooking();
+            bookingBean.setCodeBooking(booking.getCodeBooking());
         } catch (DAOException e) {
             if (e.getTypeException().equals(DUPLICATE)) {
                 throw new DuplicateEntryException(e.getMessage() + ", if you have already paid, contact support.");
@@ -139,24 +139,20 @@ public class BookTicketController {
         }
     }
 
-    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean) throws OperationFailedException {
+    private void checkBookingValid(BookingBean bookingBean, EventBean eventBean, TicketBean ticketBean) throws OperationFailedException {
         if (Boolean.TRUE.equals(eventBean.getClosed())){
             throw new OperationFailedException("Bookings are closed.");
         }
 
-        List<TicketBean> tickets = eventBean.getTickets();
-        boolean found = false;
-        for (TicketBean t : tickets) {
-            if (t.getTypeName().equals(bookingBean.getTicketType())) {
-                found = true;
-                if (bookingBean.getAge() < t.getMinimumAge()) {
-                    throw new OperationFailedException("Invalid age!");
-                }
-                break;
+        if (ticketBean.getTypeName().equals(bookingBean.getTicketType())) {
+            if (bookingBean.getAge() < ticketBean.getMinimumAge()) {
+                throw new OperationFailedException("Invalid age!");
             }
+        }else {
+            String msg = "Inconsistent data. Ticket type does not match the booking type.";
+            Logger.getGlobal().log(Level.SEVERE, msg);
+            throw new OperationFailedException();
         }
-        if (!found) {
-            throw new OperationFailedException("Invalid ticket type.");
-        }
+
     }
 }

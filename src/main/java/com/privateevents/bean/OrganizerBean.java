@@ -2,8 +2,6 @@ package com.privateevents.bean;
 
 import com.privateevents.exception.IncorrectDataException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class OrganizerBean extends UserBean{
@@ -15,10 +13,6 @@ public class OrganizerBean extends UserBean{
     private String email;
 
     private String infoPayPal;
-
-    private List<NotificationBean> notifs = new ArrayList<>();
-
-    private List<EventBean> events = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -82,22 +76,6 @@ public class OrganizerBean extends UserBean{
         } else {
             this.infoPayPal = infoPayPal;
         }
-    }
-
-    public List<NotificationBean> getNotifs() {
-        return notifs;
-    }
-
-    public void setNotifs(List<NotificationBean> notifs) {
-        this.notifs = notifs;
-    }
-
-    public List<EventBean> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<EventBean> events) {
-        this.events = events;
     }
 
 }

@@ -7,7 +7,6 @@ import com.privateevents.model.*;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ToBeanConverter {
@@ -16,7 +15,7 @@ public class ToBeanConverter {
         throw new IllegalStateException("Utility class.");
     }
 
-    public static EventBean fromEventToEventBeanWithoutBook(Event event) throws IncorrectDataException {
+    public static EventBean fromEventToEventBean(Event event) throws IncorrectDataException {
         EventBean eventBean = new EventBean();
         eventBean.setIdEvent(event.getIdEvent());
         eventBean.setName(event.getName());
@@ -31,12 +30,9 @@ public class ToBeanConverter {
 
         List<Ticket> tickets = event.getTickets();
         if(tickets != null) {
-            List<TicketBean> ticketBeans = new ArrayList<>();
             for (Ticket ticket : tickets) {
-                ticketBeans.add(fromTicketToTicketBean(ticket));
                 eventBean.setTicketsAvailability(ticket.getType(), event.getTicketAvailability(ticket.getType()));
             }
-            eventBean.setTickets(ticketBeans);
         }
 
         return eventBean;
@@ -80,23 +76,6 @@ public class ToBeanConverter {
         organizerBean.setLastName(organizer.getLastName());
         organizerBean.setEmail(organizer.getEmail());
         organizerBean.setInfoPayPal(organizer.getInfoPayPal());
-
-        List<Event> events = organizer.getEvents();
-        if(events != null) {
-            List<EventBean> eventBeans = new ArrayList<>();
-            for (Event event : events) {
-                eventBeans.add(fromEventToEventBeanWithoutBook(event));
-            }
-            organizerBean.setEvents(eventBeans);
-
-            List<Notification> notifications = organizer.getNewNotif();
-            List<NotificationBean> notificationBeans = new ArrayList<>();
-            for (Notification notification : notifications) {
-                notificationBeans.add(fromNotificationToNotificationBean(notification));
-            }
-            organizerBean.setNotifs(notificationBeans);
-        }
-
         return organizerBean;
     }
 
