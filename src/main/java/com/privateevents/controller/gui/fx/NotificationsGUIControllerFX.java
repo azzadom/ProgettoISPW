@@ -3,7 +3,7 @@ package com.privateevents.controller.gui.fx;
 import com.privateevents.bean.NotificationBean;
 import com.privateevents.bean.OrganizerBean;
 import com.privateevents.controller.app.NotificationsController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.exception.NotFoundException;
 import com.privateevents.exception.OperationFailedException;
 import javafx.collections.FXCollections;

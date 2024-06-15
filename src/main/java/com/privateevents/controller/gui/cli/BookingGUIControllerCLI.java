@@ -4,7 +4,7 @@ import com.privateevents.bean.BookingBean;
 import com.privateevents.bean.EventBean;
 import com.privateevents.bean.TicketBean;
 import com.privateevents.controller.app.BookTicketController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
 import com.privateevents.exception.DuplicateEntryException;
 import com.privateevents.exception.IncorrectDataException;

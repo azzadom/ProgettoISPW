@@ -2,7 +2,7 @@ package com.privateevents.controller.gui.fx;
 
 import com.privateevents.bean.EventBean;
 import com.privateevents.controller.app.BookTicketController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.fx.FilesFXML;
 import com.privateevents.exception.NotFoundException;
 import com.privateevents.exception.OperationFailedException;

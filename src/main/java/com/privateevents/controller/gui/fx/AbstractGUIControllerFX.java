@@ -1,6 +1,6 @@
 package com.privateevents.controller.gui.fx;
 
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.fx.FilesFXML;
 import com.privateevents.utils.view.fx.PageManagerSingleton;
 import com.privateevents.exception.NotFoundException;

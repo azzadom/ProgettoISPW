@@ -1,6 +1,6 @@
 package com.privateevents.controller.gui.cli;
 
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
 import com.privateevents.view.cli.HomeView;
 

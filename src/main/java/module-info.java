@@ -7,7 +7,6 @@ module PrivateEvents {
     requires java.desktop;
 
     opens com.privateevents.controller.gui.fx;
-    opens com.privateevents.utils.view;
     opens com.privateevents.utils.view.fx;
     opens com.privateevents.bean;
     opens com.privateevents.engineering.payment;
@@ -21,4 +20,5 @@ module PrivateEvents {
     exports com.privateevents.exception;
     exports com.privateevents;
     exports com.privateevents.utils;
+    opens com.privateevents.utils;
 }

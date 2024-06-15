@@ -3,7 +3,7 @@ package com.privateevents.controller.gui.fx;
 import com.privateevents.bean.OrganizerBean;
 import com.privateevents.bean.UserBean;
 import com.privateevents.controller.app.LoginController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.fx.FilesFXML;
 import com.privateevents.utils.view.fx.PageManagerSingleton;
 import com.privateevents.exception.DuplicateEntryException;
@@ -62,8 +62,8 @@ public class LoginAndSignupGUIControllerFX extends AbstractGUIControllerFX{
             userBean.setPassword(loginInfo[1]);
             LoginController loginController = new LoginController();
             userBean = loginController.login(userBean);
-            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(userBean);
             PageManagerSingleton.getInstance().setHome(FilesFXML.ORGANIZER_HOME.getPath(), currentSession);
+            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(userBean);
         } catch (IncorrectDataException | NotFoundException e) {
             setMsg(loginMessage, e.getMessage());
         } catch (OperationFailedException e) {
@@ -90,8 +90,8 @@ public class LoginAndSignupGUIControllerFX extends AbstractGUIControllerFX{
             organizerBean.setPassword(strings[5]);
             LoginController loginController = new LoginController();
             UserBean userBean = loginController.register(organizerBean);
-            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(userBean);
             PageManagerSingleton.getInstance().setHome(FilesFXML.ORGANIZER_HOME.getPath(), currentSession);
+            SessionManager.getSessionManager().getSessionFromId(currentSession).setUser(userBean);
         } catch (IncorrectDataException | DuplicateEntryException e) {
             setMsg(signupMessage, e.getMessage());
         } catch (OperationFailedException | NotFoundException e) {

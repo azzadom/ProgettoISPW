@@ -3,7 +3,7 @@ package com.privateevents.controller.gui.cli;
 import com.privateevents.bean.OrganizerBean;
 import com.privateevents.bean.UserBean;
 import com.privateevents.controller.app.LoginController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
 import com.privateevents.exception.DuplicateEntryException;
 import com.privateevents.exception.IncorrectDataException;

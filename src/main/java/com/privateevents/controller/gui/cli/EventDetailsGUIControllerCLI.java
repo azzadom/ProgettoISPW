@@ -2,7 +2,7 @@ package com.privateevents.controller.gui.cli;
 
 import com.privateevents.bean.EventBean;
 import com.privateevents.controller.app.BookTicketController;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 import com.privateevents.utils.view.cli.ReturnigHome;
 import com.privateevents.exception.NotFoundException;
 import com.privateevents.exception.OperationFailedException;

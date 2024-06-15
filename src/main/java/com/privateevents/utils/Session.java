@@ -1,4 +1,4 @@
-package com.privateevents.utils.view;
+package com.privateevents.utils;
 
 import com.privateevents.bean.EventBean;
 import com.privateevents.bean.UserBean;

@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import com.privateevents.bean.EventBean;
-import com.privateevents.utils.view.SessionManager;
+import com.privateevents.utils.SessionManager;
 
 public class EventDetailsGUIControllerFX extends AbstractGUIControllerFX {
 

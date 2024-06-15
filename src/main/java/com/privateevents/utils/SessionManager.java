@@ -1,4 +1,4 @@
-package com.privateevents.utils.view;
+package com.privateevents.utils;
 
 import java.util.ArrayList;
 import java.util.List;

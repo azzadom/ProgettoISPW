@@ -1274,5 +1274,7 @@ Q.idea/sonarlint/securityhotspotstore/d/2/d2f7a7a2eb26b12585cdd751382da725c0739c
 Q.idea/sonarlint/securityhotspotstore/b/1/b10282fc0c6092921edc1b4a1c343407c0f745f6,f\8\f8bad94b8cf38802eb57600aa0fdabb459fff8a2
 w
 G.idea/sonarlint/issuestore/e/0/e09022423c6ef23260d253c02903a29e460cc568,c\7\c70112a050cd69786d59833aaa134cf1feb3f745
-X
-(src/test/java/resources/start.properties,f\1\f1c9fe6559ad585c04d46b0edd6e37c0d6cdf330
+b
+2src/main/java/com/privateevents/utils/Session.java,b\e\be3767cb36ec53859b4d1b688db6e8bd320b8cdb
+i
+9src/main/java/com/privateevents/utils/SessionManager.java,3\6\361e1faa2b127443839da7a426c03c5c27698d0c
