@@ -76,7 +76,7 @@ public class PageManagerSingleton {
             primaryStage.getIcons().add(new Image("/icon.png"));
             primaryStage.setResizable(false);
             primaryStage.show();
-        } catch (IOException e){
+        } catch (IOException | IllegalStateException | NullPointerException e){
             viewStack.pop();
             String errorMsg = "Impossible to load the view: " + fxmlPath;
             Logger.getGlobal().log(Level.SEVERE, errorMsg);

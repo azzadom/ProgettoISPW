@@ -10,7 +10,7 @@ public abstract class FactorySingletonDAO {
 
     public static synchronized FactorySingletonDAO getDefaultDAO (){
         if (instance == null) {
-            String daoType = System.getenv("DAO_TYPE");
+            String daoType = System.getProperty("DAO_TYPE");
             switch (TypeDAO.valueOf(daoType)) {
                 case JDBC:
                     instance = new JDBCFactory();
