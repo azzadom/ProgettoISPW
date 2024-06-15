@@ -29,7 +29,6 @@ public class SingletonConnector {
             try (InputStream input = new FileInputStream(CONNECTION_SETTINGS)) {
                 Properties properties = new Properties();
                 properties.load(input);
-                input.close();
 
                 String connectionUrl = properties.getProperty("CONNECTION_URL");
                 String user = properties.getProperty("USER");

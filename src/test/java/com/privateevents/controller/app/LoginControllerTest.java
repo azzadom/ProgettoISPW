@@ -14,6 +14,7 @@ class LoginControllerTest {
 
     @Test
     void login() throws IncorrectDataException, OperationFailedException, NotFoundException {
+        System.setProperty("DAO_TYPE", "JDBC");
         LoginController loginController = new LoginController();
         UserBean userBean = new UserBean();
         userBean.setUsername("pippo");
@@ -24,16 +25,17 @@ class LoginControllerTest {
 
     @Test
     void register() throws IncorrectDataException, OperationFailedException, DuplicateEntryException{
+        System.setProperty("DAO_TYPE", "JDBC");
         OrganizerBean organizerBean = new OrganizerBean();
-        organizerBean.setUsername("luca");
-        organizerBean.setPassword("l.luca");
-        organizerBean.setEmail("luca@outlook.it");
-        organizerBean.setFirstName("Luca");
+        organizerBean.setUsername("mimmo");
+        organizerBean.setPassword("m.mimmo");
+        organizerBean.setEmail("mimmo@outlook.it");
+        organizerBean.setFirstName("Mimmo");
         organizerBean.setLastName("Messieri");
-        organizerBean.setInfoPayPal("luca@gmail.com");
+        organizerBean.setInfoPayPal("mimmo@gmail.com");
         LoginController loginController = new LoginController();
         UserBean user = loginController.register(organizerBean);
-        assertEquals("luca", user.getUsername());
-        assertNotEquals("l.luca", user.getPassword());
+        assertEquals("mimmo", user.getUsername());
+        assertNotEquals("m.mimmo", user.getPassword());
     }
 }

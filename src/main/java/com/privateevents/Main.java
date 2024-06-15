@@ -9,6 +9,7 @@ import java.util.logging.LogManager;
 public class Main  {
 
     private static final String START_SETTINGS = "src/main/resources/properties/start.properties";
+    private static final String LOGGER_SETTINGS = "src/main/resources/properties/logging.properties";
     private static final String VIEW_TYPE = "VIEW_TYPE";
     private static final String DAO_TYPE = "DAO_TYPE";
 
@@ -17,7 +18,7 @@ public class Main  {
 
         InputStream input;
 
-        input = new FileInputStream("src/main/resources/properties/logging.properties");
+        input = new FileInputStream(LOGGER_SETTINGS);
         LogManager.getLogManager().readConfiguration(input);
         input.close();
 
