@@ -25,7 +25,7 @@ public class TicketFS implements TicketDAO {
             List<String[]> foundRecord = handler.find(r -> r[5].equals(String.valueOf(idEvent)));
             return foundRecord.stream().map(this::fromCvsRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
-            throw new DAOException("Error in selectTickets: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectTickets: " + e.getMessage(), e, GENERIC);
         }
     }
 

@@ -28,7 +28,7 @@ public class BookingJDBC implements BookingDAO {
     @Override
     public Booking addBooking(Integer idEvent, Booking booking) throws DAOException {
         int id;
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = BookingQueries.countBookings(stmt, idEvent);
             if (rs.next()) {
@@ -46,17 +46,15 @@ public class BookingJDBC implements BookingDAO {
             }else if (e.getSQLState().equals("45000")) {
                 throw new DAOException("Tickets sold out", LIMIT_REACHED);
             }else {
-                throw new DAOException("Error adding booking: " + e.getMessage(), e.getCause(), GENERIC);
+                throw new DAOException("Error adding booking: " + e.getMessage(), e, GENERIC);
             }
-        } finally {
-            SingletonConnector.getConnector().endConnection();
         }
     }
 
     @Override
     public List<Booking> selectBookingsByEvent(Integer idEvent) throws DAOException {
         List<Booking> bookings = new ArrayList<>();
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = BookingQueries.selectBookingByEvent(stmt, idEvent);
             while (rs.next()) {
@@ -66,9 +64,7 @@ public class BookingJDBC implements BookingDAO {
             rs.close();
             return bookings;
         }catch (SQLException e) {
-            throw new DAOException("Error selecting booking: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error selecting booking: " + e.getMessage(), e, GENERIC);
         }
     }
 

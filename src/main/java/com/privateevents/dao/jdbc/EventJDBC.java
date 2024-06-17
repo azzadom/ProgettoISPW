@@ -32,7 +32,7 @@ public class EventJDBC implements EventDAO {
         Statement stmt;
         List<Event> events = new ArrayList<>();
         try {
-            stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             ResultSet rs = EventQueries.selectEventsByCity(stmt, city);
             while (rs.next()) {
@@ -43,9 +43,7 @@ public class EventJDBC implements EventDAO {
             stmt.close();
             return events;
         } catch (SQLException e) {
-            throw new DAOException("Error in selectEventsByCity: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectEventsByCity: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -53,7 +51,7 @@ public class EventJDBC implements EventDAO {
         Statement stmt;
         Event event = null;
         try {
-            stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             ResultSet rs = EventQueries.selectEvent(stmt, idEvent);
             if (rs.next()) {
@@ -63,9 +61,7 @@ public class EventJDBC implements EventDAO {
             stmt.close();
             return event;
         } catch (SQLException e) {
-            throw new DAOException("Error in selectEvent: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectEvent: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -75,7 +71,7 @@ public class EventJDBC implements EventDAO {
         Statement stmt;
         List<Event> events = new ArrayList<>();
         try {
-            stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             ResultSet rs = EventQueries.selectEventsByOrganizer(stmt, idOrganizer);
             while (rs.next()) {
@@ -86,9 +82,7 @@ public class EventJDBC implements EventDAO {
             stmt.close();
             return events;
         } catch (SQLException e) {
-            throw new DAOException("Error in selectEventsByOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectEventsByOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 

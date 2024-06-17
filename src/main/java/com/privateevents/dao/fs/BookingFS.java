@@ -39,7 +39,7 @@ public class BookingFS implements BookingDAO {
             handler.writeAll(rs);
             return booking;
         } catch (IOException e) {
-            throw new DAOException("Error in addBooking: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in addBooking: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -50,7 +50,7 @@ public class BookingFS implements BookingDAO {
             List<String[]> found = handler.find(r -> r[9].equals(String.valueOf(idEvent)));
             return found.stream().map(this::fromCsvRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
-            throw new DAOException("Error in selectBookingsByEvent: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectBookingsByEvent: " + e.getMessage(), e, GENERIC);
         }
     }
 

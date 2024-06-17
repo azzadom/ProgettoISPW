@@ -21,7 +21,7 @@ public class PageManagerSingleton {
     private static final Deque<String> viewStack = new ArrayDeque<>();
     private static PageManagerSingleton instance = null;
 
-    protected PageManagerSingleton(Stage stage) {
+    private PageManagerSingleton(Stage stage) {
         primaryStage = stage;
     }
 
@@ -79,7 +79,7 @@ public class PageManagerSingleton {
         } catch (IOException | IllegalStateException | NullPointerException e){
             viewStack.pop();
             String errorMsg = "Impossible to load the view: " + fxmlPath;
-            Logger.getGlobal().log(Level.SEVERE, errorMsg);
+            Logger.getGlobal().log(Level.SEVERE, errorMsg, e);
             throw new OperationFailedException();
         } catch (OperationFailedException | NotFoundException e){
             viewStack.pop();

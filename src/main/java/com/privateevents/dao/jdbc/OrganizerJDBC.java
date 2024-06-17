@@ -26,7 +26,7 @@ public class OrganizerJDBC implements OrganizerDAO {
 
         Organizer org = null;
 
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = OrganizerQueries.selectOrganizer(stmt, idOrganizer);
             if (rs.first()) {
@@ -35,16 +35,14 @@ public class OrganizerJDBC implements OrganizerDAO {
             rs.close();
             return org;
         } catch (SQLException | EncryptionException e) {
-            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 
     @Override
     public Organizer selectOrganizer(String username, String password) throws DAOException {
         Organizer org = null;
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = OrganizerQueries.selectOrganizer(stmt, username, password);
             if (rs.first()) {
@@ -53,15 +51,13 @@ public class OrganizerJDBC implements OrganizerDAO {
             rs.close();
             return org;
         } catch (SQLException | EncryptionException e) {
-            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 
     @Override
     public void insertOrganizer(Organizer organizer) throws DAOException {
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             OrganizerQueries.insertOrganizer(stmt, organizer.getUsername(), organizer.getPassword(),
                     organizer.getFirstName(), organizer.getLastName(),
@@ -72,9 +68,7 @@ public class OrganizerJDBC implements OrganizerDAO {
             } else if(e.getErrorCode() == 1062) {
                 throw new DAOException("Organizer already exists", DUPLICATE);
             }
-            throw new DAOException("Error in insertOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in insertOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 

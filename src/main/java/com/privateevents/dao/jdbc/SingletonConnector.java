@@ -11,20 +11,12 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class SingletonConnector {
-    protected static SingletonConnector instance = null;
-    private Connection connection = null;
+    private static Connection connection = null;
     private static final String CONNECTION_SETTINGS = "src/main/resources/properties/db.properties";
 
-    protected SingletonConnector() {}
+    private SingletonConnector() {}
 
-    public static synchronized SingletonConnector getConnector() {
-        if (instance == null) {
-            instance = new SingletonConnector();
-        }
-        return instance;
-    }
-
-    public Connection getConnection() throws ConnectionException {
+    public static synchronized Connection getConnection() throws ConnectionException {
         if (connection == null) {
             try (InputStream input = new FileInputStream(CONNECTION_SETTINGS)) {
                 Properties properties = new Properties();
@@ -36,21 +28,10 @@ public class SingletonConnector {
 
                 connection = DriverManager.getConnection(connectionUrl, user, pass);
             } catch (IOException | SQLException e) {
-                throw new ConnectionException("Error in getConnection: " + e.getMessage(), e.getCause());
+                throw new ConnectionException("Error in getConnection: " + e.getMessage(), e);
             }
         }
         return connection;
-    }
-
-    public void endConnection() throws ConnectionException {
-        if (connection != null){
-            try {
-                connection.close();
-                connection = null;
-            } catch (SQLException e) {
-                throw new ConnectionException("Error in endConnection: " + e.getMessage(), e.getCause());
-            }
-        }
     }
 
 }

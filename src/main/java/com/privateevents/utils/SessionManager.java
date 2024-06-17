@@ -8,11 +8,11 @@ public class SessionManager {
 
     private static SessionManager instance = null;
 
-    protected SessionManager() {}
+    private SessionManager() {}
 
-    public static SessionManager getSessionManager(){
-            if (SessionManager.instance == null) {
-                SessionManager.instance = new SessionManager();
+    public static synchronized SessionManager getSessionManager(){
+            if (instance == null) {
+                instance = new SessionManager();
             }
             return instance;
     }

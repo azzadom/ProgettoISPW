@@ -27,7 +27,7 @@ public class EventFS implements EventDAO {
             }
             return events;
         } catch (IOException | ClassNotFoundException e) {
-            throw new DAOException("Error in selectEventsByCity: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectEventsByCity: " + e.getMessage(), e, GENERIC);
         }
 
     }
@@ -43,7 +43,7 @@ public class EventFS implements EventDAO {
             event.setTransientParams();
             return event;
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
-            throw new DAOException("Error in selectEvent: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectEvent: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -57,7 +57,7 @@ public class EventFS implements EventDAO {
             }
             return events;
         } catch (IOException | ClassNotFoundException e) {
-            throw new DAOException("Error in selectEventsByOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectEventsByOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -75,7 +75,7 @@ public class EventFS implements EventDAO {
             }
             handler.writeObjects(event);
         } catch (IOException | ClassNotFoundException e) {
-            throw new DAOException("Error in insertEvent: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in insertEvent: " + e.getMessage(), e, GENERIC);
         }
     }
 

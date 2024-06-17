@@ -23,7 +23,7 @@ public class NotificationJDBC implements NotificationDAO {
     @Override
     public List<Notification> selectNotifications(String idOrganizer) throws DAOException {
         List<Notification> notifications = new ArrayList<>();
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = NotificationQueries.selectNotificationsByOrganizer(stmt, idOrganizer);
             while (rs.next()) {
@@ -33,15 +33,13 @@ public class NotificationJDBC implements NotificationDAO {
             rs.close();
             return notifications;
         } catch (SQLException e) {
-            throw new DAOException("Error in selectNotifications: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectNotifications: " + e.getMessage(), e, GENERIC);
         }
     }
 
     @Override
     public void addNotification(String idOrganizer, Notification notification) throws DAOException {
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             Timestamp timestamp = Timestamp.valueOf(notification.getDateAndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
@@ -51,15 +49,13 @@ public class NotificationJDBC implements NotificationDAO {
             if (e.getErrorCode() == 1062) {
                 throw new DAOException("Notification already exists", DUPLICATE);
             }
-            throw new DAOException("Error in addNotification: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in addNotification: " + e.getMessage(), e, GENERIC);
         }
     }
 
     @Override
     public void deleteNotification(String idOrganizer, List<Notification> notification) throws DAOException {
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
 
             for (Notification notif : notification) {
@@ -69,21 +65,17 @@ public class NotificationJDBC implements NotificationDAO {
                         notif.getBookingCode(), timestamp);
             }
         } catch (SQLException e) {
-            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e, GENERIC);
         }
     }
 
     public void deleteNotificationByOrg(String idOrganizer) throws DAOException {
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
 
                 NotificationQueries.deleteNotificationByOrg(stmt, idOrganizer);
         } catch (SQLException e) {
-            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e, GENERIC);
         }
     }
 

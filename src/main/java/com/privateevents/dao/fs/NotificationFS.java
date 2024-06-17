@@ -27,7 +27,7 @@ public class NotificationFS implements NotificationDAO {
             List<String[]> foundrs = handler.find(r -> r[4].equals(idOrganizer));
             return foundrs.stream().map(this::fromCsvRecord).collect(Collectors.toCollection(ArrayList::new));
         } catch (IOException e) {
-            throw new DAOException("Error in selectNotifications: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectNotifications: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -43,7 +43,7 @@ public class NotificationFS implements NotificationDAO {
             rs.add(toCsvRecord(idOrganizer, notification));
             handler.writeAll(rs);
         } catch (IOException e) {
-            throw new DAOException("Error in addNotification: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in addNotification: " + e.getMessage(), e, GENERIC);
          }
     }
 
@@ -57,7 +57,7 @@ public class NotificationFS implements NotificationDAO {
             }
             handler.remove(predicates);
         } catch (IOException e) {
-            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -66,7 +66,7 @@ public class NotificationFS implements NotificationDAO {
             CSVHandler handler = new CSVHandler(FILE_PATH, ",");
             handler.remove(n -> n[4].equals(idOrganizer));
         } catch (IOException e) {
-            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in deleteNotification: " + e.getMessage(), e, GENERIC);
         }
     }
 

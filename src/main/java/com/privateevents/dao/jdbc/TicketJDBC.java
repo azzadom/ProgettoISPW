@@ -25,7 +25,7 @@ public class TicketJDBC implements TicketDAO {
     public List<Ticket> selectTickets(Integer idEvent) throws DAOException {
 
         List<Ticket> tickets = new ArrayList<>();
-        try (Statement stmt = SingletonConnector.getConnector().getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        try (Statement stmt = SingletonConnector.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY)){
             ResultSet rs = TicketQueries.selectTicketsByEvent(stmt, idEvent);
             while (rs.next()) {
@@ -35,9 +35,7 @@ public class TicketJDBC implements TicketDAO {
             rs.close();
             return tickets;
         } catch (SQLException e) {
-            throw new DAOException("Error in selectTickets: " + e.getMessage(), e.getCause(), GENERIC);
-        } finally {
-            SingletonConnector.getConnector().endConnection();
+            throw new DAOException("Error in selectTickets: " + e.getMessage(), e, GENERIC);
         }
     }
 

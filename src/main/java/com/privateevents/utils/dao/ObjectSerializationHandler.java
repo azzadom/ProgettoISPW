@@ -14,7 +14,7 @@ public class ObjectSerializationHandler<O>{
     }
 
     private void writeObjectsCleaned(List<O> objects) throws IOException {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filePath)))){
             for (O object : objects) {
                 outputStream.writeObject(object);
             }

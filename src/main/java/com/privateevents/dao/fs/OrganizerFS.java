@@ -27,7 +27,7 @@ public class OrganizerFS implements OrganizerDAO {
             org.setTransientParams();
             return org;
         } catch (IOException | ClassNotFoundException | IndexOutOfBoundsException e) {
-            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -44,7 +44,7 @@ public class OrganizerFS implements OrganizerDAO {
             org.setTransientParams();
             return org;
         } catch (IOException | ClassNotFoundException | IndexOutOfBoundsException e) {
-            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 
@@ -58,7 +58,7 @@ public class OrganizerFS implements OrganizerDAO {
             }
             handler.writeObjects(organizer);
         } catch (IOException | ClassNotFoundException e) {
-            throw new DAOException("Error in insertOrganizer: " + e.getMessage(), e.getCause(), GENERIC);
+            throw new DAOException("Error in insertOrganizer: " + e.getMessage(), e, GENERIC);
         }
     }
 

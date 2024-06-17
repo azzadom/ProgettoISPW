@@ -40,12 +40,12 @@ public class User implements Serializable {
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger no = new BigInteger(1, messageDigest);
             StringBuilder sb = new StringBuilder(no.toString(16));
-            while (sb.length() < 32) {
+            while (sb.length() < 128) {
                 sb.insert(0, "0");
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new EncryptionException("Error in encrypt in user model.", e.getCause());
+            throw new EncryptionException("Error in encrypt in user model.", e);
         }
     }
 }
