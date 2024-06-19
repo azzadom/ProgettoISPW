@@ -16,7 +16,7 @@ public class NotificationsView extends AbstractView{
     public void showNotifications(String[] notifications) {
         printTitle("NOTIFICATIONS");
         for (String s : notifications) {
-            System.out.println(s);
+            showMessage(s);
         }
     }
 
@@ -25,7 +25,7 @@ public class NotificationsView extends AbstractView{
         List<Integer> notifs = new ArrayList<>();
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Do you want to delete all notification? (Y/N)");
+        showMessage("Do you want to delete all notification? (Y/N)");
         String choice = input.nextLine();
         if (choice.equals("Y")) {
             notifs.add(-1);
@@ -36,7 +36,7 @@ public class NotificationsView extends AbstractView{
 
         while (true){
             try {
-                System.out.println("Enter the number of the notification you want to delete: ");
+                showMessage("Enter the number of the notification you want to delete: ");
                 inputNumber = Integer.parseInt(input.nextLine());
                 if (inputNumber <= 0) {
                     throw new InputMismatchException();
@@ -44,13 +44,13 @@ public class NotificationsView extends AbstractView{
 
                 notifs.add(inputNumber);
 
-                System.out.println("Do you want to delete another notification? (Y/N): ");
+                showMessage("Do you want to delete another notification? (Y/N): ");
                 choice = input.nextLine();
                 if (choice.equals("N")) {
                     break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
+                showMessage("Invalid input!");
                 input.next();
             }
         }

@@ -12,7 +12,7 @@ public abstract class AbstractView {
 
 
     protected void printSeparator() {
-        System.out.println(SEPARATOR);
+        showMessage(SEPARATOR);
     }
 
     public abstract  int showMenu();
@@ -28,7 +28,7 @@ public abstract class AbstractView {
 
         if(titleLength > separatorLength) {
             printSeparator();
-            System.out.println(title);
+            showMessage(title);
             printSeparator();
             return;
         }
@@ -40,17 +40,17 @@ public abstract class AbstractView {
 
         if (odd == 0) {
             printSeparator();
-            System.out.println("*" + spacesString + title + spacesString + "*");
+            showMessage("*" + spacesString + title + spacesString + "*");
             printSeparator();
         } else {
             printSeparator();
-            System.out.println("*" + spacesString + title + spacesString + " *");
+            showMessage("*" + spacesString + title + spacesString + " *");
             printSeparator();
         }
     }
 
     public void showError(String message) {
-        System.out.println(ANSI_RED + message + ANSI_RESET);
+        showMessage(ANSI_RED + message + ANSI_RESET);
     }
 
     public void showMessage(String message) {
@@ -58,14 +58,14 @@ public abstract class AbstractView {
     }
 
     protected void getInput(Scanner scanner, String[] data, Integer index, String message) {
-        System.out.println(message);
+        showMessage(message);
         data[index] = scanner.nextLine();
     }
 
     protected void printMenu(String title, String ... options) {
         printTitle(title);
         for(int i = 0; i < options.length; i++) {
-            System.out.println((i + 1) + ". " + options[i]);
+            showMessage((i + 1) + ". " + options[i]);
         }
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractView {
 
         while (true) {
             try {
-                System.out.println("Choose an option: ");
+                showMessage("Choose an option: ");
                 choice = input.nextInt();
                 if (choice >= Math.min(1,options) && choice <= Math.max(1,options)) {
                     return choice;
@@ -83,7 +83,7 @@ public abstract class AbstractView {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
+                showMessage("Invalid input!");
                 input.next();
             }
         }

@@ -14,7 +14,7 @@ public class BookingView extends AbstractView {
     public void showTickets(String[] tickets) {
         printTitle("TICKETS LIST");
         for (String s : tickets) {
-            System.out.println(s);
+            showMessage(s);
         }
     }
 
@@ -31,15 +31,15 @@ public class BookingView extends AbstractView {
         getInput(input, data, 6, "Enter the Ticket Number: ");
         getInput(input, data, 7, "Do you want to pay online using PayPal? (Y/N): ");
 
-        System.out.println("DATA INSERTED CHECK");
-        System.out.println("Firstname: " + data[0]);
-        System.out.println("Lastname: " + data[1]);
-        System.out.println("Age: " + data[2]);
-        System.out.println("Gender: " + data[3]);
-        System.out.println("Email: " + data[4]);
-        System.out.println("Telephone Number: " + data[5]);
-        System.out.println("Ticket Number: " + data[6]);
-        System.out.println("PayPal: " + data[7]);
+        showMessage("DATA INSERTED CHECK");
+        showMessage("Firstname: " + data[0]);
+        showMessage("Lastname: " + data[1]);
+        showMessage("Age: " + data[2]);
+        showMessage("Gender: " + data[3]);
+        showMessage("Email: " + data[4]);
+        showMessage("Telephone Number: " + data[5]);
+        showMessage("Ticket Number: " + data[6]);
+        showMessage("PayPal: " + data[7]);
 
         if(data[7].equalsIgnoreCase("Y")){
             data[7] = "true";
@@ -50,7 +50,7 @@ public class BookingView extends AbstractView {
         int choice;
         while (true) {
             try {
-                System.out.println("Press 0 to confirm or 1 to cancel: ");
+                showMessage("Press 0 to confirm or 1 to cancel: ");
                 choice = input.nextInt();
                 if (choice >= 0 && choice <= 1) {
                     break;
@@ -58,7 +58,7 @@ public class BookingView extends AbstractView {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
+                showMessage("Invalid input!");
                 input.next();
             }
         }

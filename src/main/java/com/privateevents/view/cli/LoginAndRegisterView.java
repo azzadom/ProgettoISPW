@@ -32,18 +32,18 @@ public class LoginAndRegisterView extends AbstractView {
         getInput(input, user, 4, "Enter your Username: ");
         getInput(input, user, 5, "Enter your Password: ");
 
-        System.out.println("DATA INSERTED CHECK");
-        System.out.println("Firstname: " + user[0]);
-        System.out.println("Lastname: " + user[1]);
-        System.out.println("Email: " + user[2]);
-        System.out.println("PayPal Email: " + user[3]);
-        System.out.println("Username: " + user[4]);
-        System.out.println("Password: " + user[5]);
+        showMessage("DATA INSERTED CHECK");
+        showMessage("Firstname: " + user[0]);
+        showMessage("Lastname: " + user[1]);
+        showMessage("Email: " + user[2]);
+        showMessage("PayPal Email: " + user[3]);
+        showMessage("Username: " + user[4]);
+        showMessage("Password: " + user[5]);
 
         int choice;
         while (true) {
             try {
-                System.out.println("Press 0 to confirm or 1 to cancel: ");
+                showMessage("Press 0 to confirm or 1 to cancel: ");
                 choice = input.nextInt();
                 if (choice >= 0 && choice <= 1) {
                     break;
@@ -51,7 +51,7 @@ public class LoginAndRegisterView extends AbstractView {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
+                showMessage("Invalid input!");
                 input.next();
             }
         }

@@ -15,12 +15,12 @@ public class ListEventsView extends AbstractView{
 
     public Integer selectEvent() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the number of the event: ");
+        showMessage("Enter the number of the event: ");
         while (true) {
             try {
                 return input.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println(INPUT_ERROR);
+                showMessage(INPUT_ERROR);
                 input.next();
             }
         }
@@ -33,12 +33,12 @@ public class ListEventsView extends AbstractView{
         while (lengthToPrint > 0) {
             int max = Math.min(5, lengthToPrint) + i;
             while (i < max) {
-                System.out.println(events[i]);
+                showMessage(events[i]);
                 i++;
             }
             lengthToPrint -= max;
             if (lengthToPrint > 0) {
-                System.out.println("Insert 0 to show more events or 1 to show menu: ");
+                showMessage("Insert 0 to show more events or 1 to show menu: ");
                 Scanner input = new Scanner(System.in);
                 int choice;
                 boolean choiceFlag = true;
@@ -51,7 +51,7 @@ public class ListEventsView extends AbstractView{
                         case 1:
                             return;
                         default:
-                            System.out.println(INPUT_ERROR);
+                            showMessage(INPUT_ERROR);
                     }
                 }
             }

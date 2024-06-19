@@ -12,7 +12,7 @@ public class EventDetailsView extends AbstractView{
     public void showInfo(String[] info) {
         printTitle("EVENT INFO");
         for (String s : info) {
-            System.out.println(s);
+            showMessage(s);
         }
     }
 

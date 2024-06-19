@@ -12,7 +12,7 @@ public class HomeView extends AbstractView{
 
     public String searchEvent() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the name of the city: ");
+        showMessage("Enter the name of the city: ");
         return input.nextLine();
     }
 
