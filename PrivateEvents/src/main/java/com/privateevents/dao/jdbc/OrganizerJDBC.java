@@ -4,13 +4,14 @@ import com.privateevents.dao.jdbc.queries.OrganizerQueries;
 import com.privateevents.dao.OrganizerDAO;
 import com.privateevents.exception.EncryptionException;
 import com.privateevents.exception.dao.DAOException;
-import com.privateevents.model.Organizer;
+import com.privateevents.model.*;
 
 import static com.privateevents.exception.dao.TypeDAOException.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class OrganizerJDBC implements OrganizerDAO {
 
@@ -33,6 +34,7 @@ public class OrganizerJDBC implements OrganizerDAO {
                 org = fromResultSet(rs);
             }
             rs.close();
+            addNotifAndEvents(org);
             return org;
         } catch (SQLException | EncryptionException e) {
             throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
@@ -49,6 +51,7 @@ public class OrganizerJDBC implements OrganizerDAO {
                 org = fromResultSet(rs);
             }
             rs.close();
+            addNotifAndEvents(org);
             return org;
         } catch (SQLException | EncryptionException e) {
             throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
@@ -75,6 +78,18 @@ public class OrganizerJDBC implements OrganizerDAO {
     private Organizer fromResultSet(ResultSet rs) throws SQLException, EncryptionException {
         return new Organizer(rs.getString(COLUMN_USERNAME),rs.getString(COLUMN_PASSWORD),rs.getString(COLUMN_EMAIL), rs.getString(COLUMN_FIRSTNAME),
                 rs.getString(COLUMN_LASTNAME), rs.getString(COLUMN_INFO_PAYPAL));
+    }
+
+    private void addNotifAndEvents(Organizer organizer) throws DAOException {
+        if(organizer == null) {
+            return;
+        }
+        NotificationJDBC notificationJDBC = new NotificationJDBC();
+        EventJDBC eventJDBC = new EventJDBC();
+        List<Event> events = eventJDBC.selectEventsByOrganizer(organizer.getUsername());
+        List<Notification> notifications = notificationJDBC.selectNotifications(organizer.getUsername());
+        organizer.addEvent(events);
+        organizer.addNotif(notifications);
     }
 }
 

@@ -1,6 +1,8 @@
 package com.privateevents.dao.fs;
 
 import com.privateevents.dao.OrganizerDAO;
+import com.privateevents.model.Event;
+import com.privateevents.model.Notification;
 import com.privateevents.utils.dao.ObjectSerializationHandler;
 import com.privateevents.exception.dao.DAOException;
 import com.privateevents.model.Organizer;
@@ -25,6 +27,7 @@ public class OrganizerFS implements OrganizerDAO {
             }
             Organizer org =  orgs.getFirst();
             org.setTransientParams();
+            addNotifAndEvents(org);
             return org;
         } catch (IOException | ClassNotFoundException | IndexOutOfBoundsException e) {
             throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
@@ -42,6 +45,7 @@ public class OrganizerFS implements OrganizerDAO {
             }
             Organizer org =  orgs.getFirst();
             org.setTransientParams();
+            addNotifAndEvents(org);
             return org;
         } catch (IOException | ClassNotFoundException | IndexOutOfBoundsException e) {
             throw new DAOException("Error in selectOrganizer: " + e.getMessage(), e, GENERIC);
@@ -68,6 +72,18 @@ public class OrganizerFS implements OrganizerDAO {
 
     private Predicate<Organizer> uniquePredicate(String email){
         return org -> org.getEmail().equals(email);
+    }
+
+    private void addNotifAndEvents(Organizer organizer) throws DAOException {
+        if(organizer == null) {
+            return;
+        }
+        NotificationFS notificationFS = new NotificationFS();
+        EventFS eventFS = new EventFS();
+        List<Event> events = eventFS.selectEventsByOrganizer(organizer.getUsername());
+        List<Notification> notifications = notificationFS.selectNotifications(organizer.getUsername());
+        organizer.addEvent(events);
+        organizer.addNotif(notifications);
     }
 
 }

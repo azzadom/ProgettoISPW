@@ -1,6 +1,8 @@
 package com.privateevents.dao.fs;
 
 import com.privateevents.dao.EventDAO;
+import com.privateevents.model.Booking;
+import com.privateevents.model.Ticket;
 import com.privateevents.utils.dao.ObjectSerializationHandler;
 import com.privateevents.exception.dao.DAOException;
 import com.privateevents.model.Event;
@@ -24,6 +26,7 @@ public class EventFS implements EventDAO {
                     event.getDate().isAfter(LocalDate.now()));
             for (Event event : events) {
                 event.setTransientParams();
+                addBookingAndTickets(event);
             }
             return events;
         } catch (IOException | ClassNotFoundException e) {
@@ -41,6 +44,7 @@ public class EventFS implements EventDAO {
             }
             Event event = events.getFirst();
             event.setTransientParams();
+            addBookingAndTickets(event);
             return event;
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             throw new DAOException("Error in selectEvent: " + e.getMessage(), e, GENERIC);
@@ -81,6 +85,17 @@ public class EventFS implements EventDAO {
 
     Predicate<Event> uniquePredicate(String city, String nameEvent){
         return event -> event.getCity().equals(city) && event.getName().equals(nameEvent);
+    }
+
+    private void addBookingAndTickets(Event event) throws DAOException {
+        if(event == null) {
+            return;
+        }
+        BookingFS bookingFS = new BookingFS();
+        TicketFS ticketFS = new TicketFS();
+        List<Booking> bookings = bookingFS.selectBookingsByEvent(event.getIdEvent());
+        List<Ticket> tickets = ticketFS.selectTickets(event.getIdEvent());
+        event.setTicketsAndBookings(tickets, bookings);
     }
 
 }

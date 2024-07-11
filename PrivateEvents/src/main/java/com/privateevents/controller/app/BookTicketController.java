@@ -73,8 +73,6 @@ public class BookTicketController {
                 Logger.getGlobal().log(Level.SEVERE, msg);
                 throw new OperationFailedException();
             }
-            List<Booking> bookings = bookingDAO.selectBookingsByEvent(eventBean.getIdEvent());
-            event.setTicketsAndBookings(tickets, bookings);
 
             List<TicketBean> ticketBeans = new ArrayList<>();
             for (Ticket t: tickets){
