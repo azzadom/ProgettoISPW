@@ -50,7 +50,8 @@ The interface type can be configured by setting `VIEW_TYPE` to either `FX` for a
     - **`logging.properties`**: Configuration file for setting up logging preferences and behaviors.
 
 - **`Database/`**:
-  - **`entry.mysql`**: SQL script to populate the database with fictitious entries, useful for testing and development.
+  - **`entry.sql`**: SQL script to populate the database with fictitious entries, useful for testing and development.
+  - **`setup.sql`**: SQL script to build the database.
   - **`privateEvents.mwb`**: MySQL Workbench file to visualize and manage the database schema and data.
 
 - **`Documentazione/`**:
@@ -68,8 +69,8 @@ The interface type can be configured by setting `VIEW_TYPE` to either `FX` for a
 
 2. **Set Up MySQL Database**:
    - Ensure that MySQL is installed on your system. You can download it from the [official MySQL website](https://dev.mysql.com/downloads/).
-   - Load the `privateEvents.mwb` file located in the `Database/` directory into your MySQL Workbench to view and manage the database schema and data. This file allows you to see the database structure and make any necessary modifications. Use it also to upload the database.
-   - Use the SQL script provided in `Database/entry.mysql` to populate the tables with initial data.
+   - Use the SQL script provided in `Database/setup.sql` to load the database locally.
+   - Use the SQL script provided in `Database/entry.sql` to populate the tables with initial data.
 
 3. **Configure the Application**:
    - Open the project in IntelliJ IDEA.
