@@ -74,7 +74,7 @@ The interface type can be configured by setting `VIEW_TYPE` to either `FX` for a
 
 3. **Configure the Application**:
    - Open the project in IntelliJ IDEA.
-   - Modify the `start.properties` file located at `PrivateEvents/src/main/resources/properties/start.properties`:
+   - Modify the `start.properties` file:
      - Set `DAO_TYPE=JDBC` to use the relational database.
      - Set `VIEW_TYPE=FX` for a graphical interface or `CLI` for a terminal-style interface.
    - Configure the database connection settings in the same file:
