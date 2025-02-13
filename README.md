@@ -34,20 +34,21 @@ The interface type can be configured by setting `VIEW_TYPE` to either `FX` for a
 
 ## Directory Structure
 
-- **`src/main/java/com/privateevents`**:
-  - Contains the main Java source code for the application.
+- **`PrivateEvnts/src/main/java/com/privateevents`**:
   - **`controller/`**: Manages the application's control logic, handling user inputs and updating the model.
   - **`model/`**: Represents the data model and business logic, encapsulating the core functionality of the application.
   - **`view/`**: Contains classes for the user interface, supporting both JavaFX and Command Line Interface (CLI) views.
   - **`Main.java`**: The entry point of the application, initializing and launching the program.
 
-- **`src/main/resources/`**:
+- **`PrivateEvents/src/main/resources/`**:
   - **`data/`**: Stores CSV files used for file persistence, ensuring data can be saved and retrieved across sessions.
   - **`logger/`**: Contains log files for tracking application activity and debugging purposes.
   - **`properties/`**: Holds configuration files for various settings.
     - **`start.properties`**: Configuration file for setting `DAO_TYPE` (Data Access Object type) and `VIEW_TYPE` (User Interface type).
     - **`db.properties`**: Configuration file for setting up the MYSQL database connection parameters.
     - **`logging.properties`**: Configuration file for setting up logging preferences and behaviors.
+
+- **`PrivateEvents/src/test/java/com/privateevents`**: Contains the main Java test code for the application.
 
 - **`Database/`**:
   - **`entry.sql`**: SQL script to populate the database with fictitious entries, useful for testing and development.
