@@ -35,7 +35,7 @@ The interface type can be configured by setting `VIEW_TYPE` to either `FX` for a
 ### Requirements
 
 - **Hardware**: A computer capable of running JAR files and sufficient disk space for storing personal information in the offline version.
-- **Software**: Oracle JDK SE 21 must be correctly installed to run the JAR file. A server or local server is required to host the DBMS for the online version.
+- **Software**: Oracle JDK SE 21 must be correctly installed to run the JAR file. A server or local server is required to host the DBMS.
 
 For comprehensive technical specifications and development documentation, please refer to the detailed report in 'Documentazione/RelazioneISPW.pdf'.
 
